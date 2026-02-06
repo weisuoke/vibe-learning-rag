@@ -469,6 +469,76 @@ code_here
 
 ---
 
+## Python 环境配置
+
+### 环境要求
+
+- **Python 版本**: 3.11+ (通过 asdf 管理)
+- **包管理器**: uv
+
+### 快速开始
+
+```bash
+# 1. 安装 Python
+asdf install
+
+# 2. 安装依赖
+uv sync
+
+# 3. 激活环境
+source .venv/bin/activate
+
+# 4. 运行示例
+python examples/basic_rag.py
+```
+
+### 可用的库
+
+所有代码示例可以使用以下库：
+
+| 用途 | 库名 |
+|------|------|
+| **LLM 调用** | `openai` |
+| **Embedding** | `sentence-transformers` |
+| **向量存储** | `chromadb` |
+| **RAG 框架** | `langchain`, `langchain-openai` |
+| **文档解析** | `pypdf` |
+| **API 服务** | `fastapi`, `uvicorn` |
+| **工具** | `python-dotenv` |
+
+### 环境管理
+
+```bash
+# 添加新依赖
+uv add <package-name>
+
+# 添加开发依赖
+uv add --dev <package-name>
+
+# 更新依赖
+uv sync --upgrade
+```
+
+### 配置 API 密钥
+
+1. 复制环境变量模板：
+   ```bash
+   cp .env.example .env
+   ```
+
+2. 编辑 `.env` 文件，添加你的 API keys：
+   ```bash
+   OPENAI_API_KEY=your_key_here
+   ```
+
+3. 在代码中加载：
+   ```python
+   from dotenv import load_dotenv
+   load_dotenv()
+   ```
+
+---
+
 ## 内容撰写原则
 
 ### 1. 初学者友好原则
