@@ -529,6 +529,8 @@ uv sync --upgrade
 2. 编辑 `.env` 文件，添加你的 API keys：
    ```bash
    OPENAI_API_KEY=your_key_here
+   # 可选：使用自定义 API 端点
+   OPENAI_BASE_URL=https://your-proxy.com/v1
    ```
 
 3. 在代码中加载：

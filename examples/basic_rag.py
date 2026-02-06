@@ -16,7 +16,10 @@ def main():
 
     # 1. 初始化客户端
     print("1. 初始化客户端...")
-    client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+    client = OpenAI(
+        api_key=os.getenv("OPENAI_API_KEY"),
+        base_url=os.getenv("OPENAI_BASE_URL")  # 如果未设置则使用默认值
+    )
     chroma_client = chromadb.Client()
 
     # 2. 创建向量集合

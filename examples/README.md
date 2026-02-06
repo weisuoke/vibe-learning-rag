@@ -16,6 +16,20 @@ cp .env.example .env
 OPENAI_API_KEY=sk-...
 ```
 
+#### 使用自定义 API 端点（可选）
+
+如果你使用代理或第三方兼容服务，可以配置自定义 BASE_URL：
+
+```bash
+# OpenAI 兼容服务
+OPENAI_BASE_URL=https://your-proxy.com/v1
+
+# Anthropic 兼容服务
+ANTHROPIC_BASE_URL=https://your-proxy.com
+```
+
+如果不设置，将使用官方 API 端点。
+
 ### 2. 激活虚拟环境
 
 ```bash
