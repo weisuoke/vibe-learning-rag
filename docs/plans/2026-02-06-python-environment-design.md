@@ -14,7 +14,7 @@
 
 ## 技术栈
 
-- **Python 版本：** 3.11.11
+- **Python 版本：** 3.13.7
 - **版本管理：** asdf
 - **包管理：** uv
 - **依赖范围：** 最小可用集（核心 RAG 开发库）
@@ -27,7 +27,7 @@
 
 使用 `.tool-versions` 文件指定 Python 版本：
 ```
-python 3.11.11
+python 3.13.7
 ```
 
 **优势：**
@@ -163,7 +163,7 @@ python 3.11.11
 name = "vibe-learning-rag"
 version = "0.1.0"
 description = "RAG Development Learning Repository with atomized knowledge points"
-requires-python = ">=3.11"
+requires-python = ">=3.13"
 dependencies = [
     "openai>=1.0.0",
     "sentence-transformers>=2.2.0",
@@ -377,7 +377,7 @@ asdf plugin list
 asdf plugin add python
 
 # 安装指定版本
-asdf install python 3.11.11
+asdf install python 3.13.7
 ```
 
 ### 问题2：uv 命令未找到
@@ -453,12 +453,12 @@ python -c "import openai, chromadb, langchain; print('✓ 所有核心库已安�
 
 ## 设计决策记录
 
-### 为什么选择 Python 3.11？
+### 为什么选择 Python 3.13？
 
-- ✅ 稳定性和性能的最佳平衡
+- ✅ 最新稳定版本，性能最优
 - ✅ 所有 RAG 库完全支持
-- ✅ 现代 Python 特性（如改进的错误消息）
-- ✅ 长期支持（至 2027 年 10 月）
+- ✅ 最新的 Python 特性和改进
+- ✅ 长期支持和持续更新
 
 ### 为什么选择 uv？
 
