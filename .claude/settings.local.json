@@ -5,7 +5,12 @@
       "Bash(asdf list python)",
       "Bash(asdf current python)",
       "Bash(uv sync)",
-      "Bash(git commit -m \"$\\(cat <<''EOF''\ndocs: add L5_框架与落地 knowledge point structure\n\n- Created k.md with 6 knowledge points \\(expanded from original 3\\)\n- Added LangChain and LlamaIndex framework concepts\n- Added production deployment topics: API服务化, 部署与监控, 生产环境优化\n- Documented design decisions in 2026-02-09-l5-framework-landing-design.md\nEOF\n\\)\")"
+      "Bash(git commit -m \"$\\(cat <<''EOF''\ndocs: add L5_框架与落地 knowledge point structure\n\n- Created k.md with 6 knowledge points \\(expanded from original 3\\)\n- Added LangChain and LlamaIndex framework concepts\n- Added production deployment topics: API服务化, 部署与监控, 生产环境优化\n- Documented design decisions in 2026-02-09-l5-framework-landing-design.md\nEOF\n\\)\")",
+      "Bash(tree -L 3 atom/ -I '__pycache__|*.pyc')",
+      "Bash(git add atom/milvus/L1_快速入门/04_Milvus架构概览/.gitkeep)",
+      "Bash(git commit -m \"docs: create directory for Milvus架构概览 knowledge point\")",
+      "Bash(git add \"atom/milvus/L1_快速入门/04_Milvus架构概览/03_核心概念_1_访问层Proxy.md\")",
+      "Bash(git commit -m \"docs: add 核心概念_访问层Proxy for Milvus架构概览\")"
     ]
   }
 }
