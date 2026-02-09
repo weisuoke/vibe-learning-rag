@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add .tool-versions pyproject.toml .gitignore .env.example examples/ docs/plans/2026-02-06-python-environment-design.md CLAUDE.md)",
+      "Bash(asdf list python)",
+      "Bash(asdf current python)",
+      "Bash(uv sync)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\ndocs: add L5_框架与落地 knowledge point structure\n\n- Created k.md with 6 knowledge points \\(expanded from original 3\\)\n- Added LangChain and LlamaIndex framework concepts\n- Added production deployment topics: API服务化, 部署与监控, 生产环境优化\n- Documented design decisions in 2026-02-09-l5-framework-landing-design.md\nEOF\n\\)\")"
+    ]
+  }
+}
