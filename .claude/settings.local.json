@@ -10,7 +10,8 @@
       "Bash(git add atom/milvus/L1_快速入门/04_Milvus架构概览/.gitkeep)",
       "Bash(git commit -m \"docs: create directory for Milvus架构概览 knowledge point\")",
       "Bash(git add \"atom/milvus/L1_快速入门/04_Milvus架构概览/03_核心概念_1_访问层Proxy.md\")",
-      "Bash(git commit -m \"docs: add 核心概念_访问层Proxy for Milvus架构概览\")"
+      "Bash(git commit -m \"docs: add 核心概念_访问层Proxy for Milvus架构概览\")",
+      "mcp__Grok-mcp__web_search"
     ]
   }
 }
