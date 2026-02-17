@@ -1,0 +1,283 @@
+"""
+Token与Context Window 实战示例
+演示：Token 计算、预算分配、RAG 场景应用
+"""
+
+import tiktoken
+from typing import List
+
+# ===== 1. Token 计算基础 =====
+print("=" * 50)
+print("1. Token 计算基础")
+print("=" * 50)
+
+def count_tokens(text: str, model: str = "gpt-4o") -> int:
+    """计算文本的 Token 数量"""
+    encoder = tiktoken.encoding_for_model(model)
+    return len(encoder.encode(text))
+
+def show_tokens(text: str, model: str = "gpt-4o") -> None:
+    """展示文本的 Token 切分详情"""
+    encoder = tiktoken.encoding_for_model(model)
+    tokens = encoder.encode(text)
+    decoded = [encoder.decode([t]) for t in tokens]
+
+    print(f"文本: '{text}'")
+    print(f"Token 数量: {len(tokens)}")
+    print(f"Token 切分: {decoded}")
+    print()
+
+# 演示不同文本的 Token 切分
+show_tokens("Hello, world!")
+show_tokens("你好，世界!")
+show_tokens("RAG 是 Retrieval-Augmented Generation 的缩写")
+show_tokens("def hello(): print('hi')")
+
+# ===== 2. 不同语言的 Token 效率对比 =====
+print("=" * 50)
+print("2. 不同语言的 Token 效率")
+print("=" * 50)
+
+texts = {
+    "英文": "Retrieval-Augmented Generation is a technique that combines retrieval and generation.",
+    "中文": "检索增强生成是一种结合检索和生成的技术。",
+    "代码": "def rag_pipeline(query): return llm(retrieve(query))",
+    "混合": "RAG系统通过retrieve()函数检索相关文档",
+}
+
+for name, text in texts.items():
+    tokens = count_tokens(text)
+    chars = len(text)
+    ratio = chars / tokens
+    print(f"{name}: {chars} 字符 -> {tokens} Token（比率： {ratio:.2f} ）字符/Token")
+
+print()
+
+# ===== 3. Context Window 限制检查 =====
+print("=" * 50)
+print("3. Context Window 限制检查")
+print("=" * 50)
+
+# 模型的 Context Window 限制
+MODEL_LIMITS = {
+    "gpt-4o": 128000,
+    "gpt-4o-mini": 128000,
+    "gpt-3.5-turbo": 16384,
+    "gpt-4-turbo": 128000,
+}
+
+def check_context_limit(
+    text: str,
+    model: str = "gpt-4o",
+    max_output_tokens: int=4000
+) -> dict:
+    """检查文本是否超出 Context Window 限制"""
+
+    input_tokens = count_tokens(text, model)
+    context_limit = MODEL_LIMITS.get(model, 8000)
+    available_for_input = context_limit - max_output_tokens
+
+    result = {
+        "model": model,
+        "context_limit": context_limit,
+        "input_tokens": input_tokens,
+        "max_output_tokens": max_output_tokens,
+        "available_for_input": available_for_input,
+        "is_safe": input_tokens <= available_for_input,
+        "remaining": available_for_input - input_tokens,
+    }
+
+    return result
+
+# 测试不同长度的文本
+short_text = "什么是 RAG?" * 10
+long_text = "这是一段很长的文档内容，用于测试 Token 限制。" * 500
+
+for name, text in [("短文本", short_text), ("长文本", long_text)]:
+    result = check_context_limit(text)
+    status = "✅ 安全" if result["is_safe"] else "❌ 超限"
+    print(f"{name}: {result['input_tokens']} Token {status}")
+    print(f" 可用空间: {result['available_for_input']} Token")
+    print(f" 剩余空间: {result['remaining']} Token")
+    print()
+
+# ===== 4. Token 预算分配 =====
+print("=" * 50)
+print("4. Token 预算分配")
+print("=" * 50)
+
+def allocate_token_budget(
+    context_window: int = 128000,
+    system_prompt: str = "",
+    user_query: str = "",
+    max_output_tokens: int = 4000,
+    safety_margin: float = 0.95
+) -> dict:
+    """计算 RAG 的 Token 预算分配"""
+
+    # 计算各部分 Token
+    system_tokens = count_tokens(system_prompt) if system_prompt else 0
+    query_tokens = count_tokens(user_query) if user_query else 0
+
+    # 计算可用于检索内容的预算
+    safe_total = int(context_window * safety_margin)
+    reserved = system_tokens + query_tokens + max_output_tokens
+    retrieval_budget = safe_total - reserved
+
+    budget = {
+        "context_window": context_window,
+        "safe_total": safe_total,
+        "system_prompt_tokens": system_tokens,
+        "user_query_tokens": query_tokens,
+        "max_output_tokens": max_output_tokens,
+        "retrieval_budget": retrieval_budget,
+        "utilization": f"{(reserved + retrieval_budget) / context_window * 100:.1f}"
+    }
+
+    return budget
+
+# 模拟 RAG 场景
+system_prompt = """你是一个专业的问答助手。请基于以下参考资料回答用户的问题。
+如果参考资料中没有相关信息，请明确说明。
+回答要求：准确、简洁、有条理。"""
+
+user_query = "请详细解释 RAG 系统的工作原理， 包括检索和生成两个阶段"
+
+budget = allocate_token_budget(
+    context_window=128000,
+    system_prompt=system_prompt,
+    user_query=user_query,
+    max_output_tokens=4000
+)
+
+print("RAG Token 预算分配:")
+print(f"  Context Window: {budget['context_window']:,} Token")
+print(f"  安全可用: {budget['safe_total']:,} Token")
+print(f"  系统提示: {budget['system_prompt_tokens']} Token")
+print(f"  用户问题: {budget['user_query_tokens']} Token")
+print(f"  输出预留: {budget['max_output_tokens']:,} Token")
+print(f"  检索预算: {budget['retrieval_budget']:,} Token")
+print(f"  利用率: {budget['utilization']}")
+print()
+
+# ===== 5. 检索内容截断 =====
+print("=" * 50)
+print("5. 检索内容截断")
+print("=" * 50)
+
+def truncate_docs_to_budget(
+    documents: List[str],
+    budget: int,
+    model: str = "gpt-4o"
+) -> tuple[str, dict]:
+    """将检索文档截断到 Token 预算内"""
+
+    result_docs = []
+    current_tokens = 0
+    stats = {"total_docs": len(documents), "used_docs": 0, "truncated": False}
+
+    for i, doc in enumerate(documents):
+        doc_tokens = count_tokens(doc, model)
+
+        if current_tokens + doc_tokens <= budget:
+            result_docs.append(f"[文档{i+i}]\n{doc}")
+            current_tokens += doc_tokens
+            stats["used_docs"] += 1
+        else:
+            # 预算不足
+            remaining = budget - current_tokens
+            if remaining > 100:
+                # 截断当前文档
+                encoder = tiktoken.encoding_for_model(model)
+                tokens = encoder.encode(doc)[:remaining]
+                truncated_doc = encoder.decode(tokens)
+                result_docs.append(f"[文档{i+1}](已截断)\n{truncated_doc}...")
+                stats["used_docs"] += 1
+                stats["truncated"] = True
+            break
+
+    stats["used_tokens"] = current_tokens
+    stats["budget"] = budget
+
+    return "\n\n".join(result_docs), stats
+
+# 模拟检索到的文档
+retrieved_docs = [
+    "RAG（Retrieval-Augmented Generation）是一种结合检索和生成的技术。" * 5,
+    "向量检索是 RAG 系统的核心组件。它通过将文本转换为向量表示。" * 5,
+    "Prompt Engineering 在 RAG 中非常重要。好的提示词可以帮助模型更好地理解。" * 5,
+    "RAG 系统的评估指标包括：检索准确率、生成质量、端到端效果等。" * 5,
+    "RAG 的优化策略包括：改进检索算法、优化文档分块、使用重排序等。" * 5,
+]
+
+# 使用较小的预算来演示截断
+small_budget = 2000
+context, stats = truncate_docs_to_budget(retrieved_docs, small_budget)
+
+print(f"检索文档: {stats['total_docs']} 篇")
+print(f"使用文档: {stats['used_docs']} 篇")
+print(f"Token 预算: {stats['budget']} Token")
+print(f"实际使用: {stats['used_tokens']} Token")
+print(f"是否截断: {'是' if stats['truncated'] else '否'}")
+print()
+
+# ===== 6. 完整的 RAG Token 管理示例 =====
+print("=" * 50)
+print("6. 完整的 RAG Token 管理")
+print("=" * 50)
+
+def build_rag_messages(
+    user_query: str,
+    retrieved_docs: List[str],
+    system_prompt: str = "基于一下参考资料回答问题。如果资料中没有相关信息，请说明。",
+    model: str = "gpt-4o",
+    max_output_tokens: int = 4000
+) -> tuple[list, dict]:
+    """构建 RAG 消息， 自动处理 Token 限制"""
+
+    # 1. 计算预算
+    budget = allocate_token_budget(
+        context_window=MODEL_LIMITS.get(model, 128000),
+        system_prompt=system_prompt,
+        user_query=user_query,
+        max_output_tokens=max_output_tokens
+    )
+
+    # 2. 截断检索内容
+    context, truncate_stats = truncate_docs_to_budget(
+        retrieved_docs,
+        budget["retrieval_budget"],
+        model
+    )
+
+    # 3. 构建消息
+    messages = [
+        {"role": "system", "content": system_prompt},
+        {"role": "user", "content": f"参考资料：\n{context}\n\n问题：{user_query}"}
+    ]
+
+    # 4. 统计信息
+    stats = {
+        **budget,
+        **truncate_stats,
+        "final_input_tokens": count_tokens(str(messages), model),
+    }
+
+    return messages, stats
+
+# 构建 RAG 消息
+messages, stats = build_rag_messages(
+    user_query="什么是 RAG？它有哪些核心组件？",
+    retrieved_docs=retrieved_docs,
+    model="gpt-4o"
+)
+
+print("RAG 消息构建完成:")
+print(f"  检索预算: {stats['retrieval_budget']:,} Token")
+print(f"  使用文档: {stats['used_docs']}/{stats['total_docs']} 篇")
+print(f"  最终输入: {stats['final_input_tokens']:,} Token")
+print(f"  是否截断: {'是' if stats['truncated'] else '否'}")
+print()
+print("消息结构预览:")
+print(f"  System: {messages[0]['content'][:50]}...")
+print(f"  User: {messages[1]['content'][:100]}...")
