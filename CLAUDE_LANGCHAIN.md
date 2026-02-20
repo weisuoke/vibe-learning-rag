@@ -82,6 +82,18 @@ LangChain 的特殊要求在下方 **LangChain 特定配置** 章节中定义。
 - Memory 与状态管理
 - 可观测性与调试
 
+**2025-2026 新增场景：**
+- ✅ 工作流优先设计（LangGraph）
+- ✅ 多模态应用（文本 + 图像 + 视频）
+- ✅ 成本敏感的批处理任务
+- ✅ 需要状态持久化的长时间任务
+- ✅ 自助修复和自适应系统
+
+**何时不使用 LangChain：**
+- ❌ 极简单的单次 LLM 调用（直接用 SDK）
+- ❌ 需要极致性能优化的场景
+- ❌ 团队更熟悉其他框架（如 Semantic Kernel）
+
 ### LangChain 类比对照表
 
 在【双重类比】维度中，优先使用以下类比：
@@ -101,6 +113,12 @@ LangChain 的特殊要求在下方 **LangChain 特定配置** 章节中定义。
 | Memory | LocalStorage | 笔记本 |
 | Retriever | 搜索引擎 | 图书馆检索系统 |
 | VectorStore | 数据库索引 | 按主题分类的档案柜 |
+| LangGraph | 状态机 + React Flow | 项目管理看板 |
+| StateGraph | Redux Store | 游戏存档系统 |
+| Checkpointer | 数据库事务 | 游戏自动保存 |
+| ConditionalEdge | 路由守卫 | 红绿灯路口 |
+| MCP Server | GraphQL Gateway | 统一服务台 |
+| Batch Processing | 队列系统 | 批量打印任务 |
 
 ### 推荐库列表
 
@@ -114,6 +132,10 @@ LangChain 的特殊要求在下方 **LangChain 特定配置** 章节中定义。
 | 文档加载 | `langchain-community` |
 | 工具集成 | `langchain-community` |
 | 可观测性 | `langsmith` |
+| 工作流引擎 | `langgraph` |
+| 成本优化 | `langasync` |
+| MCP 集成 | `langsmith-mcp-server` |
+| 多模态 | `langchain-google-genai` (4.0.0+) |
 
 ### LangChain 常见误区
 
@@ -127,6 +149,282 @@ LangChain 的特殊要求在下方 **LangChain 特定配置** 章节中定义。
 - "LangChain 只适合简单应用"（企业级应用也在使用）
 - "Tools 必须是函数"（可以是任何 Runnable）
 - "ChatModel 和 LLM 是一回事"（ChatModel 专门处理对话格式）
+- "LangGraph 只是 LangChain 的附加功能"（实际上是独立的工作流引擎）
+- "序列化是安全的"（需要显式配置 allowed_objects）
+- "环境变量会自动加载秘密"（2025 后默认为 false）
+- "简单任务必须用 LangChain"（有时原生 API 更合适）
+- "Agent 总是比 Chain 好"（工作流优先，代理是组件）
+- "LangChain 不适合生产环境"（2025-2026 已有大量企业应用）
+
+---
+
+## LangGraph 与状态管理（2025-2026 新增）
+
+### 核心概念
+LangGraph 是 LangChain 生态系统中的工作流引擎，专为构建有状态的、循环的、多代理应用而设计。
+
+### 关键特性
+- **状态持久化**：通过 Checkpointer 实现状态保存和恢复
+- **条件路由**：基于状态动态决定执行路径
+- **循环支持**：允许代理多次迭代直到满足条件
+- **多代理协作**：支持复杂的代理间通信模式
+
+### 与传统 Chain 的区别
+- Chain：线性、无状态、单向流动
+- LangGraph：图状、有状态、支持循环和条件分支
+
+### 适用场景
+- 多步推理任务
+- 需要回溯和重试的工作流
+- 多代理协作系统
+- 长时间运行的任务（需要检查点）
+
+### 2026 年最新发展
+- LangGraph v1 路线图活跃开发
+- `config.configurable` → `context` API 迁移
+- 自助修复代理循环模式
+- 多模态工具集成（Gemini 2.5）
+
+---
+
+## 安全最佳实践（2025 更新）
+
+### 2025 年关键安全修复
+LangChain 在 2025 年修复了多个严重安全漏洞：
+
+#### CVE-2025-68664: 序列化注入
+- **问题**：`load()`/`loads()` 可被利用提取秘密
+- **修复**：引入 `allowed_objects` 参数（默认 'core'）
+- **迁移**：显式指定允许的对象类型
+
+#### CVE-2025-64439: LangGraph 检查点 RCE
+- **问题**：JSON 模式下的 JsonPlusSerializer 存在 RCE
+- **修复**：限制反序列化函数执行
+- **建议**：使用最新版本的 langgraph
+
+#### CVE-2025-65106: 模板注入
+- **问题**：Prompt 模板中的属性访问可被利用
+- **修复**：限制模板中的对象访问
+- **建议**：验证用户输入，避免直接插入模板
+
+#### CVE-2025-6984: XXE 攻击
+- **问题**：`etree.iterparse()` 未禁用外部实体引用
+- **修复**：禁用 XML 外部实体
+- **建议**：更新 langchain-community
+
+### 安全编码实践
+
+#### 1. 安全的序列化
+```python
+from langchain.load import load
+
+# ❌ 不安全（旧版本）
+chain = load(data)
+
+# ✅ 安全（2025+）
+chain = load(data, allowed_objects=['core'])
+```
+
+#### 2. 秘密管理
+```python
+from langchain.load import load
+
+# ❌ 不安全（自动从环境加载）
+chain = load(data, secretsFromEnv=True)
+
+# ✅ 安全（显式管理秘密）
+chain = load(data, secretsFromEnv=False)
+# 使用专门的秘密管理工具
+```
+
+#### 3. 输入验证
+```python
+from langchain.prompts import PromptTemplate
+
+# ❌ 不安全（直接插入用户输入）
+prompt = PromptTemplate.from_template(user_input)
+
+# ✅ 安全（验证和清理输入）
+if validate_template(user_input):
+    prompt = PromptTemplate.from_template(user_input)
+```
+
+#### 4. XML 解析
+```python
+# ✅ 使用最新版本的 langchain-community
+# 自动禁用外部实体引用
+```
+
+---
+
+## 成本优化策略（2026 新增）
+
+### langasync：批处理降低成本 50%
+
+#### 概述
+langasync 是 2026 年社区推出的工具，通过批处理 API 调用降低 LLM 成本。
+
+#### 核心原理
+- 将多个 LCEL 链调用合并为批处理请求
+- 支持 OpenAI 和 Anthropic 批处理 API
+- 适用于评估和非实时任务
+
+#### 使用示例
+```python
+from langasync import wrap_chain
+
+# 原始 LCEL 链
+chain = prompt | llm | parser
+
+# 包装为批处理模式
+async_chain = wrap_chain(chain, batch_size=10)
+
+# 批量执行（成本降低 50%）
+results = await async_chain.abatch(inputs)
+```
+
+#### 适用场景
+- 批量评估和测试
+- 数据标注任务
+- 离线分析和报告生成
+- 非实时的批量处理
+
+#### 不适用场景
+- 实时对话应用
+- 需要即时响应的场景
+- 单次查询
+
+### 其他成本优化技巧
+
+#### 1. 模型选择
+```python
+# 简单任务使用更便宜的模型
+from langchain_openai import ChatOpenAI
+
+cheap_llm = ChatOpenAI(model="gpt-4o-mini")  # 更便宜
+expensive_llm = ChatOpenAI(model="gpt-4")    # 更强大
+
+# 根据任务复杂度选择
+chain = RunnableBranch(
+    (is_simple_task, cheap_llm),
+    expensive_llm
+)
+```
+
+#### 2. 缓存策略
+```python
+from langchain.cache import InMemoryCache
+from langchain.globals import set_llm_cache
+
+# 启用缓存避免重复调用
+set_llm_cache(InMemoryCache())
+```
+
+#### 3. Token 优化
+```python
+# 使用更短的 prompt
+# 移除不必要的上下文
+# 使用 token 计数器监控
+```
+
+---
+
+## API 重大变更与迁移指南
+
+### 2025-2026 重大变更
+
+#### 1. load()/loads() 安全变更
+**变更时间**：2025 年 12 月
+
+**旧 API**：
+```python
+from langchain.load import load
+chain = load(data)  # 自动加载所有对象
+```
+
+**新 API**：
+```python
+from langchain.load import load
+chain = load(data, allowed_objects=['core'])  # 必须显式指定
+```
+
+**迁移步骤**：
+1. 更新到最新版本
+2. 添加 `allowed_objects` 参数
+3. 测试所有序列化/反序列化代码
+
+#### 2. secretsFromEnv 默认值变更
+**变更时间**：2025 年 12 月
+
+**旧行为**：默认 `True`（自动从环境加载）
+**新行为**：默认 `False`（需要显式启用）
+
+**迁移步骤**：
+```python
+# 如果依赖自动加载，需要显式启用
+chain = load(data, secretsFromEnv=True)
+
+# 推荐：使用专门的秘密管理
+from langchain.pydantic_v1 import SecretStr
+api_key = SecretStr(os.getenv("OPENAI_API_KEY"))
+```
+
+#### 3. LangGraph config.configurable → context
+**变更时间**：2026 年（计划中）
+
+**旧 API**：
+```python
+graph.invoke(
+    input,
+    config={"configurable": {"user_id": "123"}}
+)
+```
+
+**新 API**：
+```python
+graph.invoke(
+    input,
+    context={"user_id": "123"}
+)
+```
+
+**迁移步骤**：
+1. 关注 LangGraph v1 发布
+2. 使用 `context` 替代 `config.configurable`
+3. 更新所有图调用代码
+
+#### 4. Google Vertex AI 集成弃用
+**变更时间**：2025 年
+
+**旧包**：`langchain-google-vertexai`
+**新包**：`langchain-google-genai` (4.0.0+)
+
+**迁移步骤**：
+```bash
+# 卸载旧包
+uv remove langchain-google-vertexai
+
+# 安装新包
+uv add langchain-google-genai
+```
+
+```python
+# 旧导入
+from langchain_google_vertexai import ChatVertexAI
+
+# 新导入
+from langchain_google_genai import ChatGoogleGenerativeAI
+```
+
+### 版本兼容性矩阵
+
+| 功能 | LangChain 0.1.x | LangChain 0.2.x | LangChain 0.3.x (2025+) |
+|------|-----------------|-----------------|-------------------------|
+| load() 无参数 | ✅ | ✅ | ❌ 需要 allowed_objects |
+| secretsFromEnv 默认 | True | True | False |
+| LangGraph | 实验性 | 稳定 | 生产级 + v1 路线图 |
+| MCP Server | ❌ | ❌ | ✅ (2026) |
+| Google Vertex | ✅ | ✅ | ❌ 使用 GenAI |
 
 ---
 
@@ -246,7 +544,13 @@ atom/
     ├── L3_组件生态/
     ├── L4_Agent系统/
     ├── L5_高级特性/
-    └── L6_源码与架构/
+    ├── L6_源码与架构/
+    └── L7_LangGraph与状态管理/          # 2025-2026 新增
+        ├── k.md
+        ├── 01_Graph工作流基础/
+        ├── 02_状态持久化与检查点/
+        ├── 03_条件路由与循环/
+        └── 04_多代理协作模式/
 ```
 
 ---
@@ -296,9 +600,19 @@ atom/
 
 ---
 
-**版本：** v1.0 (LangChain 专用版 - 基于通用模板)
-**最后更新：** 2026-02-12
+**版本：** v2.0 (LangChain 专用版 - 2025-2026 更新)
+**最后更新：** 2026-02-17
 **维护者：** Claude Code
+
+**重要变更：**
+- 添加 LangGraph 与状态管理章节（L7）
+- 添加 2025 安全最佳实践（CVE 修复指南）
+- 添加成本优化策略（langasync 批处理）
+- 添加 API 重大变更与迁移指南
+- 更新类比对照表（新增 6 个概念）
+- 更新推荐库列表（新增 4 个库）
+- 更新常见误区（新增 6 个误区）
+- 添加何时不使用 LangChain 的指导
 
 ---
 

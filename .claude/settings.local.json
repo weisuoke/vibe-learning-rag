@@ -44,7 +44,31 @@
       "Bash(ls -1 atom/milvus/L*/k.md)",
       "Bash(wc -l atom/milvus/L1_快速入门/01_安装与连接/*.md)",
       "Bash(wc -l atom/rag/L4_RAG进阶优化/08_GraphRAG知识图谱检索/*.md)",
-      "Bash(wc -l /Users/wuxiao/Documents/codeWithFelix/vibe-learning/vibe-learning-rag/atom/rag/L4_RAG进阶优化/09_Agentic_RAG智能代理检索/*.md)"
+      "Bash(wc -l /Users/wuxiao/Documents/codeWithFelix/vibe-learning/vibe-learning-rag/atom/rag/L4_RAG进阶优化/09_Agentic_RAG智能代理检索/*.md)",
+      "WebFetch(domain:github.com)",
+      "Bash(claude --print \"What is 2+2?\" --output-format json)",
+      "Bash(tree atom/langchain/L7_LangGraph与状态管理/)",
+      "mcp__Grok-mcp__get_config_info",
+      "Bash(find \"atom/langchain/L1_核心抽象/01_Runnable接口与LCEL基础\" -type f -name \"*.md\" -exec wc -l {} +)",
+      "Bash(wc -l *.md)",
+      "Bash(find /Users/wuxiao/Documents/codeWithFelix/vibe-learning/vibe-learning-rag/examples -name \"*.py\" -type f -exec grep -l \"from langchain\\\\|import langchain\" {} ;)",
+      "Bash(find /Users/wuxiao/Documents/codeWithFelix/vibe-learning/vibe-learning-rag -type f \\\\\\(-name *.md -o -name *.ts -o -name *.js \\\\\\))",
+      "Bash(ls -1 \"atom/langchain/L1_核心抽象/05_RunnablePassthrough与RunnableLambda/\"*.md)",
+      "Bash(find /Users/wuxiao/Documents/codeWithFelix/vibe-learning/vibe-learning-rag -type f -name *pi-mono* -o -type d -name *pi-mono*)",
+      "Bash(find /Users/wuxiao/Documents/codeWithFelix/github -type f -name package.json -exec grep -l \"pi-mono\\\\|pi-agent-core\" {})",
+      "Bash(xargs grep -l name.*pi)",
+      "Bash(find /Users/wuxiao/Documents/codeWithFelix/vibe-learning/vibe-learning-rag -type d -name *pi*)",
+      "Bash(find /Users/wuxiao/Documents/codeWithFelix/vibe-learning/vibe-learning-rag -type f \\\\\\(-name tools.ts -o -name agent.ts -o -name *.ts \\\\\\))",
+      "Bash(find /Users/wuxiao/Documents/codeWithFelix/vibe-learning/vibe-learning-rag -type f \\\\\\(-name *.ts -o -name *.tsx -o -name *.js \\\\\\) ! -path */.venv/* ! -path */node_modules/* ! -path */.git/*)",
+      "Bash(find /Users/wuxiao/Documents/codeWithFelix/vibe-learning/vibe-learning-rag/atom/pi-mono -type f \\\\\\(-name *.ts -o -name *.tsx -o -name *.js -o -name *.json \\\\\\))",
+      "Bash(find /Users/wuxiao/Documents/codeWithFelix/vibe-learning/vibe-learning-rag -type f \\\\\\(-name *.ts -o -name *.tsx \\\\\\) ! -path */.venv/* ! -path */node_modules/*)",
+      "Bash(find /Users/wuxiao/Documents/codeWithFelix/vibe-learning/vibe-learning-rag -type f -name *.ts -o -name *.tsx)",
+      "Bash(find /Users/wuxiao/Documents/codeWithFelix/vibe-learning/vibe-learning-rag -type f \\\\\\(-name *.ts -o -name *.tsx -o -name *.js \\\\\\))",
+      "Bash(find /Users/wuxiao/Documents/codeWithFelix/vibe-learning/vibe-learning-rag/atom/langchain -name *.py -type f)",
+      "mcp__Filesystem__write_file",
+      "Bash(grep -r \"message.*queue\\\\|MessageQueue\" /Users/wuxiao/Documents/codeWithFelix/vibe-learning/vibe-learning-rag --include=*.ts --include=*.tsx --include=*.md)",
+      "Bash(find /Users/wuxiao/Documents/codeWithFelix/vibe-learning/vibe-learning-rag/atom/pi-mono -type f -name *.ts -o -name *.tsx -o -name *.js)",
+      "Bash(find /Users/wuxiao/Documents/codeWithFelix/vibe-learning/vibe-learning-rag -type f \\\\\\(-name *.ts -o -name *.tsx -o -name *.js -o -name *.jsx \\\\\\))"
     ]
   }
 }

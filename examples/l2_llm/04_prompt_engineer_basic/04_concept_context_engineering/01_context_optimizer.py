@@ -96,3 +96,22 @@ documents = [
         "source": "doc5.pdf"
     }
 ]
+
+# 优化上下文
+optimized_context = optimizer.optimize("什么是 RAG?", documents)
+
+print("\n=== 优化后的上下文 ===")
+print(optimized_context)
+
+# 使用优化后的上下文查询
+response = client.chat.completions.create(
+    model="gpt-4o",
+    messages=[
+        {"role": "system", "content": "你是专业的 RAG 助手"},
+        {"role": "user", "content": f"{optimized_context}\n\n问题：什么是 RAG?"}
+    ],
+    temperature=0.1
+)
+
+print("\n=== RAG 回答 ===")
+print(response.choices[0].message.content)

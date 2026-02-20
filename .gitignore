@@ -26,3 +26,6 @@ uv.lock
 
 # macOS
 .DS_Store
+
+# 源码
+sourcecode
