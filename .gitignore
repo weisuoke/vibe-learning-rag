@@ -31,4 +31,6 @@ uv.lock
 sourcecode
 
 # Docker volumns
-volumns
+# Common docker-compose / local persistent data directories.
+volumns/
+volumes/
