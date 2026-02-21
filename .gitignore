@@ -29,3 +29,6 @@ uv.lock
 
 # 源码
 sourcecode
+
+# Docker volumns
+volumns
