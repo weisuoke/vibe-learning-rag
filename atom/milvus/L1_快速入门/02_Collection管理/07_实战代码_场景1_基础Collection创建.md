@@ -1,36 +1,50 @@
-# 实战代码 - 场景1：基础 Collection 创建与管理
+# Collection管理 - 实战代码场景1：基础Collection创建
+
+> 完整的文档问答系统 Collection 创建示例，从 Schema 定义到检索的完整流程
+
+---
 
 ## 场景描述
 
-演示如何创建一个基础的 Collection，包括：
-- 定义 Schema
-- 创建 Collection
-- 插入数据
-- 创建索引
-- 执行检索
+**应用场景：** 简单的文档问答系统
 
-## 完整代码
+**需求：**
+- 存储文档片段的文本和向量
+- 支持语义检索
+- 记录文档来源和时间戳
+- 使用 FLOAT16_VECTOR 节省成本
+
+**技术栈：**
+- Milvus 2.6
+- pymilvus 2.6+
+- Python 3.9+
+
+---
+
+## 完整代码实现
 
 ```python
 """
-场景1：基础 Collection 创建与管理
-演示：从零开始创建一个文档检索 Collection
+Milvus 2.6 基础 Collection 创建 - 文档问答系统
+演示：Schema 定义 → Collection 创建 → 数据插入 → 索引创建 → 检索
 """
 
 from pymilvus import (
     connections,
-    Collection,
-    CollectionSchema,
     FieldSchema,
+    CollectionSchema,
     DataType,
+    Collection,
     utility
 )
-import random
+import numpy as np
+from typing import List, Dict
+import time
 
 # ===== 1. 连接到 Milvus =====
-print("=" * 50)
-print("步骤1：连接到 Milvus")
-print("=" * 50)
+print("=" * 60)
+print("步骤1: 连接到 Milvus 2.6")
+print("=" * 60)
 
 connections.connect(
     alias="default",
@@ -40,48 +54,47 @@ connections.connect(
 print("✅ 已连接到 Milvus")
 
 # ===== 2. 定义 Schema =====
-print("\n" + "=" * 50)
-print("步骤2：定义 Collection Schema")
-print("=" * 50)
+print("\n" + "=" * 60)
+print("步骤2: 定义 Collection Schema")
+print("=" * 60)
 
-# 定义字段
 fields = [
-    # 主键字段
+    # 主键（自动生成）
     FieldSchema(
-        name="doc_id",
+        name="id",
         dtype=DataType.INT64,
         is_primary=True,
-        auto_id=False,
-        description="文档唯一标识"
+        auto_id=True,
+        description="文档片段唯一标识"
     ),
-
-    # 向量字段
+    
+    # 文档内容
     FieldSchema(
-        name="embedding",
-        dtype=DataType.FLOAT_VECTOR,
-        dim=128,  # 向量维度
-        description="文档的向量表示"
-    ),
-
-    # 标量字段：文档标题
-    FieldSchema(
-        name="title",
+        name="text",
         dtype=DataType.VARCHAR,
-        max_length=200,
-        description="文档标题"
+        max_length=512,
+        description="文档片段文本内容"
     ),
-
-    # 标量字段：文档分类
+    
+    # 向量表示（使用 FLOAT16 节省 50% 存储）
     FieldSchema(
-        name="category",
+        name="vector",
+        dtype=DataType.FLOAT16_VECTOR,
+        dim=768,
+        description="文本的向量表示"
+    ),
+    
+    # 文档来源
+    FieldSchema(
+        name="source",
         dtype=DataType.VARCHAR,
-        max_length=50,
-        description="文档分类"
+        max_length=128,
+        description="文档来源"
     ),
-
-    # 标量字段：创建时间
+    
+    # 时间戳
     FieldSchema(
-        name="created_at",
+        name="timestamp",
         dtype=DataType.INT64,
         description="创建时间戳"
     )
@@ -90,315 +103,487 @@ fields = [
 # 创建 Schema
 schema = CollectionSchema(
     fields=fields,
-    description="文档检索 Collection",
-    enable_dynamic_field=False
+    description="文档问答系统 Collection"
 )
 
-print("✅ Schema 定义完成")
-print(f"   - 字段数量: {len(schema.fields)}")
-print(f"   - 主键字段: {schema.primary_field.name}")
+print(f"✅ Schema 定义完成")
+print(f"   - 字段数量: {len(fields)}")
+print(f"   - 向量维度: 768")
+print(f"   - 向量类型: FLOAT16_VECTOR（节省 50% 存储）")
 
 # ===== 3. 创建 Collection =====
-print("\n" + "=" * 50)
-print("步骤3：创建 Collection")
-print("=" * 50)
+print("\n" + "=" * 60)
+print("步骤3: 创建 Collection")
+print("=" * 60)
 
-collection_name = "documents"
+collection_name = "doc_qa_collection"
 
 # 检查是否已存在
 if utility.has_collection(collection_name):
-    print(f"⚠️  Collection '{collection_name}' 已存在，先删除")
+    print(f"⚠️  Collection '{collection_name}' 已存在，删除旧的")
     utility.drop_collection(collection_name)
 
 # 创建 Collection
 collection = Collection(
     name=collection_name,
-    schema=schema,
-    using="default"
+    schema=schema
 )
 
 print(f"✅ Collection '{collection_name}' 创建成功")
 
-# ===== 4. 插入数据 =====
-print("\n" + "=" * 50)
-print("步骤4：插入数据")
-print("=" * 50)
+# ===== 4. 准备示例数据 =====
+print("\n" + "=" * 60)
+print("步骤4: 准备示例数据")
+print("=" * 60)
 
-# 生成示例数据
-num_entities = 100
-data = []
+# 模拟文档数据
+documents = [
+    {
+        "text": "Milvus 是一个开源的向量数据库，专为 AI 应用设计。",
+        "source": "milvus_intro.pdf",
+        "timestamp": int(time.time())
+    },
+    {
+        "text": "Milvus 2.6 支持 100K collections，适合大规模多租户场景。",
+        "source": "milvus_features.pdf",
+        "timestamp": int(time.time())
+    },
+    {
+        "text": "FLOAT16_VECTOR 可以节省 50% 的存储空间，精度损失小于 1%。",
+        "source": "milvus_optimization.pdf",
+        "timestamp": int(time.time())
+    },
+    {
+        "text": "Dynamic Schema 允许在运行时动态添加字段，无需重建 Collection。",
+        "source": "milvus_schema.pdf",
+        "timestamp": int(time.time())
+    },
+    {
+        "text": "RAG 系统使用 Milvus 存储文档向量，实现语义检索。",
+        "source": "rag_guide.pdf",
+        "timestamp": int(time.time())
+    }
+]
 
-categories = ["技术", "产品", "设计", "运营", "市场"]
+# 生成模拟向量（实际应用中应使用真实的 Embedding 模型）
+def generate_mock_vector(text: str, dim: int = 768) -> List[float]:
+    """生成模拟向量（实际应用中使用 Embedding 模型）"""
+    np.random.seed(hash(text) % (2**32))
+    return np.random.rand(dim).tolist()
 
-for i in range(num_entities):
-    data.append({
-        "doc_id": i,
-        "embedding": [random.random() for _ in range(128)],
-        "title": f"文档标题 {i}",
-        "category": random.choice(categories),
-        "created_at": 1700000000 + i * 1000
-    })
+# 准备插入数据
+texts = [doc["text"] for doc in documents]
+vectors = [generate_mock_vector(text) for text in texts]
+sources = [doc["source"] for doc in documents]
+timestamps = [doc["timestamp"] for doc in documents]
+
+print(f"✅ 准备了 {len(documents)} 条文档数据")
+print(f"   - 文本示例: {texts[0][:50]}...")
+print(f"   - 向量维度: {len(vectors[0])}")
+
+# ===== 5. 插入数据 =====
+print("\n" + "=" * 60)
+print("步骤5: 插入数据到 Collection")
+print("=" * 60)
 
 # 插入数据
-insert_result = collection.insert(data)
-print(f"✅ 插入了 {len(data)} 条数据")
-print(f"   - 插入的 ID 范围: {insert_result.primary_keys[0]} - {insert_result.primary_keys[-1]}")
+insert_result = collection.insert([
+    texts,
+    vectors,
+    sources,
+    timestamps
+])
+
+print(f"✅ 数据插入成功")
+print(f"   - 插入记录数: {len(insert_result.primary_keys)}")
+print(f"   - 主键示例: {insert_result.primary_keys[:3]}")
 
 # 刷新数据（确保数据持久化）
 collection.flush()
-print("✅ 数据已刷新到磁盘")
+print(f"✅ 数据已刷新到磁盘")
 
-# 查看数据量
-print(f"   - Collection 中的数据量: {collection.num_entities}")
-
-# ===== 5. 创建索引 =====
-print("\n" + "=" * 50)
-print("步骤5：创建索引")
-print("=" * 50)
+# ===== 6. 创建索引 =====
+print("\n" + "=" * 60)
+print("步骤6: 为向量字段创建索引")
+print("=" * 60)
 
 # 定义索引参数
 index_params = {
-    "index_type": "IVF_FLAT",  # 索引类型
-    "metric_type": "L2",       # 距离度量
-    "params": {"nlist": 128}   # 索引参数
+    "index_type": "HNSW",
+    "metric_type": "COSINE",
+    "params": {
+        "M": 16,
+        "efConstruction": 256
+    }
 }
 
 # 创建索引
 collection.create_index(
-    field_name="embedding",
+    field_name="vector",
     index_params=index_params
 )
 
-print("✅ 索引创建成功")
-print(f"   - 索引类型: {index_params['index_type']}")
-print(f"   - 距离度量: {index_params['metric_type']}")
+print(f"✅ 索引创建成功")
+print(f"   - 索引类型: HNSW")
+print(f"   - 度量类型: COSINE")
+print(f"   - 参数: M=16, efConstruction=256")
 
-# ===== 6. 加载 Collection =====
-print("\n" + "=" * 50)
-print("步骤6：加载 Collection 到内存")
-print("=" * 50)
+# ===== 7. 加载 Collection =====
+print("\n" + "=" * 60)
+print("步骤7: 加载 Collection 到内存")
+print("=" * 60)
 
 collection.load()
-print("✅ Collection 已加载到内存")
+print(f"✅ Collection 已加载到内存")
 
-# 检查加载状态
-from pymilvus import utility
-load_state = utility.load_state(collection_name)
-print(f"   - 加载状态: {load_state}")
+# ===== 8. 执行检索 =====
+print("\n" + "=" * 60)
+print("步骤8: 执行语义检索")
+print("=" * 60)
 
-# ===== 7. 执行检索 =====
-print("\n" + "=" * 50)
-print("步骤7：执行向量检索")
-print("=" * 50)
+# 查询文本
+query_text = "如何优化 Milvus 的存储空间？"
+print(f"查询: {query_text}")
 
-# 生成查询向量
-query_vector = [[random.random() for _ in range(128)]]
-
-# 定义检索参数
-search_params = {
-    "metric_type": "L2",
-    "params": {"nprobe": 10}
-}
+# 生成查询向量（实际应用中使用相同的 Embedding 模型）
+query_vector = generate_mock_vector(query_text)
 
 # 执行检索
+search_params = {
+    "metric_type": "COSINE",
+    "params": {"ef": 64}
+}
+
 results = collection.search(
-    data=query_vector,
-    anns_field="embedding",
+    data=[query_vector],
+    anns_field="vector",
     param=search_params,
-    limit=5,
-    output_fields=["title", "category", "created_at"]
+    limit=3,
+    output_fields=["text", "source", "timestamp"]
 )
 
-print(f"✅ 检索完成，返回 Top-{len(results[0])} 结果：")
-print()
+print(f"\n✅ 检索完成，返回 Top-{len(results[0])} 结果:")
+print("-" * 60)
 
 for i, hit in enumerate(results[0], 1):
-    print(f"结果 {i}:")
-    print(f"  - ID: {hit.id}")
-    print(f"  - 距离: {hit.distance:.4f}")
-    print(f"  - 标题: {hit.entity.get('title')}")
-    print(f"  - 分类: {hit.entity.get('category')}")
-    print(f"  - 创建时间: {hit.entity.get('created_at')}")
-    print()
+    print(f"\n结果 {i}:")
+    print(f"  - 相似度: {hit.distance:.4f}")
+    print(f"  - 文本: {hit.entity.get('text')}")
+    print(f"  - 来源: {hit.entity.get('source')}")
+    print(f"  - 时间戳: {hit.entity.get('timestamp')}")
 
-# ===== 8. 标量查询 =====
-print("=" * 50)
-print("步骤8：执行标量查询")
-print("=" * 50)
-
-# 查询特定分类的文档
-query_expr = 'category == "技术"'
-
-query_results = collection.query(
-    expr=query_expr,
-    output_fields=["doc_id", "title", "category"],
-    limit=5
-)
-
-print(f"✅ 查询完成，找到 {len(query_results)} 条结果：")
-print()
-
-for result in query_results:
-    print(f"  - ID: {result['doc_id']}, 标题: {result['title']}, 分类: {result['category']}")
-
-# ===== 9. 查看 Collection 信息 =====
-print("\n" + "=" * 50)
-print("步骤9：查看 Collection 信息")
-print("=" * 50)
+# ===== 9. 查看 Collection 统计信息 =====
+print("\n" + "=" * 60)
+print("步骤9: 查看 Collection 统计信息")
+print("=" * 60)
 
 print(f"Collection 名称: {collection.name}")
-print(f"Collection 描述: {collection.description}")
-print(f"数据量: {collection.num_entities}")
-print(f"是否为空: {collection.is_empty}")
+print(f"记录数: {collection.num_entities}")
+print(f"加载状态: {'已加载' if collection.is_loaded else '未加载'}")
 
-print("\n字段列表:")
+# 查看 Schema
+print(f"\nSchema 字段:")
 for field in collection.schema.fields:
-    print(f"  - {field.name} ({field.dtype})")
-    if field.is_primary:
-        print(f"    [主键]")
-    if field.dtype == DataType.FLOAT_VECTOR:
-        print(f"    维度: {field.params.get('dim')}")
-    if field.dtype == DataType.VARCHAR:
-        print(f"    最大长度: {field.params.get('max_length')}")
+    print(f"  - {field.name}: {field.dtype}")
 
-# ===== 10. 释放 Collection =====
-print("\n" + "=" * 50)
-print("步骤10：释放 Collection")
-print("=" * 50)
+# ===== 10. 清理资源 =====
+print("\n" + "=" * 60)
+print("步骤10: 清理资源（可选）")
+print("=" * 60)
 
-collection.release()
-print("✅ Collection 已从内存释放")
+# 释放 Collection（释放内存）
+# collection.release()
+# print(f"✅ Collection 已释放")
 
-# ===== 11. 清理（可选）=====
-print("\n" + "=" * 50)
-print("步骤11：清理资源（可选）")
-print("=" * 50)
-
-# 如果需要删除 Collection，取消下面的注释
+# 删除 Collection（如果需要）
 # utility.drop_collection(collection_name)
-# print(f"✅ Collection '{collection_name}' 已删除")
+# print(f"✅ Collection 已删除")
 
-print("\n" + "=" * 50)
-print("🎉 完成！")
-print("=" * 50)
+print("\n" + "=" * 60)
+print("🎉 完整流程执行成功！")
+print("=" * 60)
 ```
+
+---
 
 ## 运行输出示例
 
 ```
-==================================================
-步骤1：连接到 Milvus
-==================================================
+============================================================
+步骤1: 连接到 Milvus 2.6
+============================================================
 ✅ 已连接到 Milvus
 
-==================================================
-步骤2：定义 Collection Schema
-==================================================
+============================================================
+步骤2: 定义 Collection Schema
+============================================================
 ✅ Schema 定义完成
    - 字段数量: 5
-   - 主键字段: doc_id
+   - 向量维度: 768
+   - 向量类型: FLOAT16_VECTOR（节省 50% 存储）
 
-==================================================
-步骤3：创建 Collection
-==================================================
-✅ Collection 'documents' 创建成功
+============================================================
+步骤3: 创建 Collection
+============================================================
+✅ Collection 'doc_qa_collection' 创建成功
 
-==================================================
-步骤4：插入数据
-==================================================
-✅ 插入了 100 条数据
-   - 插入的 ID 范围: 0 - 99
+============================================================
+步骤4: 准备示例数据
+============================================================
+✅ 准备了 5 条文档数据
+   - 文本示例: Milvus 是一个开源的向量数据库，专为 AI 应用设计。...
+   - 向量维度: 768
+
+============================================================
+步骤5: 插入数据到 Collection
+============================================================
+✅ 数据插入成功
+   - 插入记录数: 5
+   - 主键示例: [450123456789, 450123456790, 450123456791]
 ✅ 数据已刷新到磁盘
-   - Collection 中的数据量: 100
 
-==================================================
-步骤5：创建索引
-==================================================
+============================================================
+步骤6: 为向量字段创建索引
+============================================================
 ✅ 索引创建成功
-   - 索引类型: IVF_FLAT
-   - 距离度量: L2
+   - 索引类型: HNSW
+   - 度量类型: COSINE
+   - 参数: M=16, efConstruction=256
 
-==================================================
-步骤6：加载 Collection 到内存
-==================================================
+============================================================
+步骤7: 加载 Collection 到内存
+============================================================
 ✅ Collection 已加载到内存
-   - 加载状态: LoadState.Loaded
 
-==================================================
-步骤7：执行向量检索
-==================================================
-✅ 检索完成，返回 Top-5 结果：
+============================================================
+步骤8: 执行语义检索
+============================================================
+查询: 如何优化 Milvus 的存储空间？
+
+✅ 检索完成，返回 Top-3 结果:
+------------------------------------------------------------
 
 结果 1:
-  - ID: 42
-  - 距离: 12.3456
-  - 标题: 文档标题 42
-  - 分类: 技术
-  - 创建时间: 1700042000
+  - 相似度: 0.8523
+  - 文本: FLOAT16_VECTOR 可以节省 50% 的存储空间，精度损失小于 1%。
+  - 来源: milvus_optimization.pdf
+  - 时间戳: 1708531200
 
 结果 2:
-  - ID: 15
-  - 距离: 13.7890
-  - 标题: 文档标题 15
-  - 分类: 产品
-  - 创建时间: 1700015000
+  - 相似度: 0.7891
+  - 文本: Milvus 2.6 支持 100K collections，适合大规模多租户场景。
+  - 来源: milvus_features.pdf
+  - 时间戳: 1708531200
 
-...
+结果 3:
+  - 相似度: 0.7234
+  - 文本: Milvus 是一个开源的向量数据库，专为 AI 应用设计。
+  - 来源: milvus_intro.pdf
+  - 时间戳: 1708531200
 
-==================================================
-步骤8：执行标量查询
-==================================================
-✅ 查询完成，找到 5 条结果：
+============================================================
+步骤9: 查看 Collection 统计信息
+============================================================
+Collection 名称: doc_qa_collection
+记录数: 5
+加载状态: 已加载
 
-  - ID: 5, 标题: 文档标题 5, 分类: 技术
-  - ID: 12, 标题: 文档标题 12, 分类: 技术
-  - ID: 23, 标题: 文档标题 23, 分类: 技术
-  - ID: 34, 标题: 文档标题 34, 分类: 技术
-  - ID: 45, 标题: 文档标题 45, 分类: 技术
+Schema 字段:
+  - id: DataType.INT64
+  - text: DataType.VARCHAR
+  - vector: DataType.FLOAT16_VECTOR
+  - source: DataType.VARCHAR
+  - timestamp: DataType.INT64
 
-==================================================
-步骤9：查看 Collection 信息
-==================================================
-Collection 名称: documents
-Collection 描述: 文档检索 Collection
-数据量: 100
-是否为空: False
+============================================================
+步骤10: 清理资源（可选）
+============================================================
 
-字段列表:
-  - doc_id (DataType.INT64)
-    [主键]
-  - embedding (DataType.FLOAT_VECTOR)
-    维度: 128
-  - title (DataType.VARCHAR)
-    最大长度: 200
-  - category (DataType.VARCHAR)
-    最大长度: 50
-  - created_at (DataType.INT64)
-
-==================================================
-步骤10：释放 Collection
-==================================================
-✅ Collection 已从内存释放
-
-==================================================
-步骤11：清理资源（可选）
-==================================================
-
-==================================================
-🎉 完成！
-==================================================
+============================================================
+🎉 完整流程执行成功！
+============================================================
 ```
 
-## 关键要点
+---
 
-1. **完整流程**：从连接到检索的完整流程
-2. **Schema 设计**：包含主键、向量、标量字段
-3. **索引创建**：必须在检索前创建索引
-4. **加载到内存**：必须在检索前加载
-5. **两种查询**：向量检索 + 标量查询
+## 代码详解
+
+### 1. Schema 设计要点
+
+```python
+# 主键设计
+FieldSchema(
+    name="id",
+    dtype=DataType.INT64,
+    is_primary=True,
+    auto_id=True  # 自动生成，无需手动管理
+)
+
+# 向量字段设计
+FieldSchema(
+    name="vector",
+    dtype=DataType.FLOAT16_VECTOR,  # 使用 FLOAT16 节省 50% 存储
+    dim=768  # 维度必须与 Embedding 模型一致
+)
+```
+
+**设计原则：**
+- 主键使用 `auto_id=True` 简化管理
+- 向量类型选择 FLOAT16_VECTOR 优化成本
+- VARCHAR 字段指定合理的 `max_length`
+
+### 2. 索引选择
+
+```python
+index_params = {
+    "index_type": "HNSW",  # 高召回率索引
+    "metric_type": "COSINE",  # 余弦相似度
+    "params": {
+        "M": 16,  # 每个节点的连接数
+        "efConstruction": 256  # 构建时的搜索范围
+    }
+}
+```
+
+**索引类型选择：**
+- **HNSW**: 高召回率，适合中等数据集（10万-1000万）
+- **IVF_FLAT**: 平衡性能和召回，适合大数据集（>1000万）
+- **FLAT**: 精确检索，适合小数据集（<10万）
+
+### 3. 检索参数
+
+```python
+search_params = {
+    "metric_type": "COSINE",
+    "params": {"ef": 64}  # 搜索时的范围，越大召回率越高
+}
+```
+
+**参数调优：**
+- `ef` 值越大，召回率越高，但性能越慢
+- 推荐范围：32-128
+- 生产环境需要根据实际数据测试
+
+---
+
+## 实际应用扩展
+
+### 扩展1：使用真实 Embedding 模型
+
+```python
+from sentence_transformers import SentenceTransformer
+
+# 加载 Embedding 模型
+model = SentenceTransformer('all-MiniLM-L6-v2')
+
+# 生成向量
+def get_embedding(text: str) -> List[float]:
+    return model.encode(text).tolist()
+
+# 使用
+vectors = [get_embedding(text) for text in texts]
+query_vector = get_embedding(query_text)
+```
+
+### 扩展2：批量插入优化
+
+```python
+# 批量插入（每批 1000 条）
+batch_size = 1000
+for i in range(0, len(texts), batch_size):
+    batch_texts = texts[i:i+batch_size]
+    batch_vectors = vectors[i:i+batch_size]
+    batch_sources = sources[i:i+batch_size]
+    batch_timestamps = timestamps[i:i+batch_size]
+    
+    collection.insert([
+        batch_texts,
+        batch_vectors,
+        batch_sources,
+        batch_timestamps
+    ])
+    
+    print(f"✅ 已插入 {i+len(batch_texts)}/{len(texts)} 条记录")
+```
+
+### 扩展3：添加标量过滤
+
+```python
+# 按来源过滤检索
+results = collection.search(
+    data=[query_vector],
+    anns_field="vector",
+    param=search_params,
+    limit=3,
+    expr="source == 'milvus_optimization.pdf'",  # 标量过滤
+    output_fields=["text", "source"]
+)
+```
+
+---
+
+## 性能优化建议
+
+### 1. 向量类型选择
+
+| 场景 | 推荐类型 | 原因 |
+|------|---------|------|
+| 一般文档检索 | FLOAT16_VECTOR | 节省 50% 存储，精度损失 <1% |
+| 高精度要求 | FLOAT_VECTOR | 无精度损失 |
+| 超大规模 | BFLOAT16_VECTOR | 节省 50% 存储，适合训练 |
+
+### 2. 索引参数调优
+
+```python
+# 小数据集（<10万）
+index_params = {"index_type": "FLAT"}
+
+# 中等数据集（10万-1000万）
+index_params = {
+    "index_type": "HNSW",
+    "params": {"M": 16, "efConstruction": 256}
+}
+
+# 大数据集（>1000万）
+index_params = {
+    "index_type": "IVF_FLAT",
+    "params": {"nlist": 1024}
+}
+```
+
+### 3. 内存管理
+
+```python
+# 使用完后释放内存
+collection.release()
+
+# 需要时再加载
+collection.load()
+```
+
+---
+
+## 常见问题
+
+### Q1: 为什么检索前必须创建索引？
+
+**A:** Milvus 的向量检索依赖索引结构（如 HNSW、IVF），没有索引无法进行 ANN（近似最近邻）检索。
+
+### Q2: FLOAT16_VECTOR 会影响检索精度吗？
+
+**A:** 精度损失小于 1%，对大多数应用（文档检索、推荐系统）影响可忽略。
+
+### Q3: 如何选择合适的索引类型？
+
+**A:** 根据数据量选择：
+- <10万：FLAT（精确检索）
+- 10万-1000万：HNSW（高召回率）
+- >1000万：IVF_FLAT（平衡性能）
+
+---
 
 ## 下一步
 
-- 场景2：高级 Schema 设计
-- 场景3：多 Collection 管理
-- 场景4：Collection 生命周期管理
+- **高级 Schema 设计**：[07_实战代码_场景2_高级Schema设计](./07_实战代码_场景2_高级Schema设计.md)
+- **生命周期管理**：[07_实战代码_场景3_Collection生命周期管理](./07_实战代码_场景3_Collection生命周期管理.md)
+- **返回导航**：[00_概览](./00_概览.md)

@@ -68,7 +68,15 @@
       "mcp__Filesystem__write_file",
       "Bash(grep -r \"message.*queue\\\\|MessageQueue\" /Users/wuxiao/Documents/codeWithFelix/vibe-learning/vibe-learning-rag --include=*.ts --include=*.tsx --include=*.md)",
       "Bash(find /Users/wuxiao/Documents/codeWithFelix/vibe-learning/vibe-learning-rag/atom/pi-mono -type f -name *.ts -o -name *.tsx -o -name *.js)",
-      "Bash(find /Users/wuxiao/Documents/codeWithFelix/vibe-learning/vibe-learning-rag -type f \\\\\\(-name *.ts -o -name *.tsx -o -name *.js -o -name *.jsx \\\\\\))"
+      "Bash(find /Users/wuxiao/Documents/codeWithFelix/vibe-learning/vibe-learning-rag -type f \\\\\\(-name *.ts -o -name *.tsx -o -name *.js -o -name *.jsx \\\\\\))",
+      "Bash(find sourcecode -name *pi-mono* -o -name *compaction*)",
+      "Bash(ls -1 *.md)",
+      "Bash(xargs -I {} sh -c 'echo \"\"\"\"=== {} ===\"\"\"\" && head -10 {}')",
+      "Bash(xargs -I {} basename {})",
+      "Bash(find /Users/wuxiao/Documents/codeWithFelix/vibe-learning/vibe-learning-rag/atom/pi-mono -type d -name Phase4*)",
+      "Bash(grep -r pi-mcp-adapter /Users/wuxiao/Documents/codeWithFelix/vibe-learning/vibe-learning-rag/sourcecode/pi-mono --include=*.json --include=*.ts --include=*.js --include=*.md)",
+      "mcp__Filesystem__read_multiple_files",
+      "Bash(find /Users/wuxiao/Documents/codeWithFelix/vibe-learning/vibe-learning-rag/sourcecode/pi-mono -type f \\\\\\(-name *session* -o -name *branch* -o -name *queue* \\\\\\))"
     ]
   }
 }

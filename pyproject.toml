@@ -20,6 +20,7 @@ dependencies = [
     "matplotlib>=3.10.8",
     "seaborn>=0.13.2",
     "anthropic>=0.79.0",
+    "pymilvus>=2.6.9",
 ]
 
 [project.optional-dependencies]
