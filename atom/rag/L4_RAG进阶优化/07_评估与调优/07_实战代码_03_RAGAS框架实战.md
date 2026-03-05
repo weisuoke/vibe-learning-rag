@@ -125,7 +125,7 @@ RAG系统 + RAGAS评估集成
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain_community.vectorstores import Chroma
 from langchain.chains import RetrievalQA
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 from ragas import evaluate
 from ragas.metrics import faithfulness, answer_relevancy
 from datasets import Dataset

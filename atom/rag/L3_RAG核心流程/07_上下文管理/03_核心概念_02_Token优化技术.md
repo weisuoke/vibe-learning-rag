@@ -29,7 +29,7 @@ cost_per_month = $750  # 节省75%
 **原理**：按语义边界分块，而非固定大小
 
 ```python
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 def semantic_chunking(text: str, chunk_size: int = 500) -> list[str]:
     """语义分块"""

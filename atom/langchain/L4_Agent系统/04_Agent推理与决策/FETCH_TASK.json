@@ -1,0 +1,69 @@
+{
+  "task_id": "langchain_04_agent_reasoning_fetch_20260301",
+  "phase_directory": "atom/langchain/L4_Agent系统",
+  "knowledge_point": "04_Agent推理与决策",
+  "target_directory": "atom/langchain/L4_Agent系统/04_Agent推理与决策/reference",
+  "generated_at": "2026-03-01T00:00:00Z",
+  "total_urls": 4,
+  "exclusion_rules": {
+    "official_docs": "已通过 Context7 获取，不需要抓取",
+    "source_repo": "直接读取本地源码，不需要抓取",
+    "excluded_patterns": [
+      "github.com/langchain-ai/langchain/*",
+      "docs.langchain.com/*",
+      "python.langchain.com/*"
+    ]
+  },
+  "urls": [
+    {
+      "url": "https://x.com/Aurimas_Gr/status/2002047650011705725",
+      "knowledge_point_tag": "ReAct推理模式",
+      "priority": "high",
+      "expected_content_type": "discussion",
+      "source_search_file": "reference/search_agent_reasoning_01.md",
+      "reason": "2025年12月详细解释ReAct代理模式，包含提示设计和循环控制",
+      "content_focus": "ReAct模式详解"
+    },
+    {
+      "url": "https://www.reddit.com/r/LangChain/comments/1iqrfyy/react_vs_tools_and_function_calling_in_openai",
+      "knowledge_point_tag": "推理策略对比与选型",
+      "priority": "high",
+      "expected_content_type": "discussion",
+      "source_search_file": "reference/search_agent_reasoning_01.md",
+      "reason": "ReAct vs 函数调用的社区深度讨论",
+      "content_focus": "策略选型社区观点"
+    },
+    {
+      "url": "https://www.reddit.com/r/LangChain/comments/1kc61kj/react_vs_function_calling_which_one_to_use",
+      "knowledge_point_tag": "推理策略对比与选型",
+      "priority": "medium",
+      "expected_content_type": "discussion",
+      "source_search_file": "reference/search_agent_reasoning_01.md",
+      "reason": "代码编辑代理场景的ReAct vs Function Calling比较",
+      "content_focus": "实际场景选型"
+    },
+    {
+      "url": "https://www.reddit.com/r/LangChain/comments/1ffe38x/whats_the_difference_between_tool_calling",
+      "knowledge_point_tag": "推理策略对比与选型",
+      "priority": "medium",
+      "expected_content_type": "discussion",
+      "source_search_file": "reference/search_agent_reasoning_01.md",
+      "reason": "Tool Calling vs Structured Chat vs ReAct 三种方式的区别",
+      "content_focus": "三种推理方式对比"
+    }
+  ],
+  "priority_distribution": {
+    "high": 2,
+    "medium": 2,
+    "low": 0
+  },
+  "content_type_distribution": {
+    "article": 0,
+    "discussion": 4,
+    "code": 0
+  },
+  "knowledge_point_mapping": {
+    "ReAct推理模式": [0],
+    "推理策略对比与选型": [1, 2, 3]
+  }
+}

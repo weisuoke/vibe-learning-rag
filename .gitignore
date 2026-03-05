@@ -28,7 +28,7 @@ uv.lock
 .DS_Store
 
 # 源码
-sourcecode
+# sourcecode
 
 # Docker volumns
 # Common docker-compose / local persistent data directories.

@@ -1,0 +1,102 @@
+{
+  "task_id": "langgraph_03_部分状态更新_fetch_20260226",
+  "phase_directory": "atom/langgraph/L2_状态管理",
+  "knowledge_point": "03_部分状态更新",
+  "target_directory": "atom/langgraph/L2_状态管理/03_部分状态更新/reference",
+  "generated_at": "2026-02-26T06:29:03.740Z",
+  "total_urls": 7,
+  "exclusion_rules": {
+    "official_docs": "已通过 Context7 获取，不需要抓取",
+    "source_repo": "直接读取本地源码，不需要抓取",
+    "excluded_patterns": [
+      "github.com/langchain-ai/langgraph/*",
+      "*/official-docs/*",
+      "*/api-reference/*",
+      "docs.langchain.com/*"
+    ]
+  },
+  "urls": [
+    {
+      "url": "https://medium.com/towardsdev/built-with-langgraph-4-components-d26701f7d16d",
+      "knowledge_point_tag": "部分状态更新、Reducer 函数、StateGraph",
+      "priority": "high",
+      "expected_content_type": "article",
+      "source_search_file": "reference/search_部分状态更新_01.md",
+      "reason": "详细解释LangGraph组件，包括节点返回partial state update，StateGraph使用reducer合并更新",
+      "content_focus": "组件架构、状态更新机制"
+    },
+    {
+      "url": "https://dev.to/petrashka/langgraph-for-beginners-a-complete-guide-2310",
+      "knowledge_point_tag": "部分状态更新、add_messages、Reducer",
+      "priority": "high",
+      "expected_content_type": "article",
+      "source_search_file": "reference/search_部分状态更新_01.md",
+      "reason": "LangGraph入门指南，介绍Annotation.Root中reducer作用，如add_messages累加消息",
+      "content_focus": "入门指南、实践案例"
+    },
+    {
+      "url": "https://www.swarnendu.de/blog/langgraph-best-practices",
+      "knowledge_point_tag": "最佳实践、纯函数、Reducer",
+      "priority": "high",
+      "expected_content_type": "article",
+      "source_search_file": "reference/search_部分状态更新_01.md",
+      "reason": "LangGraph最佳实践，强调节点如纯函数返回partial state update，避免mutation",
+      "content_focus": "最佳实践、避免 mutation"
+    },
+    {
+      "url": "https://sumanta9090.medium.com/langgraph-patterns-best-practices-guide-2025-38cc2abb8763",
+      "knowledge_point_tag": "Annotated Reducers、状态转换、2025 最佳实践",
+      "priority": "high",
+      "expected_content_type": "article",
+      "source_search_file": "reference/search_部分状态更新_01.md",
+      "reason": "2025年LangGraph模式与最佳实践，使用annotated reducers明确控制状态转换",
+      "content_focus": "2025 年最新模式和最佳实践"
+    },
+    {
+      "url": "https://sparkco.ai/blog/mastering-langgraph-state-management-in-2025",
+      "knowledge_point_tag": "状态管理、Annotated Types、Reducer",
+      "priority": "high",
+      "expected_content_type": "article",
+      "source_search_file": "reference/search_部分状态更新_01.md",
+      "reason": "2025年LangGraph状态管理掌握，使用annotated types与reducer管理状态转换",
+      "content_focus": "2025 年状态管理掌握"
+    },
+    {
+      "url": "https://blog.gopenai.com/the-architecture-of-agents-planning-action-and-state-management-in-large-language-models-e00b340fcf09",
+      "knowledge_point_tag": "代理架构、状态管理、Reducer",
+      "priority": "medium",
+      "expected_content_type": "article",
+      "source_search_file": "reference/search_部分状态更新_01.md",
+      "reason": "代理架构分析，节点作为函数接收状态返回partial state update，结合reducer处理状态合并",
+      "content_focus": "代理架构分析"
+    },
+    {
+      "url": "https://dev.to/sreeni5018/the-architecture-of-agent-memory-how-langgraph-really-works-59ne",
+      "knowledge_point_tag": "内存架构、Reducer、状态合并",
+      "priority": "medium",
+      "expected_content_type": "article",
+      "source_search_file": "reference/search_部分状态更新_01.md",
+      "reason": "LangGraph内存架构详解，reducer驱动状态合并，节点产生更新后通过annotated reducer处理partial state",
+      "content_focus": "LangGraph 内存架构详解"
+    }
+  ],
+  "priority_distribution": {
+    "high": 5,
+    "medium": 2,
+    "low": 0
+  },
+  "content_type_distribution": {
+    "article": 7,
+    "discussion": 0,
+    "code": 0
+  },
+  "knowledge_point_mapping": {
+    "部分状态更新": [0, 1, 2, 3, 4],
+    "Reducer 函数": [0, 1, 2, 3, 4, 5, 6],
+    "Annotated 字段": [1, 3, 4],
+    "最佳实践": [2, 3, 4],
+    "状态合并机制": [0, 5, 6],
+    "add_messages": [1],
+    "代理架构": [5, 6]
+  }
+}

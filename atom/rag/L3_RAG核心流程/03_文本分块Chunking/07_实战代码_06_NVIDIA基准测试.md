@@ -17,7 +17,7 @@ NVIDIA 2025 分块策略基准测试
 3. 查询类型决定最优块大小
 """
 
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 from typing import List, Dict
 import time
 
@@ -245,7 +245,7 @@ for query_type, result in results.items():
 包含：性能、质量、成本三个维度
 """
 
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_experimental.text_splitter import SemanticChunker
 from langchain_openai import OpenAIEmbeddings
 import time
@@ -439,7 +439,7 @@ Anthropic 2024-2025: 减少 49-67% 检索失败
 """
 
 from anthropic import Anthropic
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 def test_contextual_retrieval(document: str, test_query: str):
     """

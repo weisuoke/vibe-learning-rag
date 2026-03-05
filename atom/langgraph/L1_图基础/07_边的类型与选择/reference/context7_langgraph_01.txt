@@ -1,0 +1,126 @@
+### Implement Dynamic Routing with Conditional Edges in LangGraph (Python)
+
+Source: https://context7.com/langchain-ai/langgraph/llms.txt
+
+This example illustrates the use of `add_conditional_edges` for dynamic routing in a `StateGraph`. It defines a routing function that inspects the current state and determines the next node(s) to execute, showcasing how to create branching logic in workflows based on state values. This enables more complex, adaptive agent behaviors.
+
+```python
+from langgraph.graph import START, END, StateGraph
+from typing import Literal
+from typing_extensions import TypedDict
+
+class State(TypedDict):
+    value: int
+    path_taken: str
+
+def process_input(state: State) -> dict:
+    return {"value": state["value"]}
+
+def route_by_value(state: State) -> Literal["high_path", "low_path"]:
+    """Route based on state value."""
+    if state["value"] > 50:
+        return "high_path"
+    return "low_path"
+
+def high_handler(state: State) -> dict:
+    return {"path_taken": "high", "value": state["value"] * 2}
+
+def low_handler(state: State) -> dict:
+    return {"path_taken": "low", "value": state["value"] + 10}
+
+builder = StateGraph(State)
+builder.add_node("process", process_input)
+builder.add_node("high_path", high_handler)
+builder.add_node("low_path", low_handler)
+
+builder.add_edge(START, "process")
+builder.add_conditional_edges(
+    "process",
+    route_by_value,
+    {"high_path": "high_path", "low_path": "low_path"}
+)
+builder.add_edge("high_path", END)
+builder.add_edge("low_path", END)
+
+graph = builder.compile()
+
+# Test with high value
+result = graph.invoke({"value": 75, "path_taken": ""})
+print(result)  # {'value': 150, 'path_taken': 'high'}
+
+# Test with low value
+result = graph.invoke({"value": 25, "path_taken": ""})
+print(result)  # {'value': 35, 'path_taken': 'low'}
+```
+
+--------------------------------
+
+### Define LangGraph Workflow Edges and Compile Custom Agent
+
+Source: https://github.com/langchain-ai/langgraph/blob/main/examples/rag/langgraph_crag_local.ipynb
+
+This code defines the edges and conditional edges for a LangGraph workflow, establishing the flow of execution between different nodes. It then compiles the workflow into a custom graph, which can be invoked for agent operations. The `display` function is used to visualize the compiled graph.
+
+```python
+workflow.add_edge(START, "retrieve")
+workflow.add_edge("retrieve", "grade_documents")
+workflow.add_conditional_edges(
+    "grade_documents",
+    decide_to_generate,
+    {
+        "search": "web_search",
+        "generate": "generate"
+    }
+)
+workflow.add_edge("web_search", "generate")
+workflow.add_edge("generate", END)
+
+custom_graph = workflow.compile()
+
+display(Image(custom_graph.get_graph(xray=True).draw_mermaid_png()))
+```
+
+--------------------------------
+
+### Build LangGraph Workflow with Edges and Conditional Edges
+
+Source: https://github.com/langchain-ai/langgraph/blob/main/examples/rag/langgraph_self_rag_local.ipynb
+
+Constructs a directed graph workflow by adding edges between nodes and conditional edges with routing logic. The workflow implements a RAG pipeline that retrieves documents, grades their relevance, optionally transforms queries, generates responses, and validates generation quality. Uses START and END sentinels to mark entry and exit points.
+
+```python
+workflow.add_edge(START, "retrieve")
+workflow.add_edge("retrieve", "grade_documents")
+workflow.add_conditional_edges(
+    "grade_documents",
+    decide_to_generate,
+    {
+        "transform_query": "transform_query",
+        "generate": "generate",
+    },
+)
+workflow.add_edge("transform_query", "retrieve")
+workflow.add_conditional_edges(
+    "generate",
+    grade_generation_v_documents_and_question,
+    {
+        "not supported": "generate",
+        "useful": END,
+        "not useful": "transform_query",
+    },
+)
+```
+
+### LangGraph > Conditional Edges - Dynamic Routing
+
+Source: https://context7.com/langchain-ai/langgraph/llms.txt
+
+Conditional edges allow dynamic routing based on state values, enabling graphs to branch execution paths at runtime. The `add_conditional_edges` method takes a source node and a path function that evaluates the current state and returns the next node name(s) to execute. This enables sophisticated control flow where different branches handle different conditions—for example, routing to a high-value handler when a state value exceeds a threshold, or to a low-value handler otherwise. The path function receives the full state object and can implement complex routing logic based on multiple state fields.
+
+--------------------------------
+
+### Edges > Conditional Routing
+
+Source: https://github.com/langchain-ai/langgraph/blob/main/examples/rag/langgraph_self_rag_pinecone_movies.ipynb
+
+Conditional edges in LangGraph enable dynamic routing based on decision functions that evaluate the current graph state. The `decide_to_generate` function demonstrates this pattern by examining filtered documents and returning either 'transform_query' or 'generate' as the next node to execute. This allows workflows to branch based on runtime conditions, such as whether retrieved documents are relevant to the user's question.

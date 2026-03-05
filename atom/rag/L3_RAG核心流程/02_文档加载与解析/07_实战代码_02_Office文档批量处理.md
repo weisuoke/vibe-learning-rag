@@ -319,7 +319,7 @@ def enhance_metadata(documents: List[Document]) -> List[Document]:
 # ===== 6. RAG应用：构建Office文档知识库 =====
 print("\n=== 6. RAG应用：构建Office文档知识库 ===")
 
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain.vectorstores import Chroma
 from langchain.embeddings import OpenAIEmbeddings
 

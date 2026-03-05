@@ -13,7 +13,7 @@ LLMLingua上下文压缩
 """
 
 from llmlingua import PromptCompressor
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 from openai import OpenAI
 import tiktoken
 from dotenv import load_dotenv

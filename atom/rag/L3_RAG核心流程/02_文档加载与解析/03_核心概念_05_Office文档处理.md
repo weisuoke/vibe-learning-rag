@@ -574,7 +574,7 @@ print(f"PowerPoint文档: {len(docs)} 张幻灯片")
 ### 6.1 使用LangChain的Office加载器
 
 ```python
-from langchain.document_loaders import (
+from langchain_community.document_loaders import (
     Docx2txtLoader,
     UnstructuredExcelLoader,
     UnstructuredPowerPointLoader
@@ -604,8 +604,8 @@ print(f"PowerPoint: {len(pptx_docs)} 文档")
 ### 7.1 构建Office文档知识库
 
 ```python
-from langchain.document_loaders import DirectoryLoader, Docx2txtLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_community.document_loaders import DirectoryLoader, Docx2txtLoader
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain.vectorstores import Chroma
 from langchain.embeddings import OpenAIEmbeddings
 

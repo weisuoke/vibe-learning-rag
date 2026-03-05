@@ -1,0 +1,47 @@
+{
+  "task_id": "langchain_14_Retriever高级策略_fetch_20260227",
+  "phase_directory": "atom/langchain/L3_组件生态",
+  "knowledge_point": "14_Retriever高级策略",
+  "target_directory": "atom/langchain/L3_组件生态/14_Retriever高级策略/reference",
+  "generated_at": "2026-02-27T04:10:00Z",
+  "total_urls": 2,
+  "exclusion_rules": {
+    "official_docs": "已通过 Context7 获取，不需要抓取",
+    "source_repo": "直接读取本地源码，不需要抓取",
+    "excluded_patterns": [
+      "github.com/langchain-ai/*",
+      "docs.langchain.com/*",
+      "python.langchain.com/*"
+    ]
+  },
+  "urls": [
+    {
+      "url": "https://superlinked.com/vectorhub/articles/optimizing-rag-with-hybrid-search-reranking",
+      "knowledge_point_tag": "混合检索+重排序",
+      "priority": "medium",
+      "expected_content_type": "article",
+      "source_search_file": "reference/search_hybrid_reranking_01.md",
+      "reason": "2025年详细的混合搜索与重排序优化文章",
+      "content_focus": "RRF融合方法和alpha参数调优"
+    },
+    {
+      "url": "https://thedataguy.pro/blog/2025/05/evaluating-advanced-rag-retrievers",
+      "knowledge_point_tag": "检索器评估",
+      "priority": "low",
+      "expected_content_type": "article",
+      "source_search_file": "reference/search_hybrid_reranking_01.md",
+      "reason": "高级检索器评估对比",
+      "content_focus": "hybrid/ensemble + reranking评估结果"
+    }
+  ],
+  "priority_distribution": {
+    "high": 0,
+    "medium": 1,
+    "low": 1
+  },
+  "content_type_distribution": {
+    "article": 2,
+    "discussion": 0,
+    "code": 0
+  }
+}

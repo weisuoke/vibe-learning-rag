@@ -1,0 +1,181 @@
+{
+  "task_id": "langchain_CallbackHandler回调系统_fetch_20260225",
+  "phase_directory": "atom/langchain/L3_组件生态",
+  "knowledge_point": "08_CallbackHandler回调系统",
+  "target_directory": "atom/langchain/L3_组件生态/08_CallbackHandler回调系统/reference",
+  "generated_at": "2026-02-25T09:15:39.748Z",
+  "total_urls": 16,
+  "exclusion_rules": {
+    "official_docs": "已通过 Context7 获取，不需要抓取",
+    "source_repo": "直接读取本地源码，不需要抓取",
+    "excluded_patterns": [
+      "github.com/langchain-ai/langchain/*",
+      "github.com/langchain-ai/langchainjs/*",
+      "*/official-docs/*",
+      "*/api-reference/*"
+    ]
+  },
+  "urls": [
+    {
+      "url": "https://github.com/pinecone-io/examples/blob/master/learn/generation/langchain/handbook/09-langchain-streaming/09-langchain-streaming.ipynb",
+      "knowledge_point_tag": "流式输出处理",
+      "priority": "high",
+      "expected_content_type": "code",
+      "source_search_file": "reference/search_callback_02.md",
+      "reason": "详细讲解如何构建自定义CallbackHandler处理LLM流式响应，包含完整代码示例",
+      "content_focus": "自定义流式回调实现"
+    },
+    {
+      "url": "https://github.com/FareedKhan-dev/agentic-rag",
+      "knowledge_point_tag": "成本追踪和性能监控",
+      "priority": "high",
+      "expected_content_type": "code",
+      "source_search_file": "reference/search_callback_02.md",
+      "reason": "继承BaseCallbackHandler创建自定义处理器，实时追踪token用量、延迟与成本",
+      "content_focus": "TokenCostCallbackHandler实现"
+    },
+    {
+      "url": "https://github.com/langfuse/langfuse-docs/blob/main/cookbook/integration_azure_openai_langchain.ipynb",
+      "knowledge_point_tag": "可观测性集成",
+      "priority": "high",
+      "expected_content_type": "code",
+      "source_search_file": "reference/search_callback_02.md",
+      "reason": "Langfuse官方Cookbook演示如何初始化CallbackHandler添加追踪、prompt版本控制",
+      "content_focus": "Langfuse集成实战"
+    },
+    {
+      "url": "https://github.com/langfuse/langfuse/issues/6761",
+      "knowledge_point_tag": "LangGraph回调处理",
+      "priority": "high",
+      "expected_content_type": "discussion",
+      "source_search_file": "reference/search_callback_02.md",
+      "reason": "讨论LangGraph CallbackHandler自动生成trace时如何正确链接prompt，包含代码示例",
+      "content_focus": "LangGraph trace链接问题解决"
+    },
+    {
+      "url": "https://github.com/orgs/langfuse/discussions/10711",
+      "knowledge_point_tag": "LangGraph回调处理",
+      "priority": "high",
+      "expected_content_type": "discussion",
+      "source_search_file": "reference/search_callback_02.md",
+      "reason": "讨论在LangGraph状态机内自定义CallbackHandler管理span名称与嵌套",
+      "content_focus": "LangGraph多LLM调用配置"
+    },
+    {
+      "url": "https://gist.github.com/ninely/88485b2e265d852d3feb8bd115065b1a",
+      "knowledge_point_tag": "流式输出处理",
+      "priority": "high",
+      "expected_content_type": "code",
+      "source_search_file": "reference/search_callback_02.md",
+      "reason": "完整自定义异步CallbackHandler代码，用于FastAPI中LangChain流式输出",
+      "content_focus": "FastAPI异步流式回调"
+    },
+    {
+      "url": "https://github.com/orgs/langfuse/discussions/11934",
+      "knowledge_point_tag": "并发环境回调管理",
+      "priority": "high",
+      "expected_content_type": "discussion",
+      "source_search_file": "reference/search_callback_02.md",
+      "reason": "讨论每个请求新建CallbackHandler实例，避免重用导致冲突",
+      "content_focus": "Django并发环境最佳实践"
+    },
+    {
+      "url": "https://www.reddit.com/r/LangChain/comments/19enjxr/streaming_local_llm_with_fastapi_llamacpp_and/",
+      "knowledge_point_tag": "流式输出处理",
+      "priority": "high",
+      "expected_content_type": "discussion",
+      "source_search_file": "reference/search_callback_02.md",
+      "reason": "分享Llama.cpp与LangChain集成时自定义CallbackHandler实现流式输出的问题解决",
+      "content_focus": "本地LLM流式输出调试"
+    },
+    {
+      "url": "https://github.com/langfuse/langfuse-docs/blob/main/cookbook/example_langgraph_agents.ipynb",
+      "knowledge_point_tag": "Agent工具调用追踪",
+      "priority": "high",
+      "expected_content_type": "code",
+      "source_search_file": "reference/search_callback_01.md",
+      "reason": "教程教导如何使用Langfuse监控LangGraph代理的内部追踪步骤",
+      "content_focus": "LangGraph代理追踪示例"
+    },
+    {
+      "url": "https://github.com/vysotin/agentic_evals_docs",
+      "knowledge_point_tag": "可观测性集成",
+      "priority": "high",
+      "expected_content_type": "article",
+      "source_search_file": "reference/search_callback_01.md",
+      "reason": "全面框架涵盖LangChain回调系统、OpenTelemetry标准及LangSmith等平台",
+      "content_focus": "代理全生命周期可观测性最佳实践"
+    },
+    {
+      "url": "https://github.com/alirezadir/Agentic-AI-Systems/blob/main/03_system_design/evals/agentic-ai-evals.md",
+      "knowledge_point_tag": "可观测性集成",
+      "priority": "high",
+      "expected_content_type": "article",
+      "source_search_file": "reference/search_callback_01.md",
+      "reason": "2025年追踪与可观测性章节，介绍LangChain回调执行图检查、工具监控",
+      "content_focus": "2025最新可观测性实践"
+    },
+    {
+      "url": "https://github.com/agentreplay/agentreplay",
+      "knowledge_point_tag": "可观测性集成",
+      "priority": "high",
+      "expected_content_type": "code",
+      "source_search_file": "reference/search_callback_01.md",
+      "reason": "通过LangChain专用回调处理器提供本地完整追踪、决策可视化",
+      "content_focus": "本地调试工具实现"
+    },
+    {
+      "url": "https://github.com/FareedKhan-dev/production-grade-agentic-system",
+      "knowledge_point_tag": "可观测性集成",
+      "priority": "high",
+      "expected_content_type": "code",
+      "source_search_file": "reference/search_callback_01.md",
+      "reason": "LangChain和LangGraph生产部署中使用Langfuse进行LLM交互追踪和监控",
+      "content_focus": "生产级Langfuse集成"
+    },
+    {
+      "url": "https://github.com/Harmeet10000/langchain-fastapi-production",
+      "knowledge_point_tag": "成本追踪和性能监控",
+      "priority": "high",
+      "expected_content_type": "code",
+      "source_search_file": "reference/search_callback_01.md",
+      "reason": "集成LangSmith追踪和自定义回调用于令牌计数、延迟跟踪",
+      "content_focus": "生产级FastAPI应用"
+    },
+    {
+      "url": "https://www.reddit.com/r/LangChain/comments/1neh5sw/what_are_the_best_open_source_llm_observability/",
+      "knowledge_point_tag": "可观测性集成",
+      "priority": "high",
+      "expected_content_type": "discussion",
+      "source_search_file": "reference/search_callback_01.md",
+      "reason": "Reddit社区推荐LangChain集成Langfuse、Phoenix等开源工具",
+      "content_focus": "开源可观测性工具对比"
+    },
+    {
+      "url": "https://www.reddit.com/r/LangChain/comments/1f6kl5z/whats_more_important_observability_or_evaluations/",
+      "knowledge_point_tag": "可观测性集成",
+      "priority": "high",
+      "expected_content_type": "discussion",
+      "source_search_file": "reference/search_callback_01.md",
+      "reason": "开发者分享在LangChain生产环境中优先建立良好可观测性的经验教训",
+      "content_focus": "可观测性优先级讨论"
+    }
+  ],
+  "priority_distribution": {
+    "high": 16,
+    "medium": 0,
+    "low": 0
+  },
+  "content_type_distribution": {
+    "article": 2,
+    "discussion": 6,
+    "code": 8
+  },
+  "knowledge_point_mapping": {
+    "流式输出处理": [0, 5, 7],
+    "成本追踪和性能监控": [1, 13],
+    "可观测性集成": [2, 9, 10, 11, 12, 14, 15],
+    "LangGraph回调处理": [3, 4, 8],
+    "并发环境回调管理": [6]
+  }
+}

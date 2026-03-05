@@ -1,0 +1,78 @@
+{
+  "task_id": "langgraph_10_状态持久化准备_fetch_20260227",
+  "phase_directory": "atom/langgraph/L2_状态管理",
+  "knowledge_point": "10_状态持久化准备",
+  "target_directory": "atom/langgraph/L2_状态管理/10_状态持久化准备/reference",
+  "generated_at": "2026-02-27T05:45:00+08:00",
+  "total_urls": 5,
+  "exclusion_rules": {
+    "official_docs": "已通过 Context7 获取，不需要抓取",
+    "source_repo": "直接读取本地源码，不需要抓取",
+    "excluded_patterns": [
+      "github.com/langchain-ai/langgraph/*",
+      "docs.langchain.com/*"
+    ]
+  },
+  "urls": [
+    {
+      "url": "https://www.reddit.com/r/LangChain/comments/1ei7fvd/reducing_length_of_state_in_langgraph",
+      "knowledge_point_tag": "状态大小控制策略",
+      "priority": "high",
+      "expected_content_type": "discussion",
+      "source_search_file": "reference/search_状态持久化准备_01.md",
+      "reason": "社区讨论状态消息因工具使用快速增长的实际问题和解决方案",
+      "content_focus": "状态大小缩减实战经验"
+    },
+    {
+      "url": "https://support.langchain.com/articles/6253531756-understanding-checkpointers-databases-api-memory-and-ttl",
+      "knowledge_point_tag": "状态大小控制策略",
+      "priority": "high",
+      "expected_content_type": "article",
+      "source_search_file": "reference/search_状态持久化准备_01.md",
+      "reason": "官方支持文档解释 checkpoint 过大导致的问题和解决建议",
+      "content_focus": "checkpoint 大小管理官方指南"
+    },
+    {
+      "url": "https://aws.amazon.com/blogs/database/build-durable-ai-agents-with-langgraph-and-amazon-dynamodb",
+      "knowledge_point_tag": "状态大小控制策略",
+      "priority": "medium",
+      "expected_content_type": "article",
+      "source_search_file": "reference/search_状态持久化准备_01.md",
+      "reason": "介绍 checkpoint 压缩和 S3 外部存储策略",
+      "content_focus": "checkpoint 压缩与外部存储卸载"
+    },
+    {
+      "url": "https://pub.towardsai.net/persistence-in-langgraph-deep-practical-guide-36dc4c452c3b",
+      "knowledge_point_tag": "持久化管道架构",
+      "priority": "high",
+      "expected_content_type": "article",
+      "source_search_file": "reference/search_状态持久化准备_01.md",
+      "reason": "2026年最全面的 LangGraph 持久化实践指南",
+      "content_focus": "持久化机制深度解析"
+    },
+    {
+      "url": "https://dev.to/jamesli/langgraph-state-machines-managing-complex-agent-task-flows-in-production-36f4",
+      "knowledge_point_tag": "可序列化设计原则",
+      "priority": "medium",
+      "expected_content_type": "article",
+      "source_search_file": "reference/search_状态持久化准备_01.md",
+      "reason": "生产环境状态机设计，强调序列化需求和状态简化",
+      "content_focus": "生产级可序列化状态设计"
+    }
+  ],
+  "priority_distribution": {
+    "high": 3,
+    "medium": 2,
+    "low": 0
+  },
+  "content_type_distribution": {
+    "article": 4,
+    "discussion": 1,
+    "code": 0
+  },
+  "knowledge_point_mapping": {
+    "状态大小控制策略": [0, 1, 2],
+    "持久化管道架构": [3],
+    "可序列化设计原则": [4]
+  }
+}

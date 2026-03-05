@@ -1,0 +1,98 @@
+{
+  "task_id": "langgraph_03_循环与迭代_fetch_20260228",
+  "phase_directory": "atom/langgraph/L3_工作流编排",
+  "knowledge_point": "03_循环与迭代",
+  "target_directory": "atom/langgraph/L3_工作流编排/03_循环与迭代/reference",
+  "generated_at": "2026-02-28T00:00:00Z",
+  "total_urls": 7,
+  "exclusion_rules": {
+    "official_docs": "已通过 Context7 获取，不需要抓取",
+    "source_repo": "直接读取本地源码，不需要抓取",
+    "excluded_patterns": [
+      "github.com/langchain-ai/langgraph/*",
+      "docs.langchain.com/*",
+      "python.langchain.com/*"
+    ]
+  },
+  "urls": [
+    {
+      "url": "https://rajatpandit.com/optimizing-langgraph-cycles",
+      "knowledge_point_tag": "递归限制与安全机制",
+      "priority": "high",
+      "expected_content_type": "article",
+      "source_search_file": "reference/search_循环迭代_01.md",
+      "reason": "专门讨论循环优化和 steps 计数器模式，实战价值高",
+      "content_focus": "循环优化最佳实践"
+    },
+    {
+      "url": "https://medium.com/fundamentals-of-artificial-intelligence/langgraph-cycles-and-conditional-edges-fb4c4839e0a4",
+      "knowledge_point_tag": "循环边与回路构建",
+      "priority": "high",
+      "expected_content_type": "article",
+      "source_search_file": "reference/search_循环迭代_01.md",
+      "reason": "系统讲解条件边与循环的关系，概念清晰",
+      "content_focus": "条件边循环机制"
+    },
+    {
+      "url": "https://medium.com/towardsdev/built-with-langgraph-9-looping-graphs-b689e42677d7",
+      "knowledge_point_tag": "循环边与回路构建",
+      "priority": "high",
+      "expected_content_type": "article",
+      "source_search_file": "reference/search_循环迭代_01.md",
+      "reason": "完整的循环图构建教程，含代码示例",
+      "content_focus": "循环图构建教程"
+    },
+    {
+      "url": "https://activewizards.com/blog/a-deep-dive-into-langgraph-for-self-correcting-ai-agents",
+      "knowledge_point_tag": "自我修正与反思循环",
+      "priority": "high",
+      "expected_content_type": "article",
+      "source_search_file": "reference/search_循环迭代_01.md",
+      "reason": "Generator-Critic 自校正循环模式的深度解析",
+      "content_focus": "自校正循环模式"
+    },
+    {
+      "url": "https://www.reddit.com/r/LangChain/comments/1h226yc/discussion_why_does_the_recursion_limit_exist_in",
+      "knowledge_point_tag": "递归限制与安全机制",
+      "priority": "medium",
+      "expected_content_type": "discussion",
+      "source_search_file": "reference/search_循环迭代_01.md",
+      "reason": "社区对递归限制设计决策的深度讨论",
+      "content_focus": "递归限制设计理念"
+    },
+    {
+      "url": "https://www.reddit.com/r/LangGraph/comments/1mw3f01/how_to_prune_tool_call_messages_in_case_of",
+      "knowledge_point_tag": "迭代状态累积",
+      "priority": "medium",
+      "expected_content_type": "discussion",
+      "source_search_file": "reference/search_循环迭代_01.md",
+      "reason": "消息修剪的实用技巧，处理递归限制的高级方案",
+      "content_focus": "消息修剪技巧"
+    },
+    {
+      "url": "https://www.reddit.com/r/LangChain/comments/1r38uf7/i_built_a_recursive_language_model_rlm_with",
+      "knowledge_point_tag": "迭代状态累积",
+      "priority": "low",
+      "expected_content_type": "discussion",
+      "source_search_file": "reference/search_循环迭代_01.md",
+      "reason": "深层递归 + 循环的实战案例，含架构设计思路",
+      "content_focus": "递归语言模型架构"
+    }
+  ],
+  "priority_distribution": {
+    "high": 4,
+    "medium": 2,
+    "low": 1
+  },
+  "content_type_distribution": {
+    "article": 4,
+    "discussion": 3,
+    "code": 0
+  },
+  "knowledge_point_mapping": {
+    "循环边与回路构建": [1, 2],
+    "递归限制与安全机制": [0, 4],
+    "自我修正与反思循环": [3],
+    "迭代状态累积": [5, 6]
+  }
+}

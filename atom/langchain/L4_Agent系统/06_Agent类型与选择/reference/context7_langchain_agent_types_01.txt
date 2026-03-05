@@ -1,0 +1,117 @@
+### Create ReAct Agent with LangChain create_agent
+
+Source: https://docs.langchain.com/oss/python/langchain/sql-agent
+
+Instantiates a ReAct agent using LangChain's create_agent function with a language model, SQL tools, and custom system prompt. The agent interprets user requests, generates SQL commands, executes them through tools, and iteratively refines queries based on error feedback until successful execution or end count is reached.
+
+```python
+from langchain.agents import create_agent
+
+
+agent = create_agent(
+    model,
+    tools,
+    system_prompt=system_prompt,
+)
+```
+
+--------------------------------
+
+### Create LangChain Agent with OpenAI Functions
+
+Source: https://docs.langchain.com/oss/python/integrations/tools/semanticscholar
+
+Instantiates an agent using `create_openai_functions_agent`. This function combines the initialized language model (LLM), the list of available tools, and the customized prompt to create an agent capable of using OpenAI's function calling capabilities.
+
+```python
+agent = create_openai_functions_agent(llm, tools, prompt)
+```
+
+--------------------------------
+
+### Initialize and Run a LangChain ReAct Agent with OpenAI and a Tool
+
+Source: https://docs.langchain.com/oss/python/integrations/tools/google_drive
+
+This Python code initializes a ReAct agent using LangChain, integrating with an OpenAI chat model. It sets the `OPENAI_API_KEY` environment variable, creates a chat model instance, and then constructs an agent with the model and a provided `tool`. The agent is then invoked with a user query, and its streamed responses are printed, demonstrating how the agent processes and responds to requests using the configured tool.
+
+```python
+import os
+
+from langchain.chat_models import init_chat_model
+from langchain.agents import create_agent
+
+
+os.environ["OPENAI_API_KEY"] = "your-openai-api-key"
+
+
+model = init_chat_model("gpt-4.1-mini", model_provider="openai", temperature=0)
+agent = create_agent(model, tools=[tool])
+
+events = agent.stream(
+    {"messages": [("user", "Search in google drive, who is 'Yann LeCun' ?")]},
+    stream_mode="values",
+)
+for event in events:
+    event["messages"][-1].pretty_print()
+```
+
+--------------------------------
+
+### Create Specialized Agents with LangChain and OpenAI
+
+Source: https://docs.langchain.com/oss/javascript/langchain/multi-agent/router-knowledge-base
+
+Demonstrates creating three specialized agents (GitHub, Notion, Slack) using LangChain's createAgent function with ChatOpenAI as the language model. Each agent is configured with domain-specific tools and a system prompt optimized for its knowledge source. The agents follow the same pattern but differ in their tools and system prompts to handle different types of queries.
+
+```typescript
+import { createAgent } from "langchain";
+import { ChatOpenAI } from "@langchain/openai";
+
+const llm = new ChatOpenAI({ model: "gpt-4.1" });
+
+const githubAgent = createAgent({
+  model: llm,
+  tools: [searchCode, searchIssues, searchPrs],
+  systemPrompt: `
+You are a GitHub expert. Answer questions about code,
+API references, and implementation details by searching
+repositories, issues, and pull requests.
+  `.trim(),
+});
+
+const notionAgent = createAgent({
+  model: llm,
+  tools: [searchNotion, getPage],
+  systemPrompt: `
+You are a Notion expert. Answer questions about internal
+processes, policies, and team documentation by searching
+the organization's Notion workspace.
+  `.trim(),
+});
+
+const slackAgent = createAgent({
+  model: llm,
+  tools: [searchSlack, getThread],
+  systemPrompt: `
+You are a Slack expert. Answer questions by searching
+relevant threads and discussions where team members have
+shared knowledge and solutions.
+  `.trim(),
+});
+```
+
+--------------------------------
+
+### Initialize ReAct Agent with GPT-4
+
+Source: https://docs.langchain.com/oss/python/integrations/tools/google_jobs
+
+Create a ReAct agent using the create_agent factory function with GPT-4 mini model and the loaded Google Jobs tool. The agent will use reasoning and acting to process user queries.
+
+```python
+from langchain.agents import create_agent
+
+
+agent = create_agent("gpt-4.1-mini", tools)
+```

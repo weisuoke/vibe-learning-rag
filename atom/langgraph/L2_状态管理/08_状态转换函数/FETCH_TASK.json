@@ -1,0 +1,58 @@
+{
+  "task_id": "langgraph_08_状态转换函数_fetch_20260227",
+  "phase_directory": "atom/langgraph/L2_状态管理",
+  "knowledge_point": "08_状态转换函数",
+  "target_directory": "atom/langgraph/L2_状态管理/08_状态转换函数/reference",
+  "generated_at": "2026-02-27T00:00:00Z",
+  "total_urls": 3,
+  "exclusion_rules": {
+    "official_docs": "已通过 Context7 获取，不需要抓取",
+    "source_repo": "直接读取本地源码，不需要抓取",
+    "excluded_patterns": [
+      "github.com/langchain-ai/langgraph/*",
+      "docs.langchain.com/*"
+    ]
+  },
+  "urls": [
+    {
+      "url": "https://www.reddit.com/r/LangChain/comments/1hxt5t7/help_me_understand_state_reducers_in_langgraph",
+      "knowledge_point_tag": "Reducer模式与状态转换",
+      "priority": "high",
+      "expected_content_type": "discussion",
+      "source_search_file": "reference/search_状态转换函数_01.md",
+      "reason": "社区对 reducer 和状态转换的详细讨论",
+      "content_focus": "社区实践案例",
+      "status": "fetched"
+    },
+    {
+      "url": "https://medium.com/@huix714/understand-statereducer-in-langgraph-d3d73730ef37",
+      "knowledge_point_tag": "Reducer机制详解",
+      "priority": "medium",
+      "expected_content_type": "article",
+      "source_search_file": "reference/search_状态转换函数_01.md",
+      "reason": "详细的 reducer 机制解释文章",
+      "content_focus": "技术博客",
+      "status": "skipped"
+    },
+    {
+      "url": "https://sparkco.ai/blog/mastering-langgraph-state-management-in-2025",
+      "knowledge_point_tag": "状态管理最佳实践",
+      "priority": "high",
+      "expected_content_type": "article",
+      "source_search_file": "reference/search_状态转换函数_01.md",
+      "reason": "2025年最新状态管理深入分析",
+      "content_focus": "技术博客",
+      "status": "fetched"
+    }
+  ],
+  "priority_distribution": {
+    "high": 2,
+    "medium": 1,
+    "low": 0
+  },
+  "content_type_distribution": {
+    "article": 2,
+    "discussion": 1,
+    "code": 0
+  }
+}

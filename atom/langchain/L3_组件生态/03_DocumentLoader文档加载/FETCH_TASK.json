@@ -1,0 +1,235 @@
+{
+  "task_id": "langchain_documentloader_fetch_20260224",
+  "phase_directory": "atom/langchain/L3_组件生态",
+  "knowledge_point": "03_DocumentLoader文档加载",
+  "target_directory": "atom/langchain/L3_组件生态/03_DocumentLoader文档加载/reference",
+  "generated_at": "2026-02-24T14:52:17.147Z",
+  "total_urls": 12,
+  "exclusion_rules": {
+    "official_docs": "已通过 Context7 获取,不需要抓取",
+    "source_repo": "直接读取本地源码,不需要抓取",
+    "excluded_patterns": [
+      "github.com/langchain-ai/langchain/blob/master/*",
+      "*/docs.langchain.com/*",
+      "*/api.python.langchain.com/*"
+    ]
+  },
+  "urls": [
+    {
+      "url": "https://github.com/timerring/rag101",
+      "knowledge_point_tag": "实战代码_场景2_PDF文档加载",
+      "priority": "high",
+      "expected_content_type": "code",
+      "source_search_file": "reference/search_documentloader_01.md",
+      "reason": "完整的 RAG 实战案例,包含 PyPDFLoader、WebBaseLoader 使用示例",
+      "content_focus": "PDF 加载器实战代码",
+      "status": "success",
+      "fetched_at": "2026-02-24T15:17:49.559292+00:00",
+      "output_file": "atom/langchain/L3_组件生态/03_DocumentLoader文档加载/reference/fetch_2_pdf_a30ab0_01.md",
+      "word_count": 1890,
+      "quality": "medium"
+    },
+    {
+      "url": "https://github.com/LangChain-OpenTutorial/LangChain-OpenTutorial/tree/main/06-DocumentLoader",
+      "knowledge_point_tag": "实战代码_场景1-8",
+      "priority": "high",
+      "expected_content_type": "code",
+      "source_search_file": "reference/search_documentloader_01.md",
+      "reason": "2026 年最新的 DocumentLoader 教程,包含各种加载器的 Jupyter Notebook 示例",
+      "content_focus": "各种格式加载器教程",
+      "status": "success",
+      "fetched_at": "2026-02-24T15:17:49.559292+00:00",
+      "output_file": "atom/langchain/L3_组件生态/03_DocumentLoader文档加载/reference/fetch_1_8_b1b3cc_02.md",
+      "word_count": 273,
+      "quality": "low"
+    },
+    {
+      "url": "https://www.reddit.com/r/LangChain/comments/1ef12q6/the_rag_engineers_guide_to_document_parsing/",
+      "knowledge_point_tag": "核心概念_3_BlobLoader与BlobParser分离",
+      "priority": "high",
+      "expected_content_type": "discussion",
+      "source_search_file": "reference/search_documentloader_01.md",
+      "reason": "RAG 工程师的文档解析最佳实践,包含解析策略、格式选择、性能优化",
+      "content_focus": "文档解析策略",
+      "status": "success",
+      "fetched_at": "2026-02-24T15:17:49.559292+00:00",
+      "output_file": "atom/langchain/L3_组件生态/03_DocumentLoader文档加载/reference/fetch_3_blobloader_blobparser_ee5d03_03.md",
+      "word_count": 593,
+      "quality": "low"
+    },
+    {
+      "url": "https://github.com/danny-avila/rag_api",
+      "knowledge_point_tag": "实战代码_场景7_异步批处理",
+      "priority": "high",
+      "expected_content_type": "code",
+      "source_search_file": "reference/search_documentloader_02.md",
+      "reason": "FastAPI + LangChain 异步集成完整实现,包含 PDF、CSV、JSON 批量流式嵌入",
+      "content_focus": "异步批处理代码",
+      "status": "success",
+      "fetched_at": "2026-02-24T15:21:01.600788+00:00",
+      "output_file": "atom/langchain/L3_组件生态/03_DocumentLoader文档加载/reference/fetch_7_db4185_04.md",
+      "word_count": 367,
+      "quality": "low"
+    },
+    {
+      "url": "https://github.com/sourangshupal/simple-rag-langchain/blob/main/01_Introduction_and_Fundamentals.ipynb",
+      "knowledge_point_tag": "核心概念_5_异步加载支持",
+      "priority": "high",
+      "expected_content_type": "code",
+      "source_search_file": "reference/search_documentloader_02.md",
+      "reason": "LCEL 与加载器集成教程,包含流式输出、批量处理、异步操作示例",
+      "content_focus": "LCEL 集成示例",
+      "status": "success",
+      "fetched_at": "2026-02-24T15:21:01.600788+00:00",
+      "output_file": "atom/langchain/L3_组件生态/03_DocumentLoader文档加载/reference/fetch_5_982240_05.md",
+      "word_count": 50,
+      "quality": "low"
+    },
+    {
+      "url": "https://www.reddit.com/r/LangChain/comments/1iy0tg3/how_to_do_data_extraction_from_1000s_of_contracts/",
+      "knowledge_point_tag": "实战代码_场景8_批量文档加载",
+      "priority": "high",
+      "expected_content_type": "discussion",
+      "source_search_file": "reference/search_documentloader_02.md",
+      "reason": "大规模批处理实战讨论,使用 LangChain/LangGraph 批量异步处理 1000+ PDF",
+      "content_focus": "大规模批处理策略",
+      "status": "success",
+      "fetched_at": "2026-02-24T15:21:01.600788+00:00",
+      "output_file": "atom/langchain/L3_组件生态/03_DocumentLoader文档加载/reference/fetch_8_9958a1_06.md",
+      "word_count": 38,
+      "quality": "low"
+    },
+    {
+      "url": "https://www.reddit.com/r/dataengineering/comments/1kbfpfz/batch_processing_pdf_files_directly_in_memory/",
+      "knowledge_point_tag": "核心概念_4_懒加载模式",
+      "priority": "high",
+      "expected_content_type": "discussion",
+      "source_search_file": "reference/search_documentloader_02.md",
+      "reason": "内存优化策略讨论,PDF 内存批量处理,支持流式高效 RAG 无磁盘 IO",
+      "content_focus": "内存优化策略",
+      "status": "failed",
+      "fetched_at": "2026-02-24T15:23:29.745030+00:00",
+      "output_file": "atom/langchain/L3_组件生态/03_DocumentLoader文档加载/reference/fetch_4_297d49_07.md",
+      "word_count": 32,
+      "quality": "low",
+      "error": "access_denied"
+    },
+    {
+      "url": "https://www.reddit.com/r/LangChain/comments/1elr7sr/what_is_the_best_document_loader_for_pdfs_and/",
+      "knowledge_point_tag": "实战代码_场景2_PDF文档加载",
+      "priority": "medium",
+      "expected_content_type": "discussion",
+      "source_search_file": "reference/search_documentloader_01.md",
+      "reason": "PDF 加载器选型讨论,社区推荐不同 PDF 加载器的对比",
+      "content_focus": "PDF 加载器选型",
+      "status": "success",
+      "fetched_at": "2026-02-24T15:23:29.745030+00:00",
+      "output_file": "atom/langchain/L3_组件生态/03_DocumentLoader文档加载/reference/fetch_2_pdf_a30ab0_08.md",
+      "word_count": 43,
+      "quality": "low"
+    },
+    {
+      "url": "https://github.com/keontang/work-notes/blob/master/aigc/langchain_details.md",
+      "knowledge_point_tag": "实战代码_场景2_PDF文档加载",
+      "priority": "medium",
+      "expected_content_type": "article",
+      "source_search_file": "reference/search_documentloader_02.md",
+      "reason": "PDF 加载器详细对比,多种 PDF 加载器解析方法,针对不同提取需求",
+      "content_focus": "PDF 加载器对比",
+      "status": "success",
+      "fetched_at": "2026-02-24T15:23:29.745030+00:00",
+      "output_file": "atom/langchain/L3_组件生态/03_DocumentLoader文档加载/reference/fetch_2_pdf_a30ab0_09.md",
+      "word_count": 67,
+      "quality": "low"
+    },
+    {
+      "url": "https://github.com/langchain-ai/langchain/issues/29499",
+      "knowledge_point_tag": "核心概念_6_load_and_split集成",
+      "priority": "medium",
+      "expected_content_type": "discussion",
+      "source_search_file": "reference/search_documentloader_02.md",
+      "reason": "批量加载问题讨论,CSVLoader、JSONLoader、PDFPlumberLoader 批量加载到向量库",
+      "content_focus": "批量加载问题",
+      "status": "success",
+      "fetched_at": "2026-02-24T15:25:44.480970+00:00",
+      "output_file": "atom/langchain/L3_组件生态/03_DocumentLoader文档加载/reference/fetch_6_load_and_split_f68a27_10.md",
+      "word_count": 44,
+      "quality": "low"
+    },
+    {
+      "url": "https://github.com/langchain-ai/langchain/issues/25718",
+      "knowledge_point_tag": "核心概念_3_BlobLoader与BlobParser分离",
+      "priority": "low",
+      "expected_content_type": "discussion",
+      "source_search_file": "reference/search_documentloader_01.md",
+      "reason": "BlobLoader 架构演进讨论,接口设计的改进建议",
+      "content_focus": "架构演进",
+      "status": "success",
+      "fetched_at": "2026-02-24T15:25:44.480970+00:00",
+      "output_file": "atom/langchain/L3_组件生态/03_DocumentLoader文档加载/reference/fetch_3_blobloader_blobparser_ee5d03_11.md",
+      "word_count": 47,
+      "quality": "low"
+    },
+    {
+      "url": "https://github.com/Abraxas-365/langchain-rust",
+      "knowledge_point_tag": "核心概念_5_异步加载支持",
+      "priority": "low",
+      "expected_content_type": "code",
+      "source_search_file": "reference/search_documentloader_02.md",
+      "reason": "Rust 版本的架构设计参考,异步架构设计思路",
+      "content_focus": "异步架构参考",
+      "status": "success",
+      "fetched_at": "2026-02-24T15:25:44.480970+00:00",
+      "output_file": "atom/langchain/L3_组件生态/03_DocumentLoader文档加载/reference/fetch_5_982240_12.md",
+      "word_count": 36,
+      "quality": "low"
+    }
+  ],
+  "priority_distribution": {
+    "high": 7,
+    "medium": 3,
+    "low": 2
+  },
+  "content_type_distribution": {
+    "code": 5,
+    "discussion": 5,
+    "article": 2
+  },
+  "knowledge_point_mapping": {
+    "核心概念_3_BlobLoader与BlobParser分离": [
+      0,
+      10
+    ],
+    "核心概念_4_懒加载模式": [
+      6
+    ],
+    "核心概念_5_异步加载支持": [
+      4,
+      11
+    ],
+    "核心概念_6_load_and_split集成": [
+      9
+    ],
+    "实战代码_场景1-8": [
+      1
+    ],
+    "实战代码_场景2_PDF文档加载": [
+      0,
+      7,
+      8
+    ],
+    "实战代码_场景7_异步批处理": [
+      3
+    ],
+    "实战代码_场景8_批量文档加载": [
+      5
+    ]
+  },
+  "progress": {
+    "processed": 12,
+    "successful": 11,
+    "partial": 0,
+    "failed": 1,
+    "updated_at": "2026-02-24T15:25:44.480970+00:00"
+  }
+}

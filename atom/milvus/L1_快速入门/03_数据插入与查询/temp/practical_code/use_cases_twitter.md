@@ -1,56 +1,59 @@
-# Bulk Insert Performance Optimization - Twitter/X Search Results
+---
+source: Grok-mcp web search results
+query: Milvus 2.6 Data-in Data-out pattern 2026
+platform: Twitter
+fetched_at: 2026-02-21
+---
 
-## Search Query
-Milvus 2.6 bulk insert performance optimization 2025 2026
+# Twitter/X Discussions: Milvus 2.6 Data-in Data-out Pattern
 
-## Results
+## Search Results
 
-### 1. Milvus 2.6 Preview: 72% Memory Reduction
-**URL:** https://milvus.io/blog/milvus-26-preview-72-memory-reduction-without-compromising-recall-and-4x-faster-than-elasticsearch.md
-**Description:** Milvus 2.6 preview introduces RaBitQ 1-bit quantization achieving 72% memory reduction while maintaining recall, with BulkInsert architecture improvements.
+### 1. Introducing Milvus 2.6: Affordable Vector Search at Billion Scale
+**URL**: https://milvus.io/blog/introduce-milvus-2-6-built-for-scale-designed-to-reduce-costs.md
+**Description**: Milvus 2.6 引入 'Data-In, Data-Out' 体验，通过 Function 接口集成第三方嵌入模型，实现原始文本直接插入和自然语言查询，简化向量转换流程。
 
-### 2. Introducing Milvus 2.6: Affordable Vector Search at Billion Scale
-**URL:** https://milvus.io/blog/introduce-milvus-2-6-built-for-scale-designed-to-reduce-costs.md
-**Description:** Milvus 2.6 official release emphasizes CDC + BulkInsert for simplified data replication and batch insertion, with tiered storage optimization for large-scale data ingestion performance and cost.
+### 2. Introducing the Embedding Function: How Milvus 2.6 Streamlines Vectorization and Semantic Search
+**URL**: https://milvus.io/blog/data-in-and-data-out-in-milvus-2-6.md
+**Description**: 详细解释 Milvus 2.6 的 Data-in, Data-out 特性，基于新 Function 模块内置嵌入生成，支持直接插入原始数据并自动向量化，连接 OpenAI、Hugging Face 等模型。
 
-### 3. Milvus 2.6: Built for Scale, Designed to Reduce Costs
-**URL:** https://zilliz.com/news/milvus-2-6-built-for-scale-designed-to-reduce-costs
-**Description:** Zilliz official announcement of Milvus 2.6, optimizing data ingestion through BulkInsert and CDC integration, supporting billion-scale vector search with balanced cost and performance.
+### 3. Milvus 2.6 Preview: 72% Memory Reduction Without Compromising Recall and 4x Faster Than Elasticsearch
+**URL**: https://milvus.io/blog/milvus-26-preview-72-memory-reduction-without-compromising-recall-and-4x-faster-than-elasticsearch.md
+**Description**: Milvus 2.6 预览介绍 Data-In, Data-Out 功能，通过 Function 接口直接处理原始文本到向量搜索，简化嵌入管道。
 
-### 4. What is bulk loading and how does it improve performance?
-**URL:** https://milvus.io/ai-quick-reference/what-is-bulk-loading-and-how-does-it-improve-performance
-**Description:** Milvus official explanation of bulk loading principles, significantly improving data loading performance through parallel processing and index disabling, suitable for batch insertion scenarios.
+### 4. Release Notes | Milvus Documentation
+**URL**: https://milvus.io/docs/release_notes.md
+**Description**: Milvus 官方发布说明，突出 2.6 版本引入 'Data-in, Data-Out' 能力，直接集成第三方嵌入模型简化 AI 应用开发。
 
-### 5. Milvus 2.6 Deep Dive: Data Model, Search, Performance & Architecture
-**URL:** https://www.youtube.com/watch?v=Guct-UMK8lw
-**Description:** Milvus 2.6 deep dive video discussing performance optimization and cost reduction, including data ingestion, indexing, and BulkInsert improvements.
+### 5. Milvus 2.6.x GA on Zilliz Cloud, Making Vector Search Faster
+**URL**: https://zilliz.com/blog/milvus-2-6-ga-on-zilliz-cloud
+**Description**: Zilliz 云上 Milvus 2.6 GA 发布，强调 Data in, data out 体验优化向量搜索工作流。
 
-### 6. Open Source Vector Database Milvus Radically Reduces Costs
-**URL:** https://www.dbta.com/Editorial/News-Flashes/Open-Source-Vector-Database-Milvus-Radically-Reduces-Costs-and-Complexities-with-Latest-Update-170032.aspx
-**Description:** Report on Milvus 2.6 update, significantly reducing ingestion complexity and cost through CDC + BulkInsert features, improving large-scale insertion efficiency.
+## Key Insights from Community Discussions
 
-### 7. GitHub Issue: Significant slowdown in Milvus standalone insertion rate
-**URL:** https://github.com/milvus-io/milvus/issues/46067
-**Description:** Milvus GitHub Issue discussing insertion rate degradation in standalone mode with specific MQ and storage configurations, involving batch insertion performance diagnosis and optimization suggestions.
+### Data-in, Data-out Pattern Benefits
+1. **Simplified Workflow**: 3步流程替代传统5步流程
+   - 传统: 准备数据 → 生成嵌入 → 插入向量 → 查询向量 → 映射结果
+   - 新模式: 插入原始数据 → 查询原始数据 → 获取结果
 
-## Key Performance Insights
+2. **Reduced Infrastructure**: 无需维护独立的嵌入服务
+3. **Consistency**: 插入和查询使用相同的嵌入模型
+4. **Developer Experience**: 更简单的API，更少的代码
 
-1. **CDC + BulkInsert**: Milvus 2.6 combines Change Data Capture with BulkInsert for efficient data replication and batch insertion.
+### Technical Implementation
+- **Function Module**: 核心实现机制
+- **Provider Integration**: 统一接口支持多提供商
+- **Automatic Vectorization**: 透明的向量化过程
+- **Configuration Management**: 集中式凭证管理
 
-2. **Memory Optimization**: RaBitQ 1-bit quantization reduces memory usage by 72% without compromising recall.
+### Use Cases
+- **RAG Applications**: 简化RAG管道构建
+- **Semantic Search**: 直接文本搜索
+- **Document Q&A**: 文档问答系统
+- **Knowledge Base**: 知识库检索
 
-3. **Parallel Processing**: Bulk loading uses parallel processing to significantly improve data loading performance.
-
-4. **Index Management**: Disabling indexes during bulk insertion and rebuilding afterward improves ingestion speed.
-
-5. **Tiered Storage**: Milvus 2.6 introduces tiered storage for cost-effective large-scale data management.
-
-6. **Billion-Scale Support**: Optimizations enable affordable vector search at billion-scale with balanced performance and cost.
-
-## Best Practices
-
-1. **Use BulkInsert for large datasets** (>10,000 documents)
-2. **Disable indexing during bulk insertion** and rebuild afterward
-3. **Use parallel processing** with appropriate batch sizes
-4. **Monitor insertion rate** and adjust batch size based on performance
-5. **Consider tiered storage** for cost optimization in large-scale deployments
+### Community Feedback
+- Positive reception for simplified workflow
+- Interest in multi-provider support
+- Questions about performance impact
+- Requests for more embedding model options

@@ -1,0 +1,273 @@
+{
+  "metadata": {
+    "project": "Milvus 2.6 Embedding Functions 深入",
+    "phase": "Phase 2: Supplementary Research",
+    "generated_date": "2026-02-24",
+    "total_tasks": 14,
+    "priority_breakdown": {
+      "high": 6,
+      "medium": 5,
+      "low": 3
+    }
+  },
+  "fetch_tasks": [
+    {
+      "id": "fetch_001",
+      "priority": "HIGH",
+      "url": "https://github.com/milvus-io/milvus/discussions/44016",
+      "title": "Embedding Functions on Existing Collections Discussion",
+      "category": "migration_guide",
+      "expected_content": [
+        "Migration strategies for existing collections",
+        "How to update embedding functions",
+        "Production environment considerations",
+        "Best practices for migration"
+      ],
+      "reason": "Critical gap: Migration guidance for existing collections",
+      "output_file": "reference/fetch_migration_guide.md"
+    },
+    {
+      "id": "fetch_002",
+      "priority": "HIGH",
+      "url": "https://milvus.io/blog/we-benchmarked-20-embedding-apis-with-milvus-7-insights-that-will-surprise-you.md",
+      "title": "Milvus Benchmark: 20+ Embedding APIs",
+      "category": "performance_benchmarks",
+      "expected_content": [
+        "Latency comparisons across providers",
+        "Throughput measurements",
+        "Batch size impact on performance",
+        "Geographic location effects",
+        "Cost per 1M tokens data"
+      ],
+      "reason": "Critical gap: Performance benchmarks for provider selection",
+      "output_file": "reference/fetch_benchmarks.md"
+    },
+    {
+      "id": "fetch_003",
+      "priority": "HIGH",
+      "url": "https://www.reddit.com/r/Rag/comments/1mmct4h/i_built_a_comprehensive_rag_system_and_heres_what/",
+      "title": "I built a comprehensive RAG system, and here's what I've learned",
+      "category": "production_examples",
+      "expected_content": [
+        "Real-world RAG implementation",
+        "OpenAI text-embedding-3-large performance",
+        "Cohere embed-v4 comparison",
+        "Practical lessons learned",
+        "Production challenges and solutions"
+      ],
+      "reason": "Critical gap: Real-world RAG implementation insights",
+      "output_file": "reference/fetch_rag_implementation.md"
+    },
+    {
+      "id": "fetch_004",
+      "priority": "HIGH",
+      "url": "https://www.reddit.com/r/Rag/comments/1qcgoo8/need_help_embedding_250m_vectors_chunks_at_1024/",
+      "title": "need help embedding 250M vectors / chunks at 1024 dims",
+      "category": "large_scale_deployment",
+      "expected_content": [
+        "Large-scale embedding challenges (250M vectors)",
+        "VoyageAI speed and cost considerations",
+        "Self-hosted vs cloud provider trade-offs",
+        "High-volume Milvus use cases",
+        "Performance optimization strategies"
+      ],
+      "reason": "Critical gap: Large-scale deployment considerations",
+      "output_file": "reference/fetch_large_scale.md"
+    },
+    {
+      "id": "fetch_005",
+      "priority": "HIGH",
+      "url": "https://github.com/milvus-io/pymilvus/issues/2660",
+      "title": "pymilvus Hybrid Search Embedding Functions Issue",
+      "category": "hybrid_search_patterns",
+      "expected_content": [
+        "Hybrid search with dense + sparse embeddings",
+        "SentenceTransformer and SPLADE integration",
+        "Production deployment considerations",
+        "Code examples and patterns"
+      ],
+      "reason": "Important gap: Hybrid search implementation patterns",
+      "output_file": "reference/fetch_hybrid_search.md"
+    },
+    {
+      "id": "fetch_006",
+      "priority": "HIGH",
+      "url": "https://github.com/milvus-io/milvus/issues/32716",
+      "title": "Milvus Insert Batch Size Troubleshooting",
+      "category": "troubleshooting",
+      "expected_content": [
+        "Docker crash with large batch inserts",
+        "Batch size limits for insert operations",
+        "Resource constraints in production",
+        "Solutions and workarounds"
+      ],
+      "reason": "Important gap: Production troubleshooting guidance",
+      "output_file": "reference/fetch_troubleshooting.md"
+    },
+    {
+      "id": "fetch_007",
+      "priority": "MEDIUM",
+      "url": "https://www.reddit.com/r/vectordatabase/comments/15deqny/milvus_creating_vector_embedding_with_langchain/",
+      "title": "[MILVUS] Creating vector embedding with LangChain and OpenAI",
+      "category": "integration_patterns",
+      "expected_content": [
+        "LangChain integration with Milvus",
+        "OpenAI embeddings practical implementation",
+        "Performance considerations",
+        "Code examples"
+      ],
+      "reason": "Important gap: LangChain integration patterns",
+      "output_file": "reference/fetch_langchain_integration.md"
+    },
+    {
+      "id": "fetch_008",
+      "priority": "MEDIUM",
+      "url": "https://www.reddit.com/r/Rag/comments/1hdd3u2/which_embedding_model_should_i_use_need_help/",
+      "title": "Which embedding model should I use??? NEED HELP!!!",
+      "category": "provider_selection",
+      "expected_content": [
+        "VoyageAI vs OpenAI comparison",
+        "Community recommendations",
+        "Selection criteria for RAG pipelines",
+        "Quality and speed trade-offs"
+      ],
+      "reason": "Important gap: Provider selection criteria",
+      "output_file": "reference/fetch_provider_selection.md"
+    },
+    {
+      "id": "fetch_009",
+      "priority": "MEDIUM",
+      "url": "https://www.reddit.com/r/singularity/comments/1gyu5ud/help_fastest_reliable_embedding_model_for_300gb/",
+      "title": "[Help] Fastest reliable embedding model for 300GB corpus?",
+      "category": "performance_comparison",
+      "expected_content": [
+        "OpenAI vs Voyage AI speed comparison",
+        "Cost considerations for large corpora",
+        "Reliability for large-scale deployments",
+        "Community experiences"
+      ],
+      "reason": "Important gap: Performance and cost comparisons",
+      "output_file": "reference/fetch_performance_comparison.md"
+    },
+    {
+      "id": "fetch_010",
+      "priority": "MEDIUM",
+      "url": "https://github.com/milvus-io/milvus-model",
+      "title": "milvus-model: Embedding Models Integration Library",
+      "category": "integration_library",
+      "expected_content": [
+        "Provider integration code examples",
+        "Reranker models integration",
+        "API usage patterns",
+        "Best practices"
+      ],
+      "reason": "Important gap: Integration patterns and examples",
+      "output_file": "reference/fetch_milvus_model.md",
+      "note": "Fetch README.md and key documentation files"
+    },
+    {
+      "id": "fetch_011",
+      "priority": "MEDIUM",
+      "url": "https://github.com/milvus-io/bootcamp",
+      "title": "Milvus Bootcamp Repository",
+      "category": "tutorials",
+      "expected_content": [
+        "RAG tutorials with embedding functions",
+        "Video search examples",
+        "Hybrid retrieval patterns",
+        "Production-ready examples"
+      ],
+      "reason": "Nice-to-have: Practical tutorials and examples",
+      "output_file": "reference/fetch_bootcamp.md",
+      "note": "Identify and fetch specific embedding function examples"
+    },
+    {
+      "id": "fetch_012",
+      "priority": "LOW",
+      "url": "https://www.reddit.com/r/LangChain/comments/170jigz/my_strategy_for_picking_a_vector_database_a/",
+      "title": "My strategy for picking a vector database: a side-by-side comparison",
+      "category": "database_comparison",
+      "expected_content": [
+        "Milvus vs other vector databases",
+        "Embedding provider recommendations",
+        "Selection criteria",
+        "Community insights"
+      ],
+      "reason": "Nice-to-have: Comparative analysis",
+      "output_file": "reference/fetch_db_comparison.md"
+    },
+    {
+      "id": "fetch_013",
+      "priority": "LOW",
+      "url": "https://www.reddit.com/r/LocalLLaMA/comments/1e63m16/vector_database_pgvector_vs_milvus_vs_weaviate/",
+      "title": "Vector database : pgvector vs milvus vs weaviate",
+      "category": "database_comparison",
+      "expected_content": [
+        "Milvus vs pgvector vs Weaviate",
+        "VoyageAI compatibility",
+        "Open-source embedding support",
+        "Community preferences"
+      ],
+      "reason": "Nice-to-have: Additional comparative analysis",
+      "output_file": "reference/fetch_db_comparison2.md"
+    },
+    {
+      "id": "fetch_014",
+      "priority": "HIGH",
+      "url": "SEARCH_REQUIRED",
+      "title": "SiliconFlow API Documentation",
+      "category": "provider_documentation",
+      "search_query": "SiliconFlow embeddings API documentation parameters batch limits",
+      "expected_content": [
+        "API parameters and configuration",
+        "Batch size limits",
+        "Authentication methods",
+        "Model specifications",
+        "Usage examples"
+      ],
+      "reason": "Critical gap: SiliconFlow provider documentation missing",
+      "output_file": "reference/fetch_siliconflow_docs.md",
+      "note": "Requires web search to find official documentation"
+    }
+  ],
+  "exclusions": {
+    "official_docs": [
+      "Already covered by Context7 queries",
+      "OpenAI, Cohere, Bedrock, VertexAI, VoyageAI, DashScope, TEI documentation"
+    ],
+    "source_repo_links": [
+      "Already covered by source code analysis",
+      "Milvus internal implementation files"
+    ]
+  },
+  "instructions": {
+    "fetch_process": [
+      "1. Process tasks in priority order (HIGH → MEDIUM → LOW)",
+      "2. For GitHub URLs: Fetch full discussion/issue content including comments",
+      "3. For Reddit URLs: Fetch post content and top comments",
+      "4. For blog URLs: Fetch complete article content",
+      "5. For repository URLs: Fetch README.md and relevant documentation",
+      "6. For SEARCH_REQUIRED: Perform web search first, then fetch top results"
+    ],
+    "output_format": [
+      "Save each fetch result to specified output_file",
+      "Include metadata: URL, fetch date, content type",
+      "Preserve formatting and code examples",
+      "Extract key insights and actionable information"
+    ],
+    "quality_criteria": [
+      "Content must be from 2024-2026 (recent)",
+      "Must contain practical examples or data",
+      "Must be relevant to Milvus embedding functions",
+      "Must fill identified gaps in Phase 1 data"
+    ]
+  },
+  "expected_outcomes": {
+    "migration_guidance": "Complete guide for updating embedding functions on existing collections",
+    "performance_data": "Comprehensive benchmarks for all 10 providers",
+    "production_examples": "Real-world RAG implementations with lessons learned",
+    "troubleshooting": "Common issues and solutions for production deployments",
+    "integration_patterns": "LangChain, Haystack, and other framework integrations",
+    "provider_selection": "Data-driven criteria for choosing embedding providers"
+  }
+}

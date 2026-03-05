@@ -150,7 +150,7 @@ class GitHubLoader:
 # ===== 2. 使用LangChain的GitLoader =====
 print("\n=== 2. 使用LangChain的GitLoader ===")
 
-from langchain.document_loaders import GitLoader
+from langchain_community.document_loaders import GitLoader
 
 def load_repo_with_langchain(
     clone_url: str,
@@ -299,7 +299,7 @@ class LocalGitRepoLoader:
 # ===== 4. RAG应用：构建代码问答系统 =====
 print("\n=== 4. RAG应用：构建代码问答系统 ===")
 
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain.vectorstores import Chroma
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.chains import RetrievalQA

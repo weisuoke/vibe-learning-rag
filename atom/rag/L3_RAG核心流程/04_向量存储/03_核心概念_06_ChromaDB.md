@@ -351,7 +351,7 @@ print(answer)
 ```python
 from langchain.vectorstores import Chroma
 from langchain.embeddings import SentenceTransformerEmbeddings
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain.chains import RetrievalQA
 from langchain.llms import OpenAI
 
@@ -359,7 +359,7 @@ from langchain.llms import OpenAI
 embeddings = SentenceTransformerEmbeddings(model_name='all-mpnet-base-v2')
 
 # 2. 加载文档并分块
-from langchain.document_loaders import TextLoader
+from langchain_community.document_loaders import TextLoader
 loader = TextLoader("document.txt")
 documents = loader.load()
 

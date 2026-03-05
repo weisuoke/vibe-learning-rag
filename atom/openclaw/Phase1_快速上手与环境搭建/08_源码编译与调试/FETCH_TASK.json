@@ -1,0 +1,116 @@
+{
+  "version": "1.0",
+  "created": "2026-02-24",
+  "status": "completed",
+  "summary": {
+    "total_tasks": 8,
+    "completed": 7,
+    "skipped": 1
+  },
+  "tasks": [
+    {
+      "id": 1,
+      "priority": "high",
+      "type": "source_code",
+      "action": "read_file",
+      "target": "sourcecode/openclaw/.vscode/launch.json",
+      "reason": "需要 OpenClaw 项目的实际调试配置示例",
+      "output": "reference/15_vscode_launch_config.md",
+      "status": "skipped",
+      "note": "文件不存在"
+    },
+    {
+      "id": 2,
+      "priority": "high",
+      "type": "web_search",
+      "query": "pnpm workspace monorepo debugging dependency resolution issues 2026",
+      "reason": "核心概念1差距 - monorepo 调试技术",
+      "output": "reference/16_pnpm_monorepo_debugging.md",
+      "status": "completed"
+    },
+    {
+      "id": 3,
+      "priority": "high",
+      "type": "web_search",
+      "query": "vitest multiple config files monorepo best practices 2026",
+      "reason": "核心概念3差距 - 多配置文件管理策略",
+      "output": "reference/17_vitest_multi_config.md",
+      "status": "completed"
+    },
+    {
+      "id": 4,
+      "priority": "medium",
+      "type": "web_search",
+      "query": "Docker multi-stage build TypeScript Node.js optimization 2026",
+      "reason": "场景4差距 - 生产构建 Docker 优化",
+      "output": "reference/18_docker_build_optimization.md",
+      "status": "completed"
+    },
+    {
+      "id": 5,
+      "priority": "medium",
+      "type": "web_search",
+      "query": "TypeScript compilation errors troubleshooting common issues 2026",
+      "reason": "场景5差距 - 问题排查技术",
+      "output": "reference/19_typescript_error_diagnosis.md",
+      "status": "completed"
+    },
+    {
+      "id": 6,
+      "priority": "medium",
+      "type": "web_search",
+      "query": "Node.js performance profiling tools clinic flamegraph 2026",
+      "reason": "场景6差距 - 性能分析工具",
+      "output": "reference/20_nodejs_performance_tools.md",
+      "status": "completed"
+    },
+    {
+      "id": 7,
+      "priority": "low",
+      "type": "context7",
+      "library": "GitHub Actions",
+      "query": "GitHub Actions cache strategy pnpm TypeScript",
+      "reason": "场景7差距 - CI/CD 缓存策略细节",
+      "output": "reference/21_github_actions_cache_detail.md",
+      "status": "skipped",
+      "note": "已有 reference/13_github_actions_optimization.md 覆盖此内容"
+    },
+    {
+      "id": 8,
+      "priority": "low",
+      "type": "web_search",
+      "query": "Node.js cross-platform path handling Windows macOS Linux 2026",
+      "reason": "完整性补充 - 跨平台开发细节",
+      "output": "reference/22_cross_platform_paths.md",
+      "status": "completed"
+    }
+  ],
+  "execution_plan": {
+    "batch_1": {
+      "priority": "high",
+      "tasks": [1, 2, 3],
+      "status": "completed"
+    },
+    "batch_2": {
+      "priority": "medium",
+      "tasks": [4, 5, 6],
+      "status": "completed"
+    },
+    "batch_3": {
+      "priority": "low",
+      "tasks": [7, 8],
+      "status": "completed"
+    }
+  },
+  "results": {
+    "total_reference_files": 20,
+    "stage_1_files": 14,
+    "stage_2_files": 6,
+    "data_sources": {
+      "source_code_analysis": 1,
+      "context7_docs": 5,
+      "web_search_stage1": 8,
+      "web_search_stage2": 6
+    }
+  }
+}

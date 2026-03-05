@@ -1,0 +1,51 @@
+{
+  "task_id": "langgraph_06_状态验证_fetch_20260227",
+  "phase_directory": "atom/langgraph/L2_状态管理",
+  "knowledge_point": "06_状态验证",
+  "target_directory": "atom/langgraph/L2_状态管理/06_状态验证/reference",
+  "generated_at": "2026-02-27T00:00:00Z",
+  "total_urls": 2,
+  "exclusion_rules": {
+    "official_docs": "已通过 Context7 获取，不需要抓取",
+    "source_repo": "直接读取本地源码，不需要抓取",
+    "excluded_patterns": [
+      "github.com/langchain-ai/langgraph/*",
+      "docs.langchain.com/*",
+      "docs.pydantic.dev/*"
+    ]
+  },
+  "urls": [
+    {
+      "url": "https://shazaali.substack.com/p/type-safety-in-langgraph-when-to",
+      "knowledge_point_tag": "TypedDict_vs_Pydantic选型",
+      "priority": "high",
+      "expected_content_type": "article",
+      "source_search_file": "reference/search_状态验证_01.md",
+      "reason": "TypedDict vs Pydantic 详细对比与最佳实践",
+      "content_focus": "选型策略与生产环境建议"
+    },
+    {
+      "url": "https://medium.com/@martin.hodges/decisions-i-made-when-using-pydantic-classes-to-define-my-langgraph-state-264620c0efca",
+      "knowledge_point_tag": "Pydantic_BaseModel状态定义",
+      "priority": "medium",
+      "expected_content_type": "article",
+      "source_search_file": "reference/search_状态验证_01.md",
+      "reason": "使用 Pydantic 定义 LangGraph 状态的实际决策经验",
+      "content_focus": "实践经验与决策过程"
+    }
+  ],
+  "priority_distribution": {
+    "high": 1,
+    "medium": 1,
+    "low": 0
+  },
+  "content_type_distribution": {
+    "article": 2,
+    "discussion": 0,
+    "code": 0
+  },
+  "knowledge_point_mapping": {
+    "TypedDict_vs_Pydantic选型": [0],
+    "Pydantic_BaseModel状态定义": [1]
+  }
+}

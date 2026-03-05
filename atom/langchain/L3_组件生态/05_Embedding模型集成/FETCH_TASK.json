@@ -1,0 +1,256 @@
+{
+  "task_id": "langchain_embedding_integration_fetch_20260225",
+  "phase_directory": "atom/langchain/L3_组件生态",
+  "knowledge_point": "05_Embedding模型集成",
+  "target_directory": "atom/langchain/L3_组件生态/05_Embedding模型集成/reference",
+  "generated_at": "2026-02-25T02:26:24.973Z",
+  "total_urls": 25,
+  "exclusion_rules": {
+    "official_docs": "已通过 Context7 获取，不需要抓取",
+    "source_repo": "直接读取本地源码，不需要抓取",
+    "excluded_patterns": [
+      "github.com/langchain-ai/langchain/*",
+      "*/official-docs/*",
+      "*/api-reference/*",
+      "docs.langchain.com/*"
+    ]
+  },
+  "urls": [
+    {
+      "url": "https://github.com/sourangshupal/simple-rag-langchain",
+      "knowledge_point_tag": "基础使用流程",
+      "priority": "high",
+      "expected_content_type": "code",
+      "source_search_file": "reference/search_embedding_integration_01.md",
+      "reason": "LangChain RAG tutorial using text-embedding-3-small",
+      "content_focus": "实战教程"
+    },
+    {
+      "url": "https://github.com/AdilShamim8/GenAI-Roadmap-with-Notes-Using-LangChain/blob/main/README.md",
+      "knowledge_point_tag": "模型选择与配置",
+      "priority": "high",
+      "expected_content_type": "article",
+      "source_search_file": "reference/search_embedding_integration_01.md",
+      "reason": "2026 LangChain guide with text-embedding-3-large best practices",
+      "content_focus": "2026最佳实践"
+    },
+    {
+      "url": "https://gist.github.com/donbr/696569a74bf7dbe90813177807ce1064",
+      "knowledge_point_tag": "模型选择与配置",
+      "priority": "high",
+      "expected_content_type": "code",
+      "source_search_file": "reference/search_embedding_integration_01.md",
+      "reason": "2025 hands-on fine-tuning embeddings tutorial",
+      "content_focus": "Fine-tuning教程"
+    },
+    {
+      "url": "https://www.reddit.com/r/LangChain/comments/1hrrrvh/best_embedding_model_for_similarity_search_for/",
+      "knowledge_point_tag": "模型选择与配置",
+      "priority": "high",
+      "expected_content_type": "discussion",
+      "source_search_file": "reference/search_embedding_integration_01.md",
+      "reason": "Discussion comparing OpenAI text-embedding-3-large with Google models",
+      "content_focus": "模型对比讨论"
+    },
+    {
+      "url": "https://www.reddit.com/r/Rag/comments/1ls6e3r/whats_the_best_rag_tech_stack_these_days_from/",
+      "knowledge_point_tag": "RAG集成实战",
+      "priority": "high",
+      "expected_content_type": "discussion",
+      "source_search_file": "reference/search_embedding_integration_01.md",
+      "reason": "Community best practices for chunking, embeddings, retrieval",
+      "content_focus": "技术栈讨论"
+    },
+    {
+      "url": "https://github.com/pinecone-io/examples/blob/master/docs/langchain-retrieval-augmentation.ipynb",
+      "knowledge_point_tag": "RAG集成实战",
+      "priority": "medium",
+      "expected_content_type": "code",
+      "source_search_file": "reference/search_embedding_integration_01.md",
+      "reason": "LangChain notebook with text-embedding-3-small for RAG",
+      "content_focus": "Pinecone集成"
+    },
+    {
+      "url": "https://github.com/vmayakumar/rag-agents",
+      "knowledge_point_tag": "自定义Embedding实现",
+      "priority": "high",
+      "expected_content_type": "code",
+      "source_search_file": "reference/search_custom_embeddings_02.md",
+      "reason": "Guide comparing custom embeddings with LangChain RAG agents",
+      "content_focus": "自定义嵌入对比"
+    },
+    {
+      "url": "https://github.com/maryamariyan/langchain-rag-tutorial",
+      "knowledge_point_tag": "多提供商集成",
+      "priority": "high",
+      "expected_content_type": "code",
+      "source_search_file": "reference/search_custom_embeddings_02.md",
+      "reason": "Tutorial switching embeddings from HuggingFace to OpenAI",
+      "content_focus": "模型切换教程"
+    },
+    {
+      "url": "https://github.com/bragai/bRAG-langchain",
+      "knowledge_point_tag": "批量处理与优化",
+      "priority": "high",
+      "expected_content_type": "code",
+      "source_search_file": "reference/search_custom_embeddings_02.md",
+      "reason": "Notebook on multi-embedding models and advanced RAG",
+      "content_focus": "高级嵌入教程"
+    },
+    {
+      "url": "https://github.com/ksmooi/agentic_ai_lab",
+      "knowledge_point_tag": "缓存机制",
+      "priority": "high",
+      "expected_content_type": "code",
+      "source_search_file": "reference/search_custom_embeddings_02.md",
+      "reason": "LangChain practice covering embedding cache design",
+      "content_focus": "缓存设计实践"
+    },
+    {
+      "url": "https://github.com/FareedKhan-dev/contextual-engineering-guide",
+      "knowledge_point_tag": "自定义Embedding实现",
+      "priority": "medium",
+      "expected_content_type": "article",
+      "source_search_file": "reference/search_custom_embeddings_02.md",
+      "reason": "Tutorial on converting tool descriptions to embeddings",
+      "content_focus": "上下文工程"
+    },
+    {
+      "url": "https://www.reddit.com/r/LocalLLaMA/comments/1iudao8/langchain_is_still_a_rabbit_hole_in_2025/",
+      "knowledge_point_tag": "Embeddings抽象接口",
+      "priority": "medium",
+      "expected_content_type": "discussion",
+      "source_search_file": "reference/search_custom_embeddings_02.md",
+      "reason": "Reddit discussion on LangChain embeddings complexity in 2025",
+      "content_focus": "社区讨论"
+    },
+    {
+      "url": "https://github.com/langchain-ai/langchain/issues/29496",
+      "knowledge_point_tag": "缓存机制",
+      "priority": "high",
+      "expected_content_type": "discussion",
+      "source_search_file": "reference/search_cache_optimization_03.md",
+      "reason": "2025 issue on CacheBackedEmbeddings key hashing problem",
+      "content_focus": "键哈希问题"
+    },
+    {
+      "url": "https://github.com/LangChain-OpenTutorial/LangChain-OpenTutorial/blob/main/08-Embedding/02-CacheBackedEmbeddings.ipynb",
+      "knowledge_point_tag": "缓存机制",
+      "priority": "high",
+      "expected_content_type": "code",
+      "source_search_file": "reference/search_cache_optimization_03.md",
+      "reason": "Official tutorial on CacheBackedEmbeddings usage",
+      "content_focus": "官方教程"
+    },
+    {
+      "url": "https://github.com/Mayuresh-22/SemanticEmbedCache",
+      "knowledge_point_tag": "缓存机制",
+      "priority": "medium",
+      "expected_content_type": "code",
+      "source_search_file": "reference/search_cache_optimization_03.md",
+      "reason": "Semantic cache library comparing with LangChain",
+      "content_focus": "语义缓存库"
+    },
+    {
+      "url": "https://github.com/SpazioDati/llm-elasticsearch-cache",
+      "knowledge_point_tag": "缓存机制",
+      "priority": "medium",
+      "expected_content_type": "code",
+      "source_search_file": "reference/search_cache_optimization_03.md",
+      "reason": "2025 Elasticsearch cache for LLM embeddings",
+      "content_focus": "Elasticsearch缓存"
+    },
+    {
+      "url": "https://www.reddit.com/r/LangChain/comments/1eghtid/question_about_retrievers_slow_pdf_loading_times/",
+      "knowledge_point_tag": "批量处理与优化",
+      "priority": "medium",
+      "expected_content_type": "discussion",
+      "source_search_file": "reference/search_cache_optimization_03.md",
+      "reason": "Discussion on slow PDF loading with cache",
+      "content_focus": "性能问题讨论"
+    },
+    {
+      "url": "https://www.reddit.com/r/LangChain/comments/1oa1nng/im_frustrated_code_from_docs_doesnt_work/",
+      "knowledge_point_tag": "缓存机制",
+      "priority": "low",
+      "expected_content_type": "discussion",
+      "source_search_file": "reference/search_cache_optimization_03.md",
+      "reason": "User reporting CacheBackedEmbeddings code issues",
+      "content_focus": "代码失效讨论"
+    },
+    {
+      "url": "https://github.com/langchain-ai/langchain-milvus",
+      "knowledge_point_tag": "RAG集成实战",
+      "priority": "high",
+      "expected_content_type": "code",
+      "source_search_file": "reference/search_rag_integration_04.md",
+      "reason": "Official LangChain Milvus integration",
+      "content_focus": "Milvus官方集成"
+    },
+    {
+      "url": "https://github.com/orgs/community/discussions/182015",
+      "knowledge_point_tag": "Embeddings抽象接口",
+      "priority": "medium",
+      "expected_content_type": "discussion",
+      "source_search_file": "reference/search_rag_integration_04.md",
+      "reason": "2025 discussion on LangChain complexity for simple RAG",
+      "content_focus": "RAG复杂度讨论"
+    },
+    {
+      "url": "https://github.com/hedayat-atefi/rag-chroma-langchain",
+      "knowledge_point_tag": "RAG集成实战",
+      "priority": "high",
+      "expected_content_type": "code",
+      "source_search_file": "reference/search_rag_integration_04.md",
+      "reason": "Developer template using LangChain and Chroma",
+      "content_focus": "Chroma RAG模板"
+    },
+    {
+      "url": "https://www.reddit.com/r/learnmachinelearning/comments/1pd9q58/multimodel_rag_with_langchain/",
+      "knowledge_point_tag": "RAG集成实战",
+      "priority": "medium",
+      "expected_content_type": "discussion",
+      "source_search_file": "reference/search_rag_integration_04.md",
+      "reason": "Reddit post on multi-model RAG with LangChain",
+      "content_focus": "多模型RAG"
+    },
+    {
+      "url": "https://www.reddit.com/r/LangChain/comments/1mm8jbm/rag_in_production/",
+      "knowledge_point_tag": "RAG集成实战",
+      "priority": "high",
+      "expected_content_type": "discussion",
+      "source_search_file": "reference/search_rag_integration_04.md",
+      "reason": "Discussion on LangChain RAG in production",
+      "content_focus": "生产部署讨论"
+    },
+    {
+      "url": "https://github.com/milvus-io/bootcamp/blob/master/integration/langchain/rag_with_milvus_and_langchain.ipynb",
+      "knowledge_point_tag": "RAG集成实战",
+      "priority": "medium",
+      "expected_content_type": "code",
+      "source_search_file": "reference/search_rag_integration_04.md",
+      "reason": "Milvus bootcamp LangChain RAG notebook",
+      "content_focus": "Milvus示例"
+    }
+  ],
+  "priority_distribution": {
+    "high": 16,
+    "medium": 8,
+    "low": 1
+  },
+  "content_type_distribution": {
+    "code": 14,
+    "article": 2,
+    "discussion": 9
+  },
+  "knowledge_point_mapping": {
+    "Embeddings抽象接口": [11, 19],
+    "模型选择与配置": [1, 2, 3, 4],
+    "批量处理与优化": [8, 16],
+    "缓存机制": [9, 12, 13, 14, 15, 17],
+    "基础使用流程": [0],
+    "多提供商集成": [7],
+    "RAG集成实战": [5, 18, 20, 21, 22, 23, 24],
+    "自定义Embedding实现": [6, 10]
+  }
+}

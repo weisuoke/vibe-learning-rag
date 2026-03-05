@@ -1,0 +1,129 @@
+{
+  "task_id": "langchain_ExampleSelector_fetch_20260226",
+  "phase_directory": "atom/langchain/L3_组件生态",
+  "knowledge_point": "12_ExampleSelector示例选择",
+  "target_directory": "atom/langchain/L3_组件生态/12_ExampleSelector示例选择/reference",
+  "generated_at": "2026-02-26T06:55:53.521Z",
+  "total_urls": 10,
+  "exclusion_rules": {
+    "official_docs": "已通过 Context7 获取，不需要抓取",
+    "source_repo": "直接读取本地源码，不需要抓取",
+    "excluded_patterns": [
+      "github.com/langchain-ai/langchain/*",
+      "python.langchain.com/docs/*",
+      "api.python.langchain.com/*",
+      "docs.langchain.com/*"
+    ]
+  },
+  "urls": [
+    {
+      "url": "https://medium.com/donato-story/exploring-few-shot-prompts-with-langchain-852f27ea4e1d",
+      "knowledge_point_tag": "核心概念_2_SemanticSimilarityExampleSelector",
+      "priority": "high",
+      "expected_content_type": "article",
+      "source_search_file": "reference/search_example_selector_01.md",
+      "reason": "详细解释动态 few-shot 示例选择，包含代码演示",
+      "content_focus": "SemanticSimilarityExampleSelector 实践案例"
+    },
+    {
+      "url": "https://github.com/gkamradt/langchain-tutorials/blob/main/LangChain%20Cookbook%20Part%201%20-%20Fundamentals.ipynb",
+      "knowledge_point_tag": "实战场景_1_静态vs动态示例选择对比",
+      "priority": "high",
+      "expected_content_type": "code",
+      "source_search_file": "reference/search_example_selector_01.md",
+      "reason": "完整的 Jupyter Notebook 示例",
+      "content_focus": "Example Selectors 基础教程"
+    },
+    {
+      "url": "https://www.pinecone.io/learn/series/langchain/langchain-prompt-templates",
+      "knowledge_point_tag": "核心概念_3_LengthBasedExampleSelector",
+      "priority": "high",
+      "expected_content_type": "article",
+      "source_search_file": "reference/search_example_selector_01.md",
+      "reason": "Pinecone 官方教程，介绍 LengthBasedExampleSelector",
+      "content_focus": "FewShotPromptTemplate 与 LengthBasedExampleSelector 结合"
+    },
+    {
+      "url": "https://pub.aimind.so/langchain-in-chains-6-example-selectors-310f47b4cdf3",
+      "knowledge_point_tag": "核心概念_6_FewShotPromptTemplate集成",
+      "priority": "high",
+      "expected_content_type": "article",
+      "source_search_file": "reference/search_example_selector_01.md",
+      "reason": "专门讲解 Example Selectors 的教程",
+      "content_focus": "多种 selector 动态选择示例"
+    },
+    {
+      "url": "https://www.sandgarden.com/learn/few-shot-prompting",
+      "knowledge_point_tag": "实战场景_2_语义相似度选择",
+      "priority": "high",
+      "expected_content_type": "article",
+      "source_search_file": "reference/search_example_selector_02.md",
+      "reason": "Few-shot prompting 最佳实践",
+      "content_focus": "语义相似度动态选择以提升提示相关性"
+    },
+    {
+      "url": "https://www.swarnendu.de/blog/langchain-best-practices",
+      "knowledge_point_tag": "核心概念_7_混合策略",
+      "priority": "high",
+      "expected_content_type": "article",
+      "source_search_file": "reference/search_example_selector_02.md",
+      "reason": "2025 年 LangChain 最佳实践",
+      "content_focus": "SemanticSimilarityExampleSelector 自适应选择"
+    },
+    {
+      "url": "https://gist.github.com/sakha1370/cf4663c759099ae6c66e8ab3aa4b7a52",
+      "knowledge_point_tag": "实战场景_6_RAG系统中的Few-shot优化",
+      "priority": "high",
+      "expected_content_type": "code",
+      "source_search_file": "reference/search_example_selector_02.md",
+      "reason": "2025-2026 年最新更新笔记",
+      "content_focus": "基于相似度的 Example Selector 在 few-shot 学习中的应用"
+    },
+    {
+      "url": "https://www.newline.co/@zaoyang/dynamic-prompts-with-langchain-templates--71d0c244",
+      "knowledge_point_tag": "核心概念_6_FewShotPromptTemplate集成",
+      "priority": "medium",
+      "expected_content_type": "article",
+      "source_search_file": "reference/search_example_selector_01.md",
+      "reason": "动态 Prompt 构建教程",
+      "content_focus": "FewShotPromptTemplate 与 LengthBasedExampleSelector 动态调整"
+    },
+    {
+      "url": "https://dev.to/aiengineering/a-beginners-guide-to-few-shot-prompting-in-langchain-2ilm",
+      "knowledge_point_tag": "实战场景_1_静态vs动态示例选择对比",
+      "priority": "medium",
+      "expected_content_type": "article",
+      "source_search_file": "reference/search_example_selector_01.md",
+      "reason": "初学者友好的教程",
+      "content_focus": "FewShotPromptTemplate 结构与动态示例应用"
+    },
+    {
+      "url": "https://github.com/whitesmith/langchain-semantic-length-example-selector",
+      "knowledge_point_tag": "核心概念_7_混合策略",
+      "priority": "medium",
+      "expected_content_type": "code",
+      "source_search_file": "reference/search_example_selector_02.md",
+      "reason": "社区扩展项目，结合语义相似度和长度限制",
+      "content_focus": "相似度与长度结合的示例选择器"
+    }
+  ],
+  "priority_distribution": {
+    "high": 7,
+    "medium": 3,
+    "low": 0
+  },
+  "content_type_distribution": {
+    "article": 6,
+    "code": 4,
+    "discussion": 0
+  },
+  "knowledge_point_mapping": {
+    "核心概念_2_SemanticSimilarityExampleSelector": [0],
+    "核心概念_3_LengthBasedExampleSelector": [2],
+    "核心概念_6_FewShotPromptTemplate集成": [3, 7],
+    "核心概念_7_混合策略": [5, 9],
+    "实战场景_1_静态vs动态示例选择对比": [1, 8],
+    "实战场景_2_语义相似度选择": [4],
+    "实战场景_6_RAG系统中的Few-shot优化": [6]
+  }
+}

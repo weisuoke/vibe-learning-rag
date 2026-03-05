@@ -1,0 +1,140 @@
+{
+  "task_id": "langgraph_02_状态传递与上下文_fetch_20260226",
+  "phase_directory": "atom/langgraph/L2_状态管理",
+  "knowledge_point": "02_状态传递与上下文",
+  "target_directory": "atom/langgraph/L2_状态管理/02_状态传递与上下文/reference",
+  "generated_at": "2026-02-26T03:47:22.109Z",
+  "total_urls": 11,
+  "exclusion_rules": {
+    "official_docs": "已通过 Context7 获取，不需要抓取",
+    "source_repo": "直接读取本地源码，不需要抓取",
+    "excluded_patterns": [
+      "github.com/langchain-ai/langgraph/*",
+      "docs.langchain.com/*",
+      "*/api-reference/*"
+    ]
+  },
+  "urls": [
+    {
+      "url": "https://medium.com/algomart/state-management-in-langgraph-the-foundation-of-reliable-ai-workflows-db98dd1499ca",
+      "knowledge_point_tag": "状态管理原理、状态机核心",
+      "priority": "high",
+      "expected_content_type": "article",
+      "source_search_file": "reference/search_状态传递_01.md",
+      "reason": "深入解析 LangGraph 状态管理原理，state 作为状态机核心，节点接收并更新 state",
+      "content_focus": "状态管理的实现细节和最佳实践"
+    },
+    {
+      "url": "https://blog.langchain.com/context-engineering-for-agents",
+      "knowledge_point_tag": "上下文工程、写选压缩",
+      "priority": "high",
+      "expected_content_type": "article",
+      "source_search_file": "reference/search_状态传递_01.md",
+      "reason": "官方博客，探讨上下文工程技术，利用 LangGraph state 对象实现写、选、压缩上下文",
+      "content_focus": "上下文工程的实践指南"
+    },
+    {
+      "url": "https://www.cloudthat.com/resources/blog/langgraph-state-the-engine-behind-smarter-ai-workflows",
+      "knowledge_point_tag": "state 作用、工作原理",
+      "priority": "high",
+      "expected_content_type": "article",
+      "source_search_file": "reference/search_状态传递_01.md",
+      "reason": "解释 LangGraph 中 state 作为上下文保持器，实现节点间信息共享、上下文保存和复杂决策",
+      "content_focus": "state 的工作原理和应用场景"
+    },
+    {
+      "url": "https://www.linkedin.com/pulse/context-engineering-langgraph-why-state-management-matters-mainkar-2relf",
+      "knowledge_point_tag": "最佳实践、对比分析",
+      "priority": "high",
+      "expected_content_type": "article",
+      "source_search_file": "reference/search_状态传递_01.md",
+      "reason": "强调 LangGraph 状态管理优于传统上下文窗口，提供外部存储、选择性检索和避免上下文污染的最佳实践",
+      "content_focus": "状态管理的优势和实践建议"
+    },
+    {
+      "url": "https://www.reddit.com/r/LangChain/comments/1kz912z/context_management_using_state",
+      "knowledge_point_tag": "state 读写机制",
+      "priority": "medium",
+      "expected_content_type": "discussion",
+      "source_search_file": "reference/search_状态传递_02.md",
+      "reason": "讨论如何使用 LangGraph 的 State 让 agents 读写共享上下文信息，实现可靠的状态读写与持久化",
+      "content_focus": "实践经验和问题解决方案"
+    },
+    {
+      "url": "https://www.reddit.com/r/LangChain/comments/1hxt5t7/help_me_understand_state_reducers_in_langgraph",
+      "knowledge_point_tag": "state reducers",
+      "priority": "medium",
+      "expected_content_type": "discussion",
+      "source_search_file": "reference/search_状态传递_02.md",
+      "reason": "解释 LangGraph 中 state reducers 的作用，如何控制 channels 的更新方式（覆盖或累加）",
+      "content_focus": "reducers 的工作原理和使用场景"
+    },
+    {
+      "url": "https://www.reddit.com/r/LangGraph/comments/1n867pe/managing_shared_state_in_langgraph_multiagent",
+      "knowledge_point_tag": "多 agent 状态管理",
+      "priority": "medium",
+      "expected_content_type": "discussion",
+      "source_search_file": "reference/search_状态传递_02.md",
+      "reason": "多 agent 系统中共享 state 的设计讨论，焦点在如何有效读写 state channels 以协调 agent 间数据流",
+      "content_focus": "共享状态的设计模式"
+    },
+    {
+      "url": "https://github.com/FareedKhan-dev/contextual-engineering-guide",
+      "knowledge_point_tag": "上下文工程实践",
+      "priority": "medium",
+      "expected_content_type": "code",
+      "source_search_file": "reference/search_状态传递_01.md",
+      "reason": "使用 LangChain 和 LangGraph 实现上下文工程管道示例，包括从 state 选择上下文并传递给下游 LLM 调用",
+      "content_focus": "上下文工程的代码示例"
+    },
+    {
+      "url": "https://www.reddit.com/r/LangChain/comments/1moi94j/langgraph_how_do_i_read_subgraph_state_without_an",
+      "knowledge_point_tag": "子图状态读取",
+      "priority": "low",
+      "expected_content_type": "discussion",
+      "source_search_file": "reference/search_状态传递_02.md",
+      "reason": "探讨在不中断的情况下读取子图状态的方法，涉及 state channels 的读写",
+      "content_focus": "子图状态管理的实践"
+    },
+    {
+      "url": "https://www.reddit.com/r/LangChain/comments/1o19qln/how_do_you_work_with_state_with_langgraphs",
+      "knowledge_point_tag": "createReactAgent 状态处理",
+      "priority": "low",
+      "expected_content_type": "discussion",
+      "source_search_file": "reference/search_状态传递_02.md",
+      "reason": "分享使用 createReactAgent 时处理 state 的经验，包括节点如何读写共享 state channels",
+      "content_focus": "特定场景的状态管理"
+    },
+    {
+      "url": "https://www.reddit.com/r/LangChain/comments/1na0ikq/langgraph_js_using_different_state_schemas",
+      "knowledge_point_tag": "不同 schema 状态流动",
+      "priority": "low",
+      "expected_content_type": "discussion",
+      "source_search_file": "reference/search_状态传递_02.md",
+      "reason": "探讨不同 state schema 下 channels 的共享与读写，适用于子图与主图状态流动的场景",
+      "content_focus": "schema 设计的最佳实践"
+    }
+  ],
+  "priority_distribution": {
+    "high": 4,
+    "medium": 4,
+    "low": 3
+  },
+  "content_type_distribution": {
+    "article": 4,
+    "discussion": 6,
+    "code": 1
+  },
+  "knowledge_point_mapping": {
+    "状态管理原理": [0],
+    "上下文工程": [1, 7],
+    "state作用": [2],
+    "最佳实践": [3],
+    "state读写机制": [4],
+    "state_reducers": [5],
+    "多agent状态管理": [6],
+    "子图状态读取": [8],
+    "createReactAgent": [9],
+    "不同schema": [10]
+  }
+}

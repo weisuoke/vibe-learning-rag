@@ -230,7 +230,7 @@ class ContextualChunker:
 """
 
 # 使用示例
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 # 1. 基础分块
 splitter = RecursiveCharacterTextSplitter(
@@ -423,7 +423,7 @@ def rerank_chunks(
 
 ```python
 # 推荐：递归字符分块 + 上下文感知
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 splitter = RecursiveCharacterTextSplitter(
     chunk_size=512,  # NVIDIA 2025 推荐

@@ -1,50 +1,54 @@
-# Practical Code Use Cases - GitHub Search Results
+---
+source: Grok-mcp web search results
+query: Milvus 2.6 Embedding Functions examples RAG 2026
+platform: GitHub
+fetched_at: 2026-02-21
+---
 
-## Search Query
-Milvus 2.6 Embedding Functions RAG implementation examples 2025 2026
+# GitHub Use Cases: Milvus 2.6 Embedding Functions and RAG Examples
 
-## Results
+## Search Results
 
-### 1. Milvus Official Repository
-**URL:** https://github.com/milvus-io/milvus
-**Description:** Milvus vector database with tutorials on building RAG applications, including embedding functions and vector search examples for AI use cases.
+### 1. Embedding Function Overview | Milvus Documentation
+**URL**: https://milvus.io/docs/embedding-function-overview.md
+**Description**: Milvus 2.6中Embedding Function模块概述，支持自动调用OpenAI、AWS Bedrock等外部服务将原始文本转为向量嵌入，支持RAG场景直接插入和查询原始文本。
 
-### 2. IBM Watsonx AI Samples
-**URL:** https://github.com/IBM/watsonx-ai-samples
-**Description:** Notebook using AutoAI RAG and Milvus for creating patterns with embedding functions, focusing on data processing and vector search integration.
+### 2. Introducing the Embedding Function: How Milvus 2.6 Streamlines Vectorization and Semantic Search
+**URL**: https://milvus.io/blog/data-in-and-data-out-in-milvus-2-6.md
+**Description**: 详细解释 Milvus 2.6 的 Data-in, Data-out 特性，基于新 Function 模块内置嵌入生成，支持直接插入原始数据并自动向量化，连接 OpenAI、Hugging Face 等模型。
 
-### 3. Note4yaoo AI App Examples
-**URL:** https://github.com/uptonking/note4yaoo
-**Description:** Examples of RAG knowledge base implementations supporting Milvus 2.6.2 for vector similarity search in standalone or distributed deployments.
+### 3. Introducing Milvus 2.6: Affordable Vector Search at Billion Scale
+**URL**: https://milvus.io/blog/introduce-milvus-2-6-built-for-scale-designed-to-reduce-costs.md
+**Description**: Milvus 2.6发布公告，介绍Function接口集成第三方嵌入模型，实现直接插入原始文本并查询自然语言，支持高效RAG管道。
 
-### 4. Illuin Tech ColPali
-**URL:** https://github.com/illuin-tech/colpali
-**Description:** Code for training vision retrievers with Milvus integration for multi-modal retrieval and RAG pipelines using embedding functions.
+### 4. Milvus GitHub Repository Releases
+**URL**: https://github.com/milvus-io/milvus/releases
+**Description**: Milvus官方GitHub仓库发布页面，包含2.6版本更新记录，支持Embedding Functions集成及相关修复示例。
 
-### 5. Microsoft GraphRAG
-**URL:** https://github.com/microsoft/graphrag
-**Description:** Graph-based RAG system discussions including Milvus for embedding generation and vector indexing in retrieval pipelines.
+### 5. milvus-model GitHub Releases
+**URL**: https://github.com/milvus-io/milvus-model/releases
+**Description**: milvus-model仓库发布，包含多种Embedding Functions实现如Voyage、Mistral、Nomic等更新，支持Milvus 2.6集成使用。
 
-### 6. InftyAI Awesome LLMOps
-**URL:** https://github.com/InftyAI/Awesome-LLMOps
-**Description:** Curated list of LLMOps tools featuring GraphRAG and Milvus for high-performance vector search in RAG implementations.
-
-### 7. Python Backend Developer Roadmap
-**URL:** https://github.com/jannctu/Python-Backend-Developer-Roadmap
-**Description:** Roadmap including Milvus as a vector database for embeddings and RAG in modern Python backend development.
-
-### 8. Eosphoros AI DB-GPT Releases
-**URL:** https://github.com/eosphoros-ai/DB-GPT
-**Description:** Updates for Milvus integration in GraphRAG, including truncate methods and embedding model support for RAG applications.
+### 6. Build RAG with Milvus
+**URL**: https://milvus.io/docs/build-rag-with-milvus.md
+**Description**: Milvus官方RAG构建指南，结合2.6版本Embedding Function简化数据处理和检索流程，提供完整示例。
 
 ## Key Insights
 
-1. **RAG Implementation Patterns**: Multiple projects demonstrate RAG implementations with Milvus 2.6, focusing on embedding functions and automatic vectorization.
+### Milvus 2.6 Core Features
+- **Data-in, Data-out Pattern**: 直接插入原始文本，自动生成向量
+- **Embedding Functions**: 内置多提供商支持（OpenAI, Bedrock, Cohere, Voyage, Jina等）
+- **Simplified RAG Workflow**: 3步流程替代传统5步流程
+- **Multi-Provider Support**: 统一接口支持多种嵌入模型提供商
 
-2. **Multi-modal Support**: ColPali and other projects show integration of text and image embeddings in Milvus for multi-modal RAG systems.
+### RAG Application Patterns
+1. **Document Q&A**: 文档问答系统
+2. **Semantic Search**: 语义搜索
+3. **Hybrid Search**: 混合检索（dense + sparse）
+4. **Multi-Modal Search**: 多模态搜索
 
-3. **Enterprise Use Cases**: IBM Watsonx and DB-GPT demonstrate enterprise-grade RAG implementations with Milvus.
-
-4. **GraphRAG Integration**: Microsoft GraphRAG and DB-GPT show advanced RAG architectures combining graph-based retrieval with vector search.
-
-5. **Production Deployments**: Examples support both standalone and distributed Milvus deployments for scalable RAG systems.
+### Code Examples Available
+- Python SDK examples with pymilvus
+- Integration with LangChain
+- Integration with LlamaIndex
+- Full RAG pipeline implementations

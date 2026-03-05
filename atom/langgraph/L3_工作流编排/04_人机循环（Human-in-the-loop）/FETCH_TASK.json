@@ -1,0 +1,71 @@
+{
+  "task_id": "langgraph_hitl_fetch_20260228",
+  "phase_directory": "atom/langgraph/L3_工作流编排",
+  "knowledge_point": "04_人机循环（Human-in-the-loop）",
+  "target_directory": "atom/langgraph/L3_工作流编排/04_人机循环（Human-in-the-loop）/reference",
+  "generated_at": "2026-02-28T12:00:00+08:00",
+  "total_urls": 4,
+  "exclusion_rules": {
+    "official_docs": "已通过 Context7 获取，不需要抓取",
+    "source_repo": "直接读取本地源码，不需要抓取",
+    "excluded_patterns": [
+      "github.com/langchain-ai/langgraph/*",
+      "docs.langchain.com/*",
+      "python.langchain.com/*"
+    ]
+  },
+  "urls": [
+    {
+      "url": "https://medium.com/the-advanced-school-of-ai/human-in-the-loop-with-langgraph-mastering-interrupts-and-commands-9e1cf2183ae3",
+      "knowledge_point_tag": "interrupt函数+Command恢复",
+      "priority": "high",
+      "expected_content_type": "article",
+      "source_search_file": "reference/search_hitl_01.md",
+      "reason": "2025-2026年最新HITL教程，包含完整代码示例和最佳实践",
+      "content_focus": "interrupt和Command使用教程"
+    },
+    {
+      "url": "https://dev.to/jamesbmour/interrupts-and-commands-in-langgraph-building-human-in-the-loop-workflows-4ngl",
+      "knowledge_point_tag": "interrupt函数+Command恢复",
+      "priority": "high",
+      "expected_content_type": "article",
+      "source_search_file": "reference/search_hitl_01.md",
+      "reason": "Dev.to教程，包含关键概念讲解和生产级HITL实现指南",
+      "content_focus": "HITL工作流构建教程"
+    },
+    {
+      "url": "https://blog.langchain.com/making-it-easier-to-build-human-in-the-loop-agents-with-interrupt",
+      "knowledge_point_tag": "interrupt函数",
+      "priority": "high",
+      "expected_content_type": "article",
+      "source_search_file": "reference/search_hitl_01.md",
+      "reason": "LangChain官方博客，介绍interrupt函数设计理念和使用方式",
+      "content_focus": "interrupt函数设计理念"
+    },
+    {
+      "url": "https://www.reddit.com/r/LangGraph/comments/1ldiqtg/i_am_struggling_with_langgraphs_humanintheloop",
+      "knowledge_point_tag": "常见问题与反直觉点",
+      "priority": "medium",
+      "expected_content_type": "discussion",
+      "source_search_file": "reference/search_hitl_01.md",
+      "reason": "社区讨论HITL常见问题，有助于编写反直觉点和面试必问",
+      "content_focus": "HITL常见问题和解决方案"
+    }
+  ],
+  "priority_distribution": {
+    "high": 3,
+    "medium": 1,
+    "low": 0
+  },
+  "content_type_distribution": {
+    "article": 3,
+    "discussion": 1,
+    "code": 0
+  },
+  "knowledge_point_mapping": {
+    "interrupt函数": [0, 1, 2],
+    "Command恢复": [0, 1],
+    "常见问题": [3],
+    "生产实践": [1]
+  }
+}

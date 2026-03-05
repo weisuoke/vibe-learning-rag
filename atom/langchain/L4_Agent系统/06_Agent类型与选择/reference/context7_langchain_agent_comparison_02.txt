@@ -1,0 +1,69 @@
+### Initialize and Run a LangChain ReAct Agent with OpenAI and a Tool
+
+Source: https://docs.langchain.com/oss/python/integrations/tools/google_drive
+
+This Python code initializes a ReAct agent using LangChain, integrating with an OpenAI chat model. It sets the `OPENAI_API_KEY` environment variable, creates a chat model instance, and then constructs an agent with the model and a provided `tool`. The agent is then invoked with a user query, and its streamed responses are printed, demonstrating how the agent processes and responds to requests using the configured tool.
+
+```python
+import os
+
+from langchain.chat_models import init_chat_model
+from langchain.agents import create_agent
+
+
+os.environ["OPENAI_API_KEY"] = "your-openai-api-key"
+
+
+model = init_chat_model("gpt-4.1-mini", model_provider="openai", temperature=0)
+agent = create_agent(model, tools=[tool])
+
+events = agent.stream(
+    {"messages": [("user", "Search in google drive, who is 'Yann LeCun' ?")]},
+    stream_mode="values",
+)
+for event in events:
+    event["messages"][-1].pretty_print()
+```
+
+--------------------------------
+
+### Create LangChain Agent with OpenAI Functions
+
+Source: https://docs.langchain.com/oss/python/integrations/tools/semanticscholar
+
+Instantiates an agent using `create_openai_functions_agent`. This function combines the initialized language model (LLM), the list of available tools, and the customized prompt to create an agent capable of using OpenAI's function calling capabilities.
+
+```python
+agent = create_openai_functions_agent(llm, tools, prompt)
+```
+
+--------------------------------
+
+### Create OpenAI Functions Agent with LangChain
+
+Source: https://docs.langchain.com/oss/python/integrations/tools/multion
+
+Initializes a LangChain agent using OpenAI functions with a toolkit and prompt template. The agent is wrapped in an AgentExecutor to manage tool invocation and execution flow. This setup enables the agent to dynamically select and use available tools from the toolkit based on user input.
+
+```python
+agent = create_openai_functions_agent(llm, toolkit.get_tools(), prompt)
+agent_executor = AgentExecutor(
+    agent=agent,
+    tools=toolkit.get_tools(),
+    verbose=False,
+)
+```
+
+### Pandas Dataframe integration > Using OpenAI functions
+
+Source: https://docs.langchain.com/oss/python/integrations/tools/pandas
+
+This section illustrates an alternative method for initializing the Pandas DataFrame agent, specifically using the `OPENAI_FUNCTIONS` agent type. This approach leverages OpenAI's function calling capabilities, which can lead to more robust and efficient tool usage by allowing the LLM to directly call predefined functions with structured arguments. It serves as a powerful alternative to the `ZERO_SHOT_REACT_DESCRIPTION` agent type for certain use cases.
+
+--------------------------------
+
+### Chaining > Agent Architecture
+
+Source: https://docs.langchain.com/oss/python/integrations/tools/asknews
+
+LangChain enables the creation of agents that can chain together multiple tools and language models to accomplish complex tasks. The OpenAI Functions Agent is a specialized agent implementation that leverages OpenAI's function calling capabilities to dynamically select and execute tools based on user input. This approach allows agents to reason about which tools to use and in what sequence, making them suitable for multi-step workflows that require accessing external data sources or performing specialized operations.

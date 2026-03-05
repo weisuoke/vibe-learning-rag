@@ -386,7 +386,7 @@ print(f"text1 vs text3: {cosine_similarity(vec1, vec3):.4f}")  # 低相似度
 ### 1. 文档向量化
 
 ```python
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_openai import OpenAIEmbeddings
 
 # 1. 加载文档

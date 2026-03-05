@@ -308,7 +308,7 @@ def load_webpage(url: str) -> Document:
 ### 3.2 使用LangChain的WebBaseLoader
 
 ```python
-from langchain.document_loaders import WebBaseLoader
+from langchain_community.document_loaders import WebBaseLoader
 
 # 加载单个网页
 loader = WebBaseLoader("https://example.com/article")
@@ -700,7 +700,7 @@ print(f"加载了 {len(docs)} 个文档")
 ### 7.1 构建在线文档知识库
 
 ```python
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain.vectorstores import Chroma
 from langchain.embeddings import OpenAIEmbeddings
 

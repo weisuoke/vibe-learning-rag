@@ -1,78 +1,32 @@
-# Data Insertion APIs Documentation (Milvus 2.6)
-
 ---
-source: https://milvus.io/docs/upsert-entities.md
-title: Upsert Entities | Milvus Documentation
+source: https://milvus.io/docs/insert-update-delete.md
+title: Insert Entities | Milvus Documentation
 fetched_at: 2026-02-21
 ---
 
-# Upsert Entities
+# Insert Entities
 
-The `upsert` operation provides a convenient way to insert or update entities in a collection.
+Entities in a collection are data records that share the same set of fields. Field values in every data record form an entity. This page introduces how to insert entities into a collection.
+
+If you dynamically add new fields after the collection has been created, and you do not specify values for these fields when inserting entities, Milvus automatically populates them with either their defined default values or **NULL** if defaults are not set. For details, refer to [Add Fields to an Existing Collection](/docs/manage-collections.md#add-fields-to-an-existing-collection).
+
+**Fields added after collection creation**: If you add new fields to a collection after creation and don't specify values during insertion, Milvus automatically populates them with defined default values or **NULL** if no defaults are set. For details, refer to [Add Fields to an Existing Collection](/docs/manage-collections.md#add-fields-to-an-existing-collection).
+
+**Duplicate handling**: The standard insert operation does not check for duplicate primary keys. Inserting data with an existing primary key creates a new entity with the same key, leading to data duplication and potential application issues. To update existing entities or avoid duplicates, use the **upsert** operation instead. For more information, refer to [Upsert Entities](/docs/upsert-entities.md).
 
 ## Overview
 
-You can use `upsert` to either insert a new entity or update an existing one, depending on whether the primary key provided in the upsert request exists in the collection. If the primary key is not found, an insert operation occurs. Otherwise, an update operation will be performed.
+In Milvus, an **Entity** refers to data records in a **Collection** that share the same **Schema**, with the data in each field of a row constituting an Entity. Therefore, the Entities within the same Collection have the same attributes (such as field names, data types, and other constraints).
 
-An upsert in Milvus works in either **override** or **merge** mode.
+When inserting an Entity into a Collection, the Entity to be inserted can only be successfully added if it contains all the fields defined in the Schema. The inserted Entity will enter a Partition named **_default** in the order of insertion. Provided that a certain Partition exists, you can also insert Entities into that Partition by specifying the Partition name in the insertion request.
 
-### Upsert in override mode
+Milvus also supports dynamic fields to maintain the scalability of the Collection. When the dynamic field is enabled, you can insert fields that are not defined in the Schema into the Collection. These fields and values will be stored as key-value pairs in a reserved field named **$meta**. For more information about dynamic fields, please refer to [Dynamic Field](/docs/enable-dynamic-field.md).
 
-An upsert request that works in override mode combines an insert and a delete. When an `upsert` request for an existing entity is received, Milvus inserts the data carried in the request payload and deletes the existing entity with the original primary key specified in the data at the same time.
+## Insert Entities into a Collection
 
-If the target collection has `autoid` enabled on its primary field, Milvus will generate a new primary key for the data carried in the request payload before inserting it.
+Before inserting data, you need to organize your data into a list of dictionaries according to the Schema, with each dictionary representing an Entity and containing all the fields defined in the Schema. If the Collection has the dynamic field enabled, each dictionary can also include fields that are not defined in the Schema.
 
-For fields with `nullable` enabled, you can omit them in the `upsert` request if they do not require any updates.
-
-### Upsert in merge mode *Compatible with Milvus v2.6.2+*
-
-You can also use the `partial_update` flag to make an upsert request work in merge mode. This allows you to include only the fields that need updating in the request payload.
-
-To perform a merge, set `partial_update` to `True` in the `upsert` request along with the primary key and the fields to update with their new values.
-
-Upon receiving such a request, Milvus performs a query with strong consistency to retrieve the entity, updates the field values based on the data in the request, inserts the modified data, and then deletes the existing entity with the original primary key carried in the request.
-
-### Upsert behaviors: special notes
-
-There are several special notes you should consider before using the merge feature. The following cases assume that you have a collection with two scalar fields named `title` and `issue`, along with a primary key `id` and a vector field called `vector`.
-
-**Upsert fields with nullable enabled.**
-
-Suppose that the issue field can be null. When you upsert these fields, note that:
-
-- If you omit the issue field in the upsert request and disable partial_update, the issue field will be updated to null instead of retaining its original value.
-- To preserve the original value of the issue field, you need either to enable partial_update and omit the issue field or include the issue field with its original value in the upsert request.
-
-**Upsert keys in the dynamic field.**
-
-Suppose that you have enabled the dynamic key in the example collection, and the key-value pairs in the dynamic field of an entity are similar to `{"author": "John", "year": 2020, "tags": ["fiction"]}`.
-
-When you upsert the entity with keys, such as author, year, or tags, or add other keys, note that:
-
-- If you upsert with partial_update disabled, the default behavior is to **override**. It means that the value of the dynamic field will be overridden by all non-schema-defined fields included in the request and their values. For example, if the data included in the request is `{"author": "Jane", "genre": "fantasy"}`, the key-value pairs in the dynamic field of the target entity will be updated to that.
-- If you upsert with partial_update enabled, the default behavior is to **merge**. It means that the value of the dynamic field will merge with all non-schema-defined fields included in the request and their values. For example, if the data included in the request is `{"author": "John", "year": 2020, "tags": ["fiction"]}`, the key-value pairs in the dynamic field of the target entity will become `{"author": "John", "year": 2020, "tags": ["fiction"], "genre": "fantasy"}` after the upsert.
-
-**Upsert a JSON field.**
-
-Suppose that the example collection has a schema-defined JSON field named extras, and the key-value pairs in this JSON field of an entity are similar to `{"author": "John", "year": 2020, "tags": ["fiction"]}`.
-
-When you upsert the extras field of an entity with modified JSON data, note that the JSON field is treated as a whole, and you cannot update individual keys selectively. In other words, the JSON field **DOES NOT** support upsert in **merge** mode.
-
-### Limits & Restrictions
-
-Based on the above content, there are several limits and restrictions to follow:
-
-- The upsert request must always include the primary keys of the target entities.
-- The target collection must be loaded and available for queries.
-- All fields specified in the request must exist in the schema of the target collection.
-- The values of all fields specified in the request must match the data types defined in the schema.
-- For any field derived from another using functions, Milvus will remove the derived field during the upsert to allow recalculation.
-
-## Upsert entities in a collection
-
-In this section, we will upsert entities into a collection named `my_collection`. This collection has only two fields, named `id`, `vector`, `title`, and `issue`. The `id` field is the primary field, while the `title` and `issue` fields are scalar fields.
-
-The three entities, if exists in the collection, will be overridden by those included the upsert request.
+In this section, you will insert entities into a Collection created in the quick-setup manner. A Collection created in this manner has only two fields, named **id** and **vector**. Additionally, this Collection has the dynamic field enabled, so the Entities in the example code include a field called **color** that is not defined in the Schema.
 
 ```python
 from pymilvus import MilvusClient
@@ -83,49 +37,66 @@ client = MilvusClient(
 )
 
 data=[
-    {
-        "id": 0,
-        "vector": [-0.619954382375778, 0.4479436794798608, -0.17493894838751745, -0.4248030059917294, -0.8648452746018911],
-        "title": "Artificial Intelligence in Real Life",
-        "issue": "vol.12"
-    }, {
-        "id": 1,
-        "vector": [0.4762662251462588, -0.6942502138717026, -0.4490002642657902, -0.628696575798281, 0.9660395877041965],
-        "title": "Hollow Man",
-        "issue": "vol.19"
-    }, {
-        "id": 2,
-        "vector": [-0.8864122635045097, 0.9260170474445351, 0.801326976181461, 0.6383943392381306, 0.7563037341572827],
-        "title": "Treasure Hunt in Missouri",
-        "issue": "vol.12"
-    }
+    {"id": 0, "vector": [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], "color": "pink_8682"},
+    {"id": 1, "vector": [0.19886812562848388, 0.06023560599112088, 0.6976963061752597, 0.2614474506242501, 0.838729485096104], "color": "red_7025"},
+    {"id": 2, "vector": [0.43742130801983836, -0.5597502546264526, 0.6457887650909682, 0.7894058910881185, 0.20785793220625592], "color": "orange_6781"},
+    {"id": 3, "vector": [0.3172005263489739, 0.9719044792798428, -0.36981146090600725, -0.4860894583077995, 0.95791889146345], "color": "pink_9298"},
+    {"id": 4, "vector": [0.4452349528804562, -0.8757026943054742, 0.8220779437047674, 0.46406290649483184, 0.30337481143159106], "color": "red_4794"},
+    {"id": 5, "vector": [0.985825131989184, -0.8144651566660419, 0.6299267002202009, 0.1206906911183383, -0.1446277761879955], "color": "yellow_4222"},
+    {"id": 6, "vector": [0.8371977790571115, -0.015764369584852833, -0.31062937026679327, -0.562666951622192, -0.8984947637863987], "color": "red_9392"},
+    {"id": 7, "vector": [-0.33445148015177995, -0.2567135004164067, 0.8987539745369246, 0.9402995886420709, 0.5378064918413052], "color": "grey_8510"},
+    {"id": 8, "vector": [0.39524717779832685, 0.4000257286739164, -0.5890507376891594, -0.8650502298996872, -0.6140360785406336], "color": "white_9381"},
+    {"id": 9, "vector": [0.5718280481994695, 0.24070317428066512, -0.3737913482606834, -0.06726932177492717, -0.6980531615588608], "color": "purple_4976"}
 ]
 
-res = client.upsert(
-    collection_name='my_collection',
+res = client.insert(
+    collection_name="quick_setup",
     data=data
 )
 
 print(res)
 
 # Output
-# {'upsert_count': 3}
+# {'insert_count': 10, 'ids': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]}
 ```
 
-## Key Points for RAG Development
+```java
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.vector.request.InsertReq;
+import io.milvus.v2.service.vector.response.InsertResp;
 
-1. **Upsert with Embedding Functions**: When using Embedding Functions in Milvus 2.6, you can upsert raw text directly without manually generating vectors. Milvus will automatically call the configured embedding provider to generate vectors.
+import java.util.*;
 
-2. **Partial Update**: The `partial_update` flag (Milvus 2.6.2+) allows you to update only specific fields without replacing the entire entity, which is useful for incremental updates in RAG systems.
+MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build());
 
-3. **Dynamic Fields**: Upsert supports dynamic fields, allowing you to add metadata to entities without modifying the schema. This is particularly useful for RAG applications where document metadata may vary.
+Gson gson = new Gson();
+List<JsonObject> data = Arrays.asList(
+        gson.fromJson("{\"id\": 0, \"vector\": [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], \"color\": \"pink_8682\"}", JsonObject.class),
+        gson.fromJson("{\"id\": 1, \"vector\": [0.19886812562848388, 0.06023560599112088, 0.6976963061752597, 0.2614474506242501, 0.838729485096104], \"color\": \"red_7025\"}", JsonObject.class),
+        gson.fromJson("{\"id\": 2, \"vector\": [0.43742130801983836, -0.5597502546264526, 0.6457887650909682, 0.7894058910881185, 0.20785793220625592], \"color\": \"orange_6781\"}", JsonObject.class),
+        gson.fromJson("{\"id\": 3, \"vector\": [0.3172005263489739, 0.9719044792798428, -0.36981146090600725, -0.4860894583077995, 0.95791889146345], \"color\": \"pink_9298\"}", JsonObject.class),
+        gson.fromJson("{\"id\": 4, \"vector\": [0.4452349528804562, -0.8757026943054742, 0.8220779437047674, 0.46406290649483184, 0.30337481143159106], \"color\": \"red_4794\"}", JsonObject.class),
+        gson.fromJson("{\"id\": 5, \"vector\": [0.985825131989184, -0.8144651566660419, 0.6299267002202009, 0.1206906911183383, -0.1446277761879955], \"color\": \"yellow_4222\"}", JsonObject.class),
+        gson.fromJson("{\"id\": 6, \"vector\": [0.8371977790571115, -0.015764369584852833, -0.31062937026679327, -0.562666951622192, -0.8984947637863987], \"color\": \"red_9392\"}", JsonObject.class),
+        gson.fromJson("{\"id\": 7, \"vector\": [-0.33445148015177995, -0.2567135004164067, 0.8987539745369246, 0.9402995886420709, 0.5378064918413052], \"color\": \"grey_8510\"}", JsonObject.class),
+        gson.fromJson("{\"id\": 8, \"vector\": [0.39524717779832685, 0.4000257286739164, -0.5890507376891594, -0.8650502298996872, -0.6140360785406336], \"color\": \"white_9381\"}", JsonObject.class),
+        gson.fromJson("{\"id\": 9, \"vector\": [0.5718280481994695, 0.24070317428066512, -0.3737913482606834, -0.06726932177492717, -0.6980531615588608], \"color\": \"purple_4976\"}", JsonObject.class)
+);
 
-4. **Performance Considerations**:
-   - Upsert operations are more expensive than pure inserts because they require a query to check if the entity exists
-   - For bulk operations, consider batching upsert requests
-   - Use partial_update when only updating specific fields to reduce overhead
+InsertReq insertReq = InsertReq.builder()
+        .collectionName("quick_setup")
+        .data(data)
+        .build();
 
-5. **Use Cases in RAG**:
-   - **Document Updates**: When a document in your knowledge base is updated, use upsert to replace the old version
-   - **Incremental Indexing**: Add new documents or update existing ones without rebuilding the entire index
-   - **Metadata Enrichment**: Update document metadata (e.g., tags, categories) without re-embedding the content
+InsertResp insertResp = client.insert(insertReq);
+System.out.println(insertResp);
+
+// Output
+// InsertResp(InsertCnt=10, primaryKeys=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+```

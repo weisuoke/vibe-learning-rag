@@ -1,0 +1,163 @@
+### Initialize and Run LangChain Structured Chat Agent with Reddit Tool and Memory (Python)
+
+Source: https://docs.langchain.com/oss/python/integrations/tools/reddit_search
+
+This Python code initializes a LangChain Structured Chat Agent. It configures the agent with a `RedditSearchRun` tool for external data retrieval, `ConversationBufferMemory` to maintain chat history, and `ChatOpenAI` as the underlying language model. The example demonstrates how the agent first uses the Reddit tool to answer a specific query and then leverages its memory to answer a follow-up question without needing to re-access the tool.
+
+```python
+from langchain.agents import AgentExecutor, StructuredChatAgent
+from langchain_classic.chains import LLMChain
+from langchain.memory import ConversationBufferMemory, ReadOnlySharedMemory
+from langchain_community.tools.reddit_search.tool import RedditSearchRun
+from langchain_community.utilities.reddit_search import RedditSearchAPIWrapper
+from langchain_core.prompts import PromptTemplate
+from langchain_openai import ChatOpenAI
+
+# Provide keys for Reddit
+client_id = ""
+client_secret = ""
+user_agent = ""
+# Provide key for OpenAI
+openai_api_key = ""
+
+template = """This is a conversation between a human and a bot:
+
+{chat_history}
+
+Write a summary of the conversation for {input}:
+"""
+
+prompt = PromptTemplate(input_variables=["input", "chat_history"], template=template)
+memory = ConversationBufferMemory(memory_key="chat_history")
+
+prefix = """Have a conversation with a human, answering the following questions as best you can. You have access to the following tools:"""
+suffix = """Begin!\n\n{chat_history}\nQuestion: {input}\n{agent_scratchpad}"""
+
+tools = [
+    RedditSearchRun(
+        api_wrapper=RedditSearchAPIWrapper(
+            reddit_client_id=client_id,
+            reddit_client_secret=client_secret,
+            reddit_user_agent=user_agent,
+        )
+    )
+]
+
+prompt = StructuredChatAgent.create_prompt(
+    prefix=prefix,
+    tools=tools,
+    suffix=suffix,
+    input_variables=["input", "chat_history", "agent_scratchpad"],
+)
+
+llm = ChatOpenAI(temperature=0, openai_api_key=openai_api_key)
+
+llm_chain = LLMChain(llm=llm, prompt=prompt)
+agent = StructuredChatAgent(llm_chain=llm_chain, verbose=True, tools=tools)
+agent_chain = AgentExecutor.from_agent_and_tools(
+    agent=agent, verbose=True, memory=memory, tools=tools
+)
+
+# Answering the first prompt requires usage of the Reddit search tool.
+agent_chain.run(input="What is the newest post on r/langchain for the week?")
+# Answering the subsequent prompt uses memory.
+agent_chain.run(input="Who is the author of the post?")
+```
+
+--------------------------------
+
+### Implement Structured Output Strategies in LangChain Agents (Python)
+
+Source: https://docs.langchain.com/oss/python/migrate/langchain-v1
+
+This snippet illustrates the new structured output strategies available in LangChain v1 agents, `ToolStrategy` and `ProviderStrategy`, which allow generating structured output using artificial tool calling or provider-native methods. It compares this with the v0 approach where `ToolStrategy` was the default and `ProviderStrategy` was not an explicit option. The `OutputSchema` is defined using Pydantic to specify the desired output format.
+
+```python
+from langchain.agents import create_agent
+from langchain.agents.structured_output import ToolStrategy, ProviderStrategy
+from pydantic import BaseModel
+
+
+class OutputSchema(BaseModel):
+    summary: str
+    sentiment: str
+
+# Using ToolStrategy
+agent = create_agent(
+    model="gpt-4.1-mini",
+    tools=tools,
+    # explicitly using tool strategy
+    response_format=ToolStrategy(OutputSchema)
+)
+```
+
+```python
+from langgraph.prebuilt import create_react_agent
+from pydantic import BaseModel
+
+class OutputSchema(BaseModel):
+    summary: str
+    sentiment: str
+
+agent = create_react_agent(
+    model="gpt-4.1-mini",
+    tools=tools,
+    # using tool strategy by default with no option for provider strategy
+    response_format=OutputSchema
+)
+
+# OR
+
+agent = create_react_agent(
+    model="gpt-4.1-mini",
+    tools=tools,
+    # using a custom prompt to instruct the model to generate the output schema
+    response_format=("please generate ...", OutputSchema)
+)
+```
+
+--------------------------------
+
+### Create JSON chat agent with Zhipu AI and tools
+
+Source: https://docs.langchain.com/oss/python/integrations/chat/zhipuai
+
+Set up a JSON chat agent using ChatZhipuAI with TavilySearchResults tool and a prompt template from the hub. This agent can handle function calls and external tool integration for enhanced capabilities.
+
+```python
+from langchain_classic import hub
+from langchain.agents import AgentExecutor, create_json_chat_agent
+from langchain_community.tools.tavily_search import TavilySearchResults
+
+tools = [TavilySearchResults(max_results=1)]
+prompt = hub.pull("hwchase17/react-chat-json")
+llm = ChatZhipuAI(temperature=0.01, model="glm-4")
+
+agent = create_json_chat_agent(llm, tools, prompt)
+agent_executor = AgentExecutor(
+    agent=agent, tools=tools, verbose=True, handle_parsing_errors=True
+)
+```
+
+--------------------------------
+
+### Configure Models and Tools for Structured Output in LangChain Agents (v1)
+
+Source: https://docs.langchain.com/oss/javascript/migrate/langchain-v1
+
+This code snippet shows the recommended way to configure models and tools for LangChain agents in v1, especially when aiming for structured output. It emphasizes passing a plain model (string or instance) and a separate list of tools to `createAgent`. It explicitly advises against passing models that are pre-bound with tools, a pattern that is no longer supported for optimal structured output handling.
+
+```typescript
+// No longer supported
+// const modelWithTools = new ChatOpenAI({ model: "gpt-4.1-mini" }).bindTools([someTool]);
+// const agent = createAgent({ model: modelWithTools, tools: [] });
+
+// Use instead
+const agent = createAgent({ model: "gpt-4.1-mini", tools: [someTool] });
+```
+
+### Migrate to create_agent > Additional Updates
+
+Source: https://docs.langchain.com/oss/python/migrate/langchain-v1
+
+Additional changes include the removal of prompted output for structured output, which should now use `ToolStrategy` or `ProviderStrategy` instead. The streaming node name has been changed from `"agent"` to `"model"`. Runtime context is now handled through dependency injection via a `context` argument instead of `config["configurable"]`. The overall namespace has been streamlined to focus on agent building blocks, with legacy code moved to the `langchain-classic` package.

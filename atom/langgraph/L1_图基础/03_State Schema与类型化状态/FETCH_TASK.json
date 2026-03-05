@@ -1,0 +1,150 @@
+{
+  "task_name": "State Schema与类型化状态 - 社区资料抓取",
+  "knowledge_point": "03_State Schema与类型化状态",
+  "stage": "L1_图基础",
+  "created_at": "2026-02-25",
+  "total_links": 20,
+  "links": [
+    {
+      "priority": "high",
+      "category": "github",
+      "url": "https://github.com/langchain-ai/langgraph/issues/6617",
+      "title": "ReAct Agent 生产可靠性 RFC",
+      "description": "生产环境中 ReAct Agent 的可靠性改进建议"
+    },
+    {
+      "priority": "high",
+      "category": "github",
+      "url": "https://github.com/LangChain-OpenTutorial/LangChain-OpenTutorial/blob/main/17-LangGraph/01-Core-Features/01-LangGraph-Introduction.ipynb",
+      "title": "LangGraph 入门教程",
+      "description": "LangGraph 核心特性介绍和入门示例"
+    },
+    {
+      "priority": "high",
+      "category": "github",
+      "url": "https://github.com/langchain-ai/langchain-academy/blob/main/module-1/simple-graph.ipynb",
+      "title": "简单图示例",
+      "description": "LangChain Academy 的简单图构建示例"
+    },
+    {
+      "priority": "high",
+      "category": "reddit",
+      "url": "https://www.reddit.com/r/LangChain/comments/1qna46j/best_practice_for_managing_langgraph_postgres/",
+      "title": "Postgres checkpoints 最佳实践",
+      "description": "使用 PostgreSQL 管理 LangGraph checkpoints 的最佳实践"
+    },
+    {
+      "priority": "high",
+      "category": "reddit",
+      "url": "https://www.reddit.com/r/LangChain/comments/1m2v8c7/how_are_you_saving_graph_state/",
+      "title": "图状态保存方法",
+      "description": "社区讨论如何保存和管理图状态"
+    },
+    {
+      "priority": "high",
+      "category": "reddit",
+      "url": "https://www.reddit.com/r/LangChain/comments/1ei7fvd/reducing_length_of_state_in_langgraph/",
+      "title": "状态长度优化",
+      "description": "如何减少 LangGraph 状态的长度"
+    },
+    {
+      "priority": "high",
+      "category": "twitter",
+      "url": "https://x.com/nothiingf4/status/2005971165718986899",
+      "title": "Typed State Schema 示例",
+      "description": "类型化状态 Schema 的实际示例"
+    },
+    {
+      "priority": "high",
+      "category": "twitter",
+      "url": "https://x.com/saen_dev/status/2024034286953795952",
+      "title": "状态 schema 设计建议",
+      "description": "设计状态 schema 的建议和技巧"
+    },
+    {
+      "priority": "high",
+      "category": "twitter",
+      "url": "https://x.com/GreyforgeLabs/status/2026395005590364312",
+      "title": "扁平状态 schema 模式",
+      "description": "使用扁平状态 schema 的模式和优势"
+    },
+    {
+      "priority": "medium",
+      "category": "github",
+      "url": "https://github.com/langchain-ai/langgraph/issues/4305",
+      "title": "Optional 类型 reducer 行为",
+      "description": "Optional 类型字段的 reducer 行为讨论"
+    },
+    {
+      "priority": "medium",
+      "category": "github",
+      "url": "https://github.com/langchain-ai/langgraph/issues/3587",
+      "title": "子图状态 reducer 异常",
+      "description": "子图中状态 reducer 的异常行为"
+    },
+    {
+      "priority": "medium",
+      "category": "github",
+      "url": "https://github.com/langchain-ai/langchain/issues/34590",
+      "title": "Command None 值持久化",
+      "description": "Command 中 None 值的持久化问题"
+    },
+    {
+      "priority": "medium",
+      "category": "reddit",
+      "url": "https://www.reddit.com/r/LangChain/comments/1on4ym0/need_guidance_on_using_langgraph_checkpointer_for/",
+      "title": "Checkpointer 持久化指导",
+      "description": "使用 LangGraph Checkpointer 进行持久化的指导"
+    },
+    {
+      "priority": "medium",
+      "category": "reddit",
+      "url": "https://www.reddit.com/r/LangChain/comments/1dpgr6p/how_to_manage_state_in_langgraph_for_multiple/",
+      "title": "多用户状态管理",
+      "description": "在 LangGraph 中管理多用户状态"
+    },
+    {
+      "priority": "medium",
+      "category": "twitter",
+      "url": "https://x.com/LangChain/status/1884646840941109399",
+      "title": "Functional API 状态管理",
+      "description": "使用 Functional API 进行状态管理"
+    },
+    {
+      "priority": "medium",
+      "category": "twitter",
+      "url": "https://x.com/LangChain/status/1903884452435992798",
+      "title": "状态化 AI 代理构建",
+      "description": "构建状态化 AI 代理的方法"
+    },
+    {
+      "priority": "low",
+      "category": "github",
+      "url": "https://github.com/langchain-ai/langgraph/issues/3648",
+      "title": "子图 stream updates 模式",
+      "description": "子图中 stream updates 的模式"
+    },
+    {
+      "priority": "low",
+      "category": "github",
+      "url": "https://github.com/cdot65/naf-ai-agents-workshop/blob/main/notebooks/101_type_annotations.ipynb",
+      "title": "类型注解教程",
+      "description": "Python 类型注解的教程"
+    },
+    {
+      "priority": "low",
+      "category": "reddit",
+      "url": "https://www.reddit.com/r/LangChain/comments/1na0ikq/langgraph_js_using_different_state_schemas/",
+      "title": "不同状态 schema 配置",
+      "description": "在 LangGraph JS 中使用不同的状态 schema"
+    },
+    {
+      "priority": "low",
+      "category": "twitter",
+      "url": "https://x.com/kishansiva/status/1977962888489816439",
+      "title": "生产状态 schema 检查清单",
+      "description": "生产环境中状态 schema 的检查清单"
+    }
+  ],
+  "notes": "这些链接需要使用第三方工具抓取。抓取完成后，将内容保存到 reference/ 目录中对应的文件。"
+}

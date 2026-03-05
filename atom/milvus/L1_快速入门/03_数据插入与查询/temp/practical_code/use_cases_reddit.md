@@ -1,113 +1,77 @@
-# Hybrid Search BM25 Best Practices - Reddit Search Results
+---
+source: Grok-mcp web search results
+query: Milvus 2.6 Embedding Functions best practices 2026
+platform: Reddit
+fetched_at: 2026-02-21
+---
 
-## Search Query
-Milvus hybrid search BM25 best practices 2025 2026
+# Reddit Discussions: Milvus 2.6 Embedding Functions Best Practices
 
-## Results
+## Search Results
 
-### 1. How are you guys doing Hybrid Search in production? (r/Rag)
-**URL:** https://www.reddit.com/r/Rag/comments/1gd1hxu/how_are_you_guys_doing_hybrid_search_in_production
-**Description:** Discussion on production hybrid search setup using Milvus with ~900k chunks, dense embeddings, and BM25 sparse vectors.
+### 1. Best practice for creating embeddings
+**URL**: https://www.reddit.com/r/vectordatabase/comments/15rxk5d/best_practice_for_creating_embeddings
+**Description**: Discussion on documented best practices for text embeddings, including optimal chunk sizes, removing new lines, and other preprocessing techniques suitable for Milvus integration.
 
-**Key Points:**
-- Managing 900k chunks with both dense and sparse vectors
-- Production-ready hybrid search configuration
-- Performance considerations for large-scale deployments
+### 2. How to Choose the Right Embedding Model for RAG - Milvus Blog
+**URL**: https://www.reddit.com/r/LLMDevs/comments/1qg6hnh/how_to_choose_the_right_embedding_model_for_rag
+**Description**: Guide to selecting appropriate embedding models for Retrieval-Augmented Generation systems using Milvus, with user discussions on LLM and embedding combinations.
 
-### 2. Questions on BM25 Re-indexing and Hybrid Search Implementation (r/vectordatabase)
-**URL:** https://www.reddit.com/r/vectordatabase/comments/1dplqw5/questions_on_bm25_reindexing_and_hybrid_search
-**Description:** Explores BM25 hybrid search re-indexing requirements and implementation best practices for scenarios with 300+ daily document additions.
+### 3. Milvus Vector database
+**URL**: https://www.reddit.com/r/LangChain/comments/1nkxjd1/milvus_vector_database
+**Description**: Advice on avoiding general LLMs as embedders in Milvus; emphasizes that high parameter counts do not ensure effective embedding performance.
 
-**Key Points:**
-- BM25 re-indexing strategies for dynamic document collections
-- Handling daily document additions efficiently
-- Balancing re-indexing frequency with performance
+### 4. Milvus - Updating the Embeddings
+**URL**: https://www.reddit.com/r/vectordatabase/comments/1dmnfob/milvus_updating_the_embeddings
+**Description**: Exploration of methods to update embeddings in Milvus vector stores, including best practices and alternatives for dynamic data applications.
 
-### 3. How to Build RAG with Full-text Search + Semantic Search in Milvus 2.5 (r/vectordatabase)
-**URL:** https://www.reddit.com/r/vectordatabase/comments/1hgs6j3/how_to_build_rag_with_fulltext_search_semantic
-**Description:** Introduces RAG construction method combining BM25-based full-text search with semantic search in Milvus 2.5, suitable for dynamic document collections.
+### 5. Slashed My RAG Startup Costs 75% with Milvus RaBitQ + SQ8 Quantization!
+**URL**: https://www.reddit.com/r/Rag/comments/1pvrpzx/slashed_my_rag_startup_costs_75_with_milvus
+**Description**: Practical approach to quantizing embeddings in Milvus using RaBitQ and SQ8 to significantly reduce memory usage and costs in RAG setups.
 
-**Key Points:**
-- Combining BM25 full-text search with semantic search
-- Milvus 2.5/2.6 built-in BM25 support
-- Dynamic document collection handling
+### 6. Milvus and RAG-system
+**URL**: https://www.reddit.com/r/Rag/comments/1lkgplk/milvus_and_ragsystem
+**Description**: Community insights on document processing for Milvus-based RAG systems, covering chunking strategies, embedding models, and supporting technologies.
 
-### 4. Using Milvus as a "rebuildable index" for AI agent memory (r/vectordatabase)
-**URL:** https://www.reddit.com/r/vectordatabase/comments/1r3kz3r/using_milvus_as_a_rebuildable_index_for_ai_agent
-**Description:** Shares best practices using Milvus hybrid search (dense + BM25 sparse) combined with RRFRanker for AI agent memory reconstruction.
+### 7. Best Practices for Semantic Search on 200k vectors
+**URL**: https://www.reddit.com/r/learnmachinelearning/comments/1acxy85/best_practices_for_semantic_search_on_200k
+**Description**: Recommendations for managing large-scale embeddings in semantic search, including optimization techniques applicable to Milvus deployments.
 
-**Key Points:**
-- Hybrid search for AI agent memory
-- RRFRanker (Reciprocal Rank Fusion) for result combination
-- Rebuildable index patterns
+## Key Community Insights
 
-### 5. Which hybrid search method are you using? (r/vectordatabase)
-**URL:** https://www.reddit.com/r/vectordatabase/comments/17mrmee/which_hybrid_search_method_are_you_using
-**Description:** Community discussion on Milvus default vector search + reranking hybrid search method, and other BM25-related hybrid implementation options.
+### Embedding Model Selection
+- **Don't use general LLMs as embedders**: High parameter count ≠ good embedding quality
+- **Specialized embedding models**: Use models designed for embeddings (e.g., BGE, Sentence Transformers)
+- **Model size considerations**: Smaller specialized models often outperform larger general models
+- **Domain-specific models**: Choose models trained on relevant domains
 
-**Key Points:**
-- Vector search + reranking as default approach
-- BM25 integration options
-- Community preferences and experiences
+### Chunking Strategies
+- **Optimal chunk size**: 256-512 tokens for most use cases
+- **Overlap**: 10-20% overlap between chunks
+- **Semantic boundaries**: Split at paragraph or sentence boundaries
+- **Document structure**: Preserve document hierarchy when possible
 
-### 6. Milvus embedding-only vs. hybrid search experiment (r/Rag)
-**URL:** https://www.reddit.com/r/Rag/comments/1qvrwjc/milvus_embeddingonly_vs_hybrid_search_experiment
-**Description:** Experimental comparison of Milvus pure embedding search vs. hybrid search (with BM25), using top-k=35 and reranking.
+### Cost Optimization
+- **Quantization**: RaBitQ + SQ8 can reduce costs by 75%
+- **Memory management**: Use quantization for large-scale deployments
+- **Batch processing**: Process embeddings in batches to reduce API costs
+- **Caching**: Cache frequently used embeddings
 
-**Key Points:**
-- Embedding-only vs. hybrid search performance comparison
-- Top-k=35 configuration
-- Reranking effectiveness
+### Updating Embeddings
+- **Upsert operation**: Use upsert instead of delete + insert
+- **Incremental updates**: Update only changed documents
+- **Version control**: Track embedding model versions
+- **Reindexing strategy**: Plan for full reindexing when changing models
 
-### 7. Anyone here using hybrid retrieval in production? (r/Rag)
-**URL:** https://www.reddit.com/r/Rag/comments/1m65ybe/anyone_here_using_hybrid_retrieval_in_production
-**Description:** Discusses production hybrid retrieval practices, emphasizing BM25 sparse vector advantage of not requiring recalculation when adding new documents.
+### RAG System Design
+- **Hybrid search**: Combine dense and sparse embeddings
+- **Reranking**: Add reranking step for better results
+- **Metadata filtering**: Use scalar fields for pre-filtering
+- **Multi-vector search**: Use multiple embedding types for different aspects
 
-**Key Points:**
-- BM25 sparse vectors don't need recalculation for new documents
-- Production deployment considerations
-- Incremental indexing benefits
-
-### 8. Author of Enterprise RAG AMA on hybrid search (r/Rag)
-**URL:** https://www.reddit.com/r/Rag/comments/1knr136/author_of_enterprise_rag_herehappy_to_dive_deep
-**Description:** Enterprise RAG author AMA, in-depth discussion on BM25 + vector hybrid retrieval, accuracy, and practical production best practices.
-
-**Key Points:**
-- Enterprise-grade hybrid search patterns
-- BM25 + vector combination strategies
-- Accuracy vs. practicality trade-offs
-
-## Key Best Practices from Reddit Community
-
-### 1. Hybrid Search Architecture
-- **Dense + Sparse**: Combine dense embeddings (semantic) with BM25 sparse vectors (keyword matching)
-- **RRFRanker**: Use Reciprocal Rank Fusion for combining results from multiple search methods
-- **Reranking**: Apply reranking after hybrid search for improved accuracy
-
-### 2. Production Considerations
-- **Scale**: Successfully deployed with 900k+ chunks
-- **Incremental Updates**: BM25 sparse vectors don't require recalculation when adding new documents
-- **Re-indexing Strategy**: Balance re-indexing frequency with performance requirements
-
-### 3. Configuration Recommendations
-- **Top-k**: Use top-k=35 or higher for hybrid search before reranking
-- **Batch Size**: Adjust based on document size and system resources
-- **Index Type**: SPARSE_INVERTED_INDEX for BM25, HNSW/IVF_FLAT for dense vectors
-
-### 4. RAG Integration
-- **Full-text + Semantic**: Combine BM25 full-text search with semantic search for comprehensive retrieval
-- **Dynamic Collections**: Hybrid search works well with frequently updated document collections
-- **AI Agent Memory**: Effective for rebuildable index patterns in AI agent systems
-
-### 5. Performance Optimization
-- **Parallel Search**: Execute dense and sparse searches in parallel
-- **Caching**: Cache frequently accessed results
-- **Monitoring**: Track search latency and accuracy metrics
-
-## Common Pitfalls to Avoid
-
-1. **Over-reliance on semantic search**: BM25 provides crucial keyword matching that semantic search may miss
-2. **Ignoring re-indexing**: While BM25 doesn't need recalculation, dense embeddings may need updates
-3. **Insufficient top-k**: Using too small top-k before reranking can miss relevant results
-4. **Not using reranking**: Hybrid search benefits significantly from reranking
-5. **Improper weight balancing**: Need to tune weights between dense and sparse search results
+### Common Pitfalls
+- Using general LLMs as embedding models
+- Not considering chunk size impact on retrieval quality
+- Ignoring quantization for large-scale deployments
+- Not planning for embedding updates
+- Overlooking metadata filtering opportunities
