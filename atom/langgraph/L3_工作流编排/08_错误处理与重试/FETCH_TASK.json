@@ -1,0 +1,80 @@
+{
+  "task_id": "langgraph_08_错误处理与重试_fetch_20260307",
+  "phase_directory": "atom/langgraph/L3_工作流编排",
+  "knowledge_point": "08_错误处理与重试",
+  "target_directory": "atom/langgraph/L3_工作流编排/08_错误处理与重试/reference",
+  "generated_at": "2026-03-07T00:00:00Z",
+  "total_urls": 5,
+  "exclusion_rules": {
+    "official_docs": "已通过 Context7 获取，不需要抓取",
+    "source_repo": "直接读取本地源码，不需要抓取",
+    "excluded_patterns": [
+      "github.com/langchain-ai/langgraph/blob/*",
+      "docs.langchain.com/*",
+      "reference.langchain.com/*"
+    ]
+  },
+  "urls": [
+    {
+      "url": "https://sparkco.ai/blog/advanced-error-handling-strategies-in-langgraph-applications",
+      "knowledge_point_tag": "降级与Fallback模式",
+      "priority": "high",
+      "expected_content_type": "article",
+      "source_search_file": "reference/search_生产模式_02.md",
+      "reason": "详细讲解 LangGraph 高级错误处理，含断路器和 fallback 模式",
+      "content_focus": "生产级错误处理策略"
+    },
+    {
+      "url": "https://www.getmaxim.ai/articles/retries-fallbacks-and-circuit-breakers-in-llm-apps-a-production-guide/",
+      "knowledge_point_tag": "降级与Fallback模式",
+      "priority": "high",
+      "expected_content_type": "article",
+      "source_search_file": "reference/search_生产模式_02.md",
+      "reason": "LLM 应用的重试/回退/断路器完整生产指南",
+      "content_focus": "断路器与 Fallback 实现"
+    },
+    {
+      "url": "https://www.reddit.com/r/LangChain/comments/1r8i7cp/",
+      "knowledge_point_tag": "实战场景_LLM_API调用重试",
+      "priority": "medium",
+      "expected_content_type": "discussion",
+      "source_search_file": "reference/search_生产模式_02.md",
+      "reason": "429 速率限制实际处理经验",
+      "content_focus": "速率限制与重试风暴处理"
+    },
+    {
+      "url": "https://www.reddit.com/r/LangChain/comments/1n89rr1/",
+      "knowledge_point_tag": "实战场景_生产级错误恢复",
+      "priority": "medium",
+      "expected_content_type": "discussion",
+      "source_search_file": "reference/search_错误处理_01.md",
+      "reason": "生产级弹性代理构建经验",
+      "content_focus": "显式错误处理节点设计"
+    },
+    {
+      "url": "https://www.reddit.com/r/LangChain/comments/1qxgdkz/",
+      "knowledge_point_tag": "反直觉点",
+      "priority": "medium",
+      "expected_content_type": "discussion",
+      "source_search_file": "reference/search_错误处理_01.md",
+      "reason": "无限重试循环的实际案例与解决方案",
+      "content_focus": "无限循环避免"
+    }
+  ],
+  "priority_distribution": {
+    "high": 2,
+    "medium": 3,
+    "low": 0
+  },
+  "content_type_distribution": {
+    "article": 2,
+    "discussion": 3,
+    "code": 0
+  },
+  "knowledge_point_mapping": {
+    "降级与Fallback模式": [0, 1],
+    "实战场景_LLM_API调用重试": [2],
+    "实战场景_生产级错误恢复": [3],
+    "反直觉点": [4]
+  }
+}

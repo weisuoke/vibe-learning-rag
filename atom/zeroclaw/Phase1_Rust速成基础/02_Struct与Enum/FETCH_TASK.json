@@ -1,0 +1,61 @@
+{
+  "task_id": "zeroclaw_02_struct_enum_fetch_20260309",
+  "phase_directory": "atom/zeroclaw/Phase1_Rust速成基础",
+  "knowledge_point": "02_Struct与Enum",
+  "target_directory": "atom/zeroclaw/Phase1_Rust速成基础/02_Struct与Enum/reference",
+  "generated_at": "2026-03-09T15:50:00Z",
+  "total_urls": 3,
+  "exclusion_rules": {
+    "official_docs": "已通过 Context7 获取，不需要抓取",
+    "source_repo": "直接读取本地源码，不需要抓取",
+    "excluded_patterns": [
+      "github.com/zeroclaw-labs/zeroclaw/*",
+      "doc.rust-lang.org/*",
+      "rust-lang.org/*"
+    ]
+  },
+  "urls": [
+    {
+      "url": "https://medium.com/@a1guy/rust-structs-enums-explained-2025-how-to-organize-data-effectively-03527267ec73",
+      "knowledge_point_tag": "核心概念_1_Struct定义与字段",
+      "priority": "medium",
+      "expected_content_type": "article",
+      "source_search_file": "reference/search_struct_enum_01.md",
+      "reason": "2025年 struct/enum 实践文章，补充社区视角",
+      "content_focus": "struct/enum 组织数据最佳实践"
+    },
+    {
+      "url": "https://users.rust-lang.org/t/best-practices-for-using-rust-enum/127625",
+      "knowledge_point_tag": "核心概念_3_Enum与变体类型",
+      "priority": "high",
+      "expected_content_type": "discussion",
+      "source_search_file": "reference/search_struct_enum_01.md",
+      "reason": "2025年3月社区讨论，包含嵌套 enum 最佳实践",
+      "content_focus": "enum 变体设计与嵌套策略"
+    },
+    {
+      "url": "https://effective-rust.com/newtype.html",
+      "knowledge_point_tag": "核心概念_6_组合与嵌套",
+      "priority": "high",
+      "expected_content_type": "article",
+      "source_search_file": "reference/search_struct_enum_01.md",
+      "reason": "Newtype 模式详解，对类型安全非常重要",
+      "content_focus": "Newtype wrapper 模式与零开销抽象"
+    }
+  ],
+  "priority_distribution": {
+    "high": 2,
+    "medium": 1,
+    "low": 0
+  },
+  "content_type_distribution": {
+    "article": 2,
+    "discussion": 1,
+    "code": 0
+  },
+  "knowledge_point_mapping": {
+    "核心概念_1_Struct定义与字段": [0],
+    "核心概念_3_Enum与变体类型": [1],
+    "核心概念_6_组合与嵌套": [2]
+  }
+}

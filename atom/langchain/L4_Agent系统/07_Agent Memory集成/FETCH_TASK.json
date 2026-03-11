@@ -1,0 +1,62 @@
+{
+  "task_id": "langchain_agent_memory_fetch_20260306",
+  "phase_directory": "atom/langchain/L4_Agent系统",
+  "knowledge_point": "07_Agent Memory集成",
+  "target_directory": "atom/langchain/L4_Agent系统/07_Agent Memory集成/reference",
+  "generated_at": "2026-03-06T12:00:00Z",
+  "total_urls": 3,
+  "exclusion_rules": {
+    "official_docs": "已通过 Context7 获取，不需要抓取",
+    "source_repo": "直接读取本地源码，不需要抓取",
+    "excluded_patterns": [
+      "github.com/langchain-ai/langchain/*",
+      "github.com/langchain-ai/langgraph/*",
+      "docs.langchain.com/*",
+      "python.langchain.com/*"
+    ]
+  },
+  "urls": [
+    {
+      "url": "https://github.com/FareedKhan-dev/contextual-engineering-guide",
+      "knowledge_point_tag": "工作记忆与上下文工程",
+      "priority": "high",
+      "expected_content_type": "code",
+      "source_search_file": "reference/search_agent_memory_01.md",
+      "reason": "2025年上下文工程最新实践，含LangGraph工作记忆管道实现",
+      "content_focus": "上下文工程实践案例"
+    },
+    {
+      "url": "https://www.reddit.com/r/LangChain/comments/1r9sapz/adding_persistent_memory_to_langchain_agents/",
+      "knowledge_point_tag": "长期记忆与跨会话",
+      "priority": "high",
+      "expected_content_type": "discussion",
+      "source_search_file": "reference/search_agent_memory_01.md",
+      "reason": "社区讨论持久记忆集成策略，含语义/情节/程序记忆检索方案",
+      "content_focus": "持久记忆集成策略"
+    },
+    {
+      "url": "https://www.reddit.com/r/LangChain/comments/1p0e4nk/long_term_memory_mem0zeplangmem_what_made_you/",
+      "knowledge_point_tag": "长期记忆工具选型",
+      "priority": "medium",
+      "expected_content_type": "discussion",
+      "source_search_file": "reference/search_agent_memory_01.md",
+      "reason": "长期记忆工具Mem0/Zep/LangMem对比和选择建议",
+      "content_focus": "长期记忆工具对比"
+    }
+  ],
+  "priority_distribution": {
+    "high": 2,
+    "medium": 1,
+    "low": 0
+  },
+  "content_type_distribution": {
+    "article": 0,
+    "discussion": 2,
+    "code": 1
+  },
+  "knowledge_point_mapping": {
+    "工作记忆与Agent思考": [0],
+    "长期记忆与跨会话": [1, 2],
+    "记忆持久化后端": [1]
+  }
+}

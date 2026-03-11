@@ -1,0 +1,31 @@
+{
+  "task_id": "langgraph_09_超时控制_fetch_20260307T000000Z",
+  "phase_directory": "atom/langgraph/L3_工作流编排",
+  "knowledge_point": "09_超时控制",
+  "target_directory": "atom/langgraph/L3_工作流编排/09_超时控制/reference",
+  "generated_at": "2026-03-07T00:00:00Z",
+  "total_urls": 0,
+  "exclusion_rules": {
+    "official_docs": "已通过 Context7 获取，不需要额外抓取",
+    "source_repo": "直接读取本地源码，不需要抓取",
+    "excluded_patterns": [
+      "github.com/langchain-ai/langgraph/tree/main/*",
+      "docs.langchain.com/oss/python/langgraph/*",
+      "reference.langchain.com/python/langgraph/*"
+    ]
+  },
+  "urls": [],
+  "priority_distribution": {
+    "high": 0,
+    "medium": 0,
+    "low": 0
+  },
+  "content_type_distribution": {
+    "article": 0,
+    "discussion": 0,
+    "code": 0
+  },
+  "knowledge_point_mapping": {},
+  "note": "本轮需要抓取的高价值社区链接已使用 Grok-mcp 直接抓取并落盘为 fetch_*.md，因此没有待处理 URL。"
+}
+

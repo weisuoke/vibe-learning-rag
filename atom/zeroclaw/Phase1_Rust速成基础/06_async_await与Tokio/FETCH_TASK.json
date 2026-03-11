@@ -1,0 +1,51 @@
+{
+  "task_id": "zeroclaw_06_async_await_tokio_fetch_20260310",
+  "phase_directory": "atom/zeroclaw/Phase1_Rust速成基础",
+  "knowledge_point": "06_async_await与Tokio",
+  "target_directory": "atom/zeroclaw/Phase1_Rust速成基础/06_async_await与Tokio/reference",
+  "generated_at": "2026-03-10T00:00:00Z",
+  "total_urls": 2,
+  "exclusion_rules": {
+    "official_docs": "已通过 Context7 获取，不需要抓取",
+    "source_repo": "直接读取本地源码，不需要抓取",
+    "excluded_patterns": [
+      "github.com/zeroclaw-labs/zeroclaw/*",
+      "docs.rs/tokio/*",
+      "github.com/dtolnay/async-trait/*"
+    ]
+  },
+  "urls": [
+    {
+      "url": "https://reintech.io/blog/tokio-tutorial-2026-building-async-applications-rust",
+      "knowledge_point_tag": "Tokio运行时与实战",
+      "priority": "medium",
+      "expected_content_type": "article",
+      "source_search_file": "reference/search_async_tokio_01.md",
+      "reason": "2026年最新Tokio教程，可能包含最新API变化和实践建议",
+      "content_focus": "最新Tokio教程内容"
+    },
+    {
+      "url": "https://thenewstack.io/how-rust-does-async-differently-and-why-it-matters/",
+      "knowledge_point_tag": "async_fn与Future机制",
+      "priority": "medium",
+      "expected_content_type": "article",
+      "source_search_file": "reference/search_async_tokio_02.md",
+      "reason": "Rust异步模型与JS对比，Pull vs Push模型解释",
+      "content_focus": "Rust异步模型差异化解释"
+    }
+  ],
+  "priority_distribution": {
+    "high": 0,
+    "medium": 2,
+    "low": 0
+  },
+  "content_type_distribution": {
+    "article": 2,
+    "discussion": 0,
+    "code": 0
+  },
+  "knowledge_point_mapping": {
+    "async_fn与Future机制": [1],
+    "Tokio运行时与实战": [0]
+  }
+}

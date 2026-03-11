@@ -1,0 +1,41 @@
+{
+  "task_id": "zeroclaw_01_ownership_borrowing_fetch_20260309",
+  "phase_directory": "atom/zeroclaw/Phase1_Rust速成基础",
+  "knowledge_point": "01_所有权与借用",
+  "target_directory": "atom/zeroclaw/Phase1_Rust速成基础/01_所有权与借用/reference",
+  "generated_at": "2026-03-09T00:00:00Z",
+  "total_urls": 1,
+  "exclusion_rules": {
+    "official_docs": "已通过 Context7 获取，不需要抓取",
+    "source_repo": "直接读取本地源码，不需要抓取",
+    "excluded_patterns": [
+      "doc.rust-lang.org/*",
+      "github.com/rust-lang/*"
+    ]
+  },
+  "urls": [
+    {
+      "url": "https://github.com/pretzelhammer/rust-blog/blob/master/posts/common-rust-lifetime-misconceptions.md",
+      "knowledge_point_tag": "生命周期注解",
+      "priority": "high",
+      "expected_content_type": "article",
+      "source_search_file": "reference/search_ownership_01.md",
+      "reason": "社区最高引用率的生命周期误解文章，覆盖10个核心误解",
+      "content_focus": "生命周期常见误解与正确理解",
+      "status": "completed"
+    }
+  ],
+  "priority_distribution": {
+    "high": 1,
+    "medium": 0,
+    "low": 0
+  },
+  "content_type_distribution": {
+    "article": 1,
+    "discussion": 0,
+    "code": 0
+  },
+  "knowledge_point_mapping": {
+    "生命周期注解": [0]
+  }
+}
